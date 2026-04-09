@@ -1,0 +1,2026 @@
+[
+  {
+    "name": "Acionamento flag no robô",
+    "group": "Acionamento flag no robô",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/bots/{{botId}}/trigger-signal/{{contactId}}?flag=flagAqui",
+    "body": "",
+    "keywords": "acionamento flag no robô acionamento flag no robô post {{url}}/api/v1/bots/{{botid}}/trigger-signal/{{contactid}}?flag=flagaqui"
+  },
+  {
+    "name": "Listar agendamentos",
+    "group": "Agendamentos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/schedule?perPage=40",
+    "body": "",
+    "keywords": "listar agendamentos agendamentos get {{url}}/api/v1/schedule?perpage=40"
+  },
+  {
+    "name": "Buscar agendamento",
+    "group": "Agendamentos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/schedule/{{scheduleId}}",
+    "body": "",
+    "keywords": "buscar agendamento agendamentos get {{url}}/api/v1/schedule/{{scheduleid}}"
+  },
+  {
+    "name": "Editar agendamento",
+    "group": "Agendamentos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/schedule/{{scheduleId}}",
+    "body": "{\r\n  \"contactId\": \"{{contactId}}\", //ID do contato\r\n  \"departmentId\": \"{{departmentId}}\", //ID do departamento\r\n  \"files\": [],\r\n  \"message\": \"{{text}}\",\r\n  \"notes\": \"{{notes}}}}\",\r\n  \"notificateUser\": true, //true or false\r\n  \"openTicket\": true, //true or false\r\n  \"scheduledAt\": \"{{2023-07-15 10:35:18}}\",\r\n  \"userId\": \"{{userId}}\"\r\n}",
+    "keywords": "editar agendamento agendamentos put {{url}}/api/v1/schedule/{{scheduleid}}"
+  },
+  {
+    "name": "Criar agendamento",
+    "group": "Agendamentos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/schedule",
+    "body": "{\r\n  \"contactId\": \"{{contactId}}\",\r\n  \"departmentId\": \"{{departmentId}}\",\r\n  \"files\": [{{arquivos}}],\r\n  \"message\": \"{{text}}\",\r\n  \"notes\": \"{{note}}}}\",\r\n  \"notificateUser\": true, //true or false\r\n  \"openTicket\": true, //true or false\r\n  \"scheduledAt\": \"{{2023-07-15 10:35:18}}\",\r\n  \"userId\": \"{{userId}}\"\r\n}",
+    "keywords": "criar agendamento agendamentos post {{url}}/api/v1/schedule"
+  },
+  {
+    "name": "Excluir agendamento",
+    "group": "Agendamentos",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/schedule/{{scheduleId}}",
+    "body": "",
+    "keywords": "excluir agendamento agendamentos delete {{url}}/api/v1/schedule/{{scheduleid}}"
+  },
+  {
+    "name": "Buscar departamentos (Agora)",
+    "group": "Agora",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/now/departments-resume",
+    "body": "",
+    "keywords": "buscar departamentos (agora) agora get {{url}}/api/v1/now/departments-resume"
+  },
+  {
+    "name": "Buscar atendentes (Agora)",
+    "group": "Agora",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/now/attendance-resume",
+    "body": "",
+    "keywords": "buscar atendentes (agora) agora get {{url}}/api/v1/now/attendance-resume"
+  },
+  {
+    "name": "Buscar todos os dados (Agora)",
+    "group": "Agora",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/now/resume",
+    "body": "",
+    "keywords": "buscar todos os dados (agora) agora get {{url}}/api/v1/now/resume"
+  },
+  {
+    "name": "Listar assuntos de fechamento",
+    "group": "Assuntos de chamado",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/ticket-topics?perPage=40",
+    "body": "",
+    "keywords": "listar assuntos de fechamento assuntos de chamado get {{url}}/api/v1/ticket-topics?perpage=40"
+  },
+  {
+    "name": "Buscar um assunto específico",
+    "group": "Assuntos de chamado",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/ticket-topics/{{ticketTopicId}}",
+    "body": "",
+    "keywords": "buscar um assunto específico assuntos de chamado get {{url}}/api/v1/ticket-topics/{{tickettopicid}}"
+  },
+  {
+    "name": "Editar assunto específico",
+    "group": "Assuntos de chamado",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/ticket-topics/{{ticketTopicId}}",
+    "body": "{\r\n  \"name\": \"{{name}}\"\r\n}",
+    "keywords": "editar assunto específico assuntos de chamado put {{url}}/api/v1/ticket-topics/{{tickettopicid}}"
+  },
+  {
+    "name": "Criar assunto",
+    "group": "Assuntos de chamado",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/ticket-topics",
+    "body": "{\r\n  \"name\": \"{{name}}\"\r\n}",
+    "keywords": "criar assunto assuntos de chamado post {{url}}/api/v1/ticket-topics"
+  },
+  {
+    "name": "Excluir assunto específico",
+    "group": "Assuntos de chamado",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/ticket-topics/{{ticketTopicId}}",
+    "body": "",
+    "keywords": "excluir assunto específico assuntos de chamado delete {{url}}/api/v1/ticket-topics/{{tickettopicid}}"
+  },
+  {
+    "name": "Listar auditorias de autenticação",
+    "group": "Auditoria de autenticação",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/auth-history?perPage=40",
+    "body": "",
+    "keywords": "listar auditorias de autenticação auditoria de autenticação get {{url}}/api/v1/auth-history?perpage=40"
+  },
+  {
+    "name": "Buscar auditoria de autenticação",
+    "group": "Auditoria de autenticação",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/auth-history/{{authId}}",
+    "body": "",
+    "keywords": "buscar auditoria de autenticação auditoria de autenticação get {{url}}/api/v1/auth-history/{{authid}}"
+  },
+  {
+    "name": "Gerar Token de acesso",
+    "group": "Autorização",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/oauth/token",
+    "body": "{\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"api\",\r\n    \"client_secret\": \"secret\",\r\n    \"username\": \"{{email}}\", //e-mail de login do usuário\r\n    \"password\": \"{{password}}\" //senha de login do usuário\r\n}",
+    "keywords": "gerar token de acesso autorização post {{url}}/api/v1/oauth/token"
+  },
+  {
+    "name": "Listar avaliações",
+    "group": "Avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/questions?perPage=40",
+    "body": "",
+    "keywords": "listar avaliações avaliações get {{url}}/api/v1/questions?perpage=40"
+  },
+  {
+    "name": "Buscar avaliação",
+    "group": "Avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/questions/{{questionId}}",
+    "body": "",
+    "keywords": "buscar avaliação avaliações get {{url}}/api/v1/questions/{{questionid}}"
+  },
+  {
+    "name": "Editar avaliação",
+    "group": "Avaliações",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/questions/{{questionId}}",
+    "body": "{\r\n  \"name\": \"{{name}}\",\r\n  \"duration\": \"{{duration}}\", //duração\r\n  \"type\": \"{{type}}\", //tipo (NPS ou CSAT)\r\n  \"questionMessage\": \"{{O que você achou da nossa avaliação?}}\",\r\n  \"tries\": {{tries}}, //tentativas\r\n  \"successMessage\": \"{{Obrigado por responder}}\",\r\n  \"invalidMessage\": \"{{Resposta invalida}}\"\r\n}",
+    "keywords": "editar avaliação avaliações put {{url}}/api/v1/questions/{{questionid}}"
+  },
+  {
+    "name": "Criar avaliação",
+    "group": "Avaliações",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/questions",
+    "body": "{\r\n  \"name\": \"{{name}}\",\r\n  \"duration\": \"{{duration}}\",\r\n  \"type\": \"{{type}}\",\r\n  \"questionMessage\": \"{{O que você achou da nossa avaliação?}}\",\r\n  \"tries\": {{tries}}, //tentativas\r\n  \"successMessage\": \"{{Obrigado por responder}}\",\r\n  \"invalidMessage\": \"{{Resposta invalida}}\"\r\n}",
+    "keywords": "criar avaliação avaliações post {{url}}/api/v1/questions"
+  },
+  {
+    "name": "Excluir avaliação",
+    "group": "Avaliações",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/questions/{{questionId}}",
+    "body": "",
+    "keywords": "excluir avaliação avaliações delete {{url}}/api/v1/questions/{{questionid}}"
+  },
+  {
+    "name": "Listar campanhas",
+    "group": "Campanhas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/campaigns?perPage=40",
+    "body": "",
+    "keywords": "listar campanhas campanhas get {{url}}/api/v1/campaigns?perpage=40"
+  },
+  {
+    "name": "Buscar campanha",
+    "group": "Campanhas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/campaigns/{{campaignsId}}",
+    "body": "",
+    "keywords": "buscar campanha campanhas get {{url}}/api/v1/campaigns/{{campaignsid}}"
+  },
+  {
+    "name": "Extrair status de uma campanha",
+    "group": "Campanhas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/campaigns/{{campaignId}}/stats",
+    "body": "",
+    "keywords": "extrair status de uma campanha campanhas get {{url}}/api/v1/campaigns/{{campaignid}}/stats"
+  },
+  {
+    "name": "Visualizar quem criou e enviou uma campanha",
+    "group": "Campanhas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/campaigns",
+    "body": "",
+    "keywords": "visualizar quem criou e enviou uma campanha campanhas get {{url}}/api/v1/campaigns"
+  },
+  {
+    "name": "Editar campanha",
+    "group": "Campanhas",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/campaigns/{{campaignsId}}",
+    "body": "//Copiar o retorno do GET \"Buscar campanha\" aqui e altera-lo",
+    "keywords": "editar campanha campanhas put {{url}}/api/v1/campaigns/{{campaignsid}}"
+  },
+  {
+    "name": "Exportar resultados da campanha",
+    "group": "Campanhas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/campaigns/export/csv\n",
+    "body": "{\n    \"where\": {\n        \"campaignId\": \"{{campaignId}}\" //ID da campanha\n    },\n    \"type\": \"semiColon\"\n}",
+    "keywords": "exportar resultados da campanha campanhas post {{url}}/api/v1/campaigns/export/csv\n"
+  },
+  {
+    "name": "Excluir campanha",
+    "group": "Campanhas",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/campaigns/{{campaignsId}}",
+    "body": "",
+    "keywords": "excluir campanha campanhas delete {{url}}/api/v1/campaigns/{{campaignsid}}"
+  },
+  {
+    "name": "Listar campos personalizados",
+    "group": "Campos personalizados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/custom-fields?perPage=40",
+    "body": "",
+    "keywords": "listar campos personalizados campos personalizados get {{url}}/api/v1/custom-fields?perpage=40"
+  },
+  {
+    "name": "Buscar campo personalizado",
+    "group": "Campos personalizados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/custom-fields/{{customFieldsId}}",
+    "body": "",
+    "keywords": "buscar campo personalizado campos personalizados get {{url}}/api/v1/custom-fields/{{customfieldsid}}"
+  },
+  {
+    "name": "Editar campo personalizado",
+    "group": "Campos personalizados",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/custom-fields/{{customFieldsId}}",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"type\": \"text\",\r\n    \"allowed\": \"contacts\"\r\n}",
+    "keywords": "editar campo personalizado campos personalizados put {{url}}/api/v1/custom-fields/{{customfieldsid}}"
+  },
+  {
+    "name": "Criar campo personalizado",
+    "group": "Campos personalizados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/custom-fields",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"type\": \"text\",\r\n    \"allowed\": \"contacts\"\r\n}",
+    "keywords": "criar campo personalizado campos personalizados post {{url}}/api/v1/custom-fields"
+  },
+  {
+    "name": "Excluir campo personalizado",
+    "group": "Campos personalizados",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/custom-fields/{{customFieldsId}}",
+    "body": "",
+    "keywords": "excluir campo personalizado campos personalizados delete {{url}}/api/v1/custom-fields/{{customfieldsid}}"
+  },
+  {
+    "name": "Listar cargos",
+    "group": "Cargos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/roles?perPage=40",
+    "body": "",
+    "keywords": "listar cargos cargos get {{url}}/api/v1/roles?perpage=40"
+  },
+  {
+    "name": "Buscar cargo",
+    "group": "Cargos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/roles/{{roleId}}",
+    "body": "",
+    "keywords": "buscar cargo cargos get {{url}}/api/v1/roles/{{roleid}}"
+  },
+  {
+    "name": "Buscar permissões do cargo",
+    "group": "Cargos",
+    "method": "GET",
+    "url": "{{URL}}}}/api/v1/roles/{{roleId}}?include=permissions",
+    "body": "",
+    "keywords": "buscar permissões do cargo cargos get {{url}}}}/api/v1/roles/{{roleid}}?include=permissions"
+  },
+  {
+    "name": "Buscar cargos do usuário",
+    "group": "Cargos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/users/{{roleId}}?include=roles",
+    "body": "",
+    "keywords": "buscar cargos do usuário cargos get {{url}}/api/v1/users/{{roleid}}?include=roles"
+  },
+  {
+    "name": "Editar cargo",
+    "group": "Cargos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/roles/{{roleId}}",
+    "body": "{\r\n  \"displayName\": \"{{name}}\",\r\n  \"isAdmin\": {{false}},\r\n  \"permissions\": [] \r\n}",
+    "keywords": "editar cargo cargos put {{url}}/api/v1/roles/{{roleid}}"
+  },
+  {
+    "name": "Criar cargo",
+    "group": "Cargos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/roles",
+    "body": "{\r\n  \"displayName\": \"{{name}}\",\r\n  \"isAdmin\": {{false}},\r\n  \"permissions\": [] \r\n}",
+    "keywords": "criar cargo cargos post {{url}}/api/v1/roles"
+  },
+  {
+    "name": "Excluir cargo",
+    "group": "Cargos",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/roles/{{roleId}}",
+    "body": "",
+    "keywords": "excluir cargo cargos delete {{url}}/api/v1/roles/{{roleid}}"
+  },
+  {
+    "name": "Listar central de notificações",
+    "group": "Central de notificações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/notifications?perPage=40",
+    "body": "",
+    "keywords": "listar central de notificações central de notificações get {{url}}/api/v1/notifications?perpage=40"
+  },
+  {
+    "name": "Marcar todas as notificações como lidas",
+    "group": "Central de notificações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/notifications/read-all",
+    "body": "",
+    "keywords": "marcar todas as notificações como lidas central de notificações get {{url}}/api/v1/notifications/read-all"
+  },
+  {
+    "name": "Buscar chamados do contato",
+    "group": "Chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets?where[contactId]={{contactId}}",
+    "body": "",
+    "keywords": "buscar chamados do contato chamados get {{url}}/api/v1/tickets?where[contactid]={{contactid}}"
+  },
+  {
+    "name": "Buscar pelo contactid todos os chamados do cliente trazendo quem encerrou/transferiu",
+    "group": "Chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets",
+    "body": "",
+    "keywords": "buscar pelo contactid todos os chamados do cliente trazendo quem encerrou/transferiu chamados get {{url}}/api/v1/tickets"
+  },
+  {
+    "name": "Transferência de chamado",
+    "group": "Chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/ticket/transfer",
+    "body": "{\r\n    \"departmentId\": \"{{departmentId}}\",\r\n    \"userId\": \"{{userId}}\", //id do usuário SE for abrir direto para ele\r\n    \"comments\": \"{{comments}}\" //comentario interno\r\n}",
+    "keywords": "transferência de chamado chamados post {{url}}/api/v1/contacts/{{contactid}}/ticket/transfer"
+  },
+  {
+    "name": "Transferência de Transferência em massa",
+    "group": "Chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/ticket/bulk-transfer",
+    "body": "{\n    \"departmentId\": \"{{departmentId}}\", //id do departamento que vai receber os chamados\n    \"userId\": \"{{userId}}\", //id do usuário que vai receber os chamados\n    \"comments\": \"{{comments}}\", //comentário da transferência\n    \"ticketsSelectedId\": [\n        \"{{idTicket}}\", //id dos chamados\n        \"{{idTicket}}\",\n        \"{{idTicket}}\",\n        \"{{idTicket}}\",\n        \"{{idTicket}}\",\n        \"{{idTicket}}\",\n        \"{{idTicket}}\"\n    ]\n}",
+    "keywords": "transferência de transferência em massa chamados post {{url}}/api/v1/contacts/ticket/bulk-transfer"
+  },
+  {
+    "name": "Abertura de chamado",
+    "group": "Chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/ticket/transfer",
+    "body": "{\r\n    \"departmentId\": \"{{departmentId}}\",\r\n    \"userId\": \"{{userId}}\",\r\n    \"comments\": \"{{comments}}\" //comentario interno\r\n}",
+    "keywords": "abertura de chamado chamados post {{url}}/api/v1/contacts/{{contactid}}/ticket/transfer"
+  },
+  {
+    "name": "Fechar chamado",
+    "group": "Chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/ticket/close",
+    "body": "",
+    "keywords": "fechar chamado chamados post {{url}}/api/v1/contacts/{{contactid}}/ticket/close"
+  },
+  {
+    "name": "Fechar um chamado com assunto",
+    "group": "Chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/ticket/close",
+    "body": "{\r\n    \"ticketTopicIds\": \"{{ticketTopicIds}}\" //ID do chamado\r\n}",
+    "keywords": "fechar um chamado com assunto chamados post {{url}}/api/v1/contacts/{{contactid}}/ticket/close"
+  },
+  {
+    "name": "Listar conexões",
+    "group": "Conexões",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/services?perPage=35",
+    "body": "",
+    "keywords": "listar conexões conexões get {{url}}/api/v1/services?perpage=35"
+  },
+  {
+    "name": "Buscar conexão",
+    "group": "Conexões",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/services/{{serviceId}}",
+    "body": "",
+    "keywords": "buscar conexão conexões get {{url}}/api/v1/services/{{serviceid}}"
+  },
+  {
+    "name": "Buscar conexões ativas",
+    "group": "Conexões",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/services?query={\"where\":{\"archivedAt\":{\"$eq\":null}},\"order\":[[\"name\",\"asc\"]],\"page\":1,\"perPage\":50}",
+    "body": "",
+    "keywords": "buscar conexões ativas conexões get {{url}}/api/v1/services?query={\"where\":{\"archivedat\":{\"$eq\":null}},\"order\":[[\"name\",\"asc\"]],\"page\":1,\"perpage\":50}"
+  },
+  {
+    "name": "Editar conexão",
+    "group": "Conexões",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/services/{{serviceId}}",
+    "body": "{\r\n    \"id\": \"{{serviceId}}\", //id da conexão\r\n    \"name\": \"{{name}}\",\r\n    \"archivedAt\": null,\r\n    \"type\": \"{{type}}\", //tipo (e-mail, telegram, etc)\r\n    \"deletedAt\": null,\r\n    \"accountId\": \"{{accountId}}\", //id da conta\r\n    \"botId\": \"{{botId}}\", //id do robo\r\n    \"defaultDepartmentId\": \"{{defaultDepartmentId}}\" //id departamento padrão\r\n}",
+    "keywords": "editar conexão conexões put {{url}}/api/v1/services/{{serviceid}}"
+  },
+  {
+    "name": "Arquivar conexão",
+    "group": "Conexões",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/services/{{serviceId}}/archive",
+    "body": "{\r\n    \"archive\": true,\r\n    \"type\": \"{{tipo}}\" //tipo (e-mail, telegram, etc)\r\n}",
+    "keywords": "arquivar conexão conexões post {{url}}/api/v1/services/{{serviceid}}/archive"
+  },
+  {
+    "name": "Criar conexão",
+    "group": "Conexões",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/services",
+    "body": "{\r\n    \"name\":\"{{name}}\",\r\n    \"type\":\"{{type}}\", //tipo (e-mail, telegram, etc)\r\n    \"botId\": \"{{teste}}\", //id do robo\r\n    \"defaultDepartmentId\": \"{{teste}}\" //id departamento padrão\r\n}",
+    "keywords": "criar conexão conexões post {{url}}/api/v1/services"
+  },
+  {
+    "name": "Desligar conexão",
+    "group": "Conexões",
+    "method": "POST",
+    "url": "{{URL}}api/v1/services/{{serviceId}}/shutdown",
+    "body": "",
+    "keywords": "desligar conexão conexões post {{url}}api/v1/services/{{serviceid}}/shutdown"
+  },
+  {
+    "name": "Iniciar conexão",
+    "group": "Conexões",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/services/{{serviceId}}/start",
+    "body": "",
+    "keywords": "iniciar conexão conexões post {{url}}/api/v1/services/{{serviceid}}/start"
+  },
+  {
+    "name": "Reiniciar conexão",
+    "group": "Conexões",
+    "method": "POST",
+    "url": "{{URL}}api/v1/services/{{serviceId}}/restart",
+    "body": "",
+    "keywords": "reiniciar conexão conexões post {{url}}api/v1/services/{{serviceid}}/restart"
+  },
+  {
+    "name": "Gerar QR Code",
+    "group": "Conexões",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/services/{{serviceId}}/logout",
+    "body": "",
+    "keywords": "gerar qr code conexões post {{url}}/api/v1/services/{{serviceid}}/logout"
+  },
+  {
+    "name": "Excluir conexão",
+    "group": "Conexões",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/services/{{serviceId}}",
+    "body": "",
+    "keywords": "excluir conexão conexões delete {{url}}/api/v1/services/{{serviceid}}"
+  },
+  {
+    "name": "Listar todos os contatos",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts?perPage=40",
+    "body": "",
+    "keywords": "listar todos os contatos contatos get {{url}}/api/v1/contacts?perpage=40"
+  },
+  {
+    "name": "Listar contatos da conexão",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts?where[serviceId]={{serviceId}}?perPage=40",
+    "body": "",
+    "keywords": "listar contatos da conexão contatos get {{url}}/api/v1/contacts?where[serviceid]={{serviceid}}?perpage=40"
+  },
+  {
+    "name": "Buscar contato",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "",
+    "keywords": "buscar contato contatos get {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Buscar contato por número de uma conexão específica",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{url}}/api/v1/contacts?where[data.number][$iLike]=%{{number}}%&where[serviceId]={{serviceId}}",
+    "body": "",
+    "keywords": "buscar contato por número de uma conexão específica contatos get {{url}}/api/v1/contacts?where[data.number][$ilike]=%{{number}}%&where[serviceid]={{serviceid}}"
+  },
+  {
+    "name": "Buscar tags vinculadas a um contato",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}?include[0]=tags&include[1]",
+    "body": "",
+    "keywords": "buscar tags vinculadas a um contato contatos get {{url}}/api/v1/contacts/{{contactid}}?include[0]=tags&include[1]"
+  },
+  {
+    "name": "Buscar contatos vinculados ao Campo Personalizado",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts?query={\"include\":[{\"model\":\"customFieldValues\",\"include\":[{\"model\":\"customField\",\"where\":{\"name\":\"{{customFieldName}}\"}}]}]}",
+    "body": "",
+    "keywords": "buscar contatos vinculados ao campo personalizado contatos get {{url}}/api/v1/contacts?query={\"include\":[{\"model\":\"customfieldvalues\",\"include\":[{\"model\":\"customfield\",\"where\":{\"name\":\"{{customfieldname}}\"}}]}]}"
+  },
+  {
+    "name": "Busca de contatos que possuem X campos personalizados preenchidos",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts",
+    "body": "",
+    "keywords": "busca de contatos que possuem x campos personalizados preenchidos contatos get {{url}}/api/v1/contacts"
+  },
+  {
+    "name": "Buscar contatos vinculados a Organização",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts?query={\"include\":[{\"model\":\"person\",\"required\":\"true\",\"where\":{\"id\":\"{{organizationId}}\"}}],\"perPage\":\"30\"}",
+    "body": "",
+    "keywords": "buscar contatos vinculados a organização contatos get {{url}}/api/v1/contacts?query={\"include\":[{\"model\":\"person\",\"required\":\"true\",\"where\":{\"id\":\"{{organizationid}}\"}}],\"perpage\":\"30\"}"
+  },
+  {
+    "name": "Buscar contatos vinculados a Pessoa",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts?query={\"include\":[{\"model\":\"person\",\"required\":\"true\",\"where\":{\"id\":\"{{personId}}\"}}],\"perPage\":\"30\"}",
+    "body": "",
+    "keywords": "buscar contatos vinculados a pessoa contatos get {{url}}/api/v1/contacts?query={\"include\":[{\"model\":\"person\",\"required\":\"true\",\"where\":{\"id\":\"{{personid}}\"}}],\"perpage\":\"30\"}"
+  },
+  {
+    "name": "Editar contato",
+    "group": "Contatos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\r\n\"internalName\": \"{{name}}\",\r\n\"number\": \"{{number}}\",\r\n\"serviceId\": \"{{serviceid}}\", //id conexão\r\n\"defaultDepartmentId\": null,\r\n\"tagIds\": [\"{{tagIds}}\", \"{{tagIds}}\"]\r\n}",
+    "keywords": "editar contato contatos put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Editar tag do contato",
+    "group": "Contatos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\r\n\"tagIds\": [\"{{tagIds}}\", \"{{tagIds}}\"] //id tag\r\n}",
+    "keywords": "editar tag do contato contatos put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Editar campo personalizado de um contato",
+    "group": "Contatos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\r\n    \"customFields\": [\r\n        {\r\n            \"id\": \"{{customFieldsId}}\",\r\n            \"value\": \"{{texto}}\"\r\n        }\r\n    ]\r\n}",
+    "keywords": "editar campo personalizado de um contato contatos put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Incluir tags em um contato existente",
+    "group": "Contatos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\n\"tagIds\": [\"{{tagIds}}\", \"{{tagIds}}\"] //id tag\n}",
+    "keywords": "incluir tags em um contato existente contatos put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Cadastrar contato",
+    "group": "Contatos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts",
+    "body": "{\r\n\"internalName\": \"{{name}}\",\r\n\"number\": \"{{number}}\", //número contato\r\n\"serviceId\": \"{{serviceid}}\", //id conexão\r\n\"defaultDepartmentId\": null,\r\n\"tagIds\": [\"{{tagIds}}\"], //id tag\r\n\"customFields\": [ //campos personalizados\r\n        {\r\n            \"id\": \"{{customFieldId}}\", //id campo personalizado\r\n            \"value\": \"{{value}}\" //texto\r\n        }\r\n]\r\n}",
+    "keywords": "cadastrar contato contatos post {{url}}/api/v1/contacts"
+  },
+  {
+    "name": "Cadastrar múltiplos contatos",
+    "group": "Contatos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/many",
+    "body": "[\r\n    {\r\n        \"internalName\": \"{{name}}\", //Nome do contato\r\n        \"number\": \"{{number}}\", //Número do contato\r\n        \"serviceId\": \"{{serviceid}}\", //ID da conexão\r\n        \"defaultDepartmentId\": null,\r\n        \"tagIds\": [\r\n            \"{{tagIds}}\" //ID da TAG\r\n        ]\r\n    },\r\n    {\r\n        \"internalName\": \"{{name}}\",\r\n        \"number\": \"{{number}}\",\r\n        \"serviceId\": \"{{serviceid}}\",\r\n        \"defaultDepartmentId\": null,\r\n        \"tagIds\": [\r\n            \"{{tagIds}}\"\r\n        ]\r\n    }\r\n]",
+    "keywords": "cadastrar múltiplos contatos contatos post {{url}}/api/v1/contacts/many"
+  },
+  {
+    "name": "Exportar contatos",
+    "group": "Contatos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/export/csv",
+    "body": "{\r\n  \"where\": {\r\n    \"visible\": true,\r\n    \"isGroup\": {\r\n      \"$eq\": false\r\n    },\r\n    \"isBroadcast\": {\r\n      \"$eq\": false\r\n    },\r\n    \"serviceId\": \"{{serviceId}}\" //id conexão\r\n  },\r\n  \"include\": [\r\n    \"avatar\",\r\n    \"tags\",\r\n    {\r\n      \"model\": \"service\",\r\n      \"required\": true\r\n    },\r\n    \"person\"\r\n  ],\r\n  \"order\": [\r\n    [\r\n      \"name\",\r\n      \"ASC\"\r\n    ]\r\n  ],\r\n  \"page\": 1,\r\n  \"perPage\": 15,\r\n  \"type\": \"comma\",\r\n  \"serviceType\": \"whatsapp\" //tipo de conexão (e-mail, telegram, etc)\r\n}",
+    "keywords": "exportar contatos contatos post {{url}}/api/v1/contacts/export/csv"
+  },
+  {
+    "name": "Total de contatos com filtros",
+    "group": "Contatos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/count",
+    "body": "{\r\n  \"query\": {\r\n    \"isFiltered\": false,\r\n    \"departmentIds\": [ \r\n      {{departmentIds}} //id departamento - Opcional\r\n    ]\r\n  }\r\n}",
+    "keywords": "total de contatos com filtros contatos post {{url}}/api/v1/contacts/count"
+  },
+  {
+    "name": "Sincroniza contato",
+    "group": "Contatos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/sync",
+    "body": "",
+    "keywords": "sincroniza contato contatos post {{url}}/api/v1/contacts/{{contactid}}/sync"
+  },
+  {
+    "name": "Bloquear contato",
+    "group": "Contatos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/block",
+    "body": "",
+    "keywords": "bloquear contato contatos post {{url}}/api/v1/contacts/{{contactid}}/block"
+  },
+  {
+    "name": "Desbloquear contato",
+    "group": "Contatos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/block",
+    "body": "{\r\n    \"block\": false,\r\n    \"description\": \"{{description}}\" //descrição (texto explicando o motivo)\r\n}",
+    "keywords": "desbloquear contato contatos post {{url}}/api/v1/contacts/{{contactid}}/block"
+  },
+  {
+    "name": "Excluir contato",
+    "group": "Contatos",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "",
+    "keywords": "excluir contato contatos delete {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Exclui multiplos contatos",
+    "group": "Contatos",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/contacts/many",
+    "body": "{\r\n  \"where\": {\r\n    \"id\": [\r\n      \"{{contactId}}\", //ID dos contatos que deseja excluir\r\n      \"{{contactId}}\"\r\n    ]\r\n  }\r\n}",
+    "keywords": "exclui multiplos contatos contatos delete {{url}}/api/v1/contacts/many"
+  },
+  {
+    "name": "Listar ausências",
+    "group": "Controle de ausência",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/absence?filters[createdAt]={{2024-04-09T12:50:49.385}}Z&filters[endedAt]={{2024-04-16T12:50:49.385}}Z&include=user&page=1000&perPage=40",
+    "body": "",
+    "keywords": "listar ausências controle de ausência get {{url}}/api/v1/absence?filters[createdat]={{2024-04-09t12:50:49.385}}z&filters[endedat]={{2024-04-16t12:50:49.385}}z&include=user&page=1000&perpage=40"
+  },
+  {
+    "name": "Listagem de créditos",
+    "group": "Créditos SMS",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/credit-movements?perPage=40",
+    "body": "",
+    "keywords": "listagem de créditos créditos sms get {{url}}/api/v1/credit-movements?perpage=40"
+  },
+  {
+    "name": "Balanço",
+    "group": "Créditos SMS",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/credit-movements/balances",
+    "body": "",
+    "keywords": "balanço créditos sms get {{url}}/api/v1/credit-movements/balances"
+  },
+  {
+    "name": "Buscar uma movimentação expecífica ",
+    "group": "Créditos SMS",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/credit-movements/{{movementId}}",
+    "body": "",
+    "keywords": "buscar uma movimentação expecífica  créditos sms get {{url}}/api/v1/credit-movements/{{movementid}}"
+  },
+  {
+    "name": "Listar departamentos",
+    "group": "Departamentos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/departments?perPage=40",
+    "body": "",
+    "keywords": "listar departamentos departamentos get {{url}}/api/v1/departments?perpage=40"
+  },
+  {
+    "name": "Buscar departamento",
+    "group": "Departamentos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/departments/{{departmentId}}",
+    "body": "",
+    "keywords": "buscar departamento departamentos get {{url}}/api/v1/departments/{{departmentid}}"
+  },
+  {
+    "name": "Editar departamento",
+    "group": "Departamentos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/departments/{{departmentId}}",
+    "body": "{\r\n    \"name\": \"{{name}}\" //nome\r\n}",
+    "keywords": "editar departamento departamentos put {{url}}/api/v1/departments/{{departmentid}}"
+  },
+  {
+    "name": "Criar departamento",
+    "group": "Departamentos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/departments",
+    "body": "{\r\n    \"name\": \"{{name}}\" //nome\r\n}",
+    "keywords": "criar departamento departamentos post {{url}}/api/v1/departments"
+  },
+  {
+    "name": "Arquivar departamento",
+    "group": "Departamentos",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/departments/{{departmentId}}/archive",
+    "body": "{\r\n    \"archive\": true\r\n}",
+    "keywords": "arquivar departamento departamentos post {{url}}/api/v1/departments/{{departmentid}}/archive"
+  },
+  {
+    "name": "Excluir departamento",
+    "group": "Departamentos",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/departments/{{departmentId}}",
+    "body": "",
+    "keywords": "excluir departamento departamentos delete {{url}}/api/v1/departments/{{departmentid}}"
+  },
+  {
+    "name": "Listas distribuições de chamados",
+    "group": "Distribuição de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/distribution?perPage=40",
+    "body": "",
+    "keywords": "listas distribuições de chamados distribuição de chamados get {{url}}/api/v1/distribution?perpage=40"
+  },
+  {
+    "name": "Buscar distribuição de chamados",
+    "group": "Distribuição de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/distribution/{{distributionId}}",
+    "body": "",
+    "keywords": "buscar distribuição de chamados distribuição de chamados get {{url}}/api/v1/distribution/{{distributionid}}"
+  },
+  {
+    "name": "Editar distribuição de chamados",
+    "group": "Distribuição de chamados",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/distribution/{{distributionId}}",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"maxNum\": 1, //máximo de chamados por Atendente e Departamento\r\n    \"timeToRedistribute\": 5,//tempo máximo em minutos que os chamados permanecerão na fila do usuário offline.\r\n    \"departments\": [\r\n        {\r\n            \"id\": \"[{{departmentId}}], [{{departmentId}}]\" //id departamento\r\n        }\r\n    ],\r\n    \"roles\": [\r\n        {\r\n            \"id\": \"[{{roleId}}], [{{roleId}}]\" //id cargo\r\n        }\r\n    ],\r\n    \"redistributeAll\": false, //redistribuir todos os chamados\r\n    \"redistributeAssignedTickets\": false, //redistribuir somente chamados não respondidos\r\n  ",
+    "keywords": "editar distribuição de chamados distribuição de chamados put {{url}}/api/v1/distribution/{{distributionid}}"
+  },
+  {
+    "name": "Criar distribuição de chamados - Fila",
+    "group": "Distribuição de chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/distribution",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"maxNum\": 1, //máximo de chamados por Atendente e Departamento\r\n    \"timeToRedistribute\": 5, //tempo máximo em minutos que os chamados permanecerão na fila do usuário offline.\r\n    \"departments\": [\r\n        {\r\n            \"id\": \"[{{departmentId}}], [{{departmentId}}]\" //id departamento\r\n        }\r\n    ],\r\n    \"roles\": [\r\n        {\r\n            \"id\": \"[{{roleId}}], [{{roleId}}]\" //id cargo\r\n        }\r\n    ],\r\n    \"redistributeAll\": false, //redistribuir todos os chamados\r\n    \"redistributeAssignedTickets\": false, //redistribuir somente chamados não respondidos\r\n ",
+    "keywords": "criar distribuição de chamados - fila distribuição de chamados post {{url}}/api/v1/distribution"
+  },
+  {
+    "name": "Criar distribuição de chamados - Padrão",
+    "group": "Distribuição de chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/distribution",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"maxNum\": 1, //máximo de chamados por Atendente e Departamento\r\n    \"timeToRedistribute\": 5, //tempo máximo em minutos que os chamados permanecerão na fila do usuário offline.\r\n    \"departments\": [\r\n        {\r\n            \"id\": \"[{{departmentId}}], [{{departmentId}}]\" //id departamento\r\n        }\r\n    ],\r\n    \"roles\": [\r\n        {\r\n            \"id\": \"[{{roleId}}], [{{roleId}}]\" //id cargo\r\n        }\r\n    ],\r\n    \"redistributeAll\": false, //redistribuir todos os chamados\r\n    \"redistributeAssignedTickets\": false, //redistribuir somente chamados não respondidos\r\n ",
+    "keywords": "criar distribuição de chamados - padrão distribuição de chamados post {{url}}/api/v1/distribution"
+  },
+  {
+    "name": "Excluir distribuição de chamados",
+    "group": "Distribuição de chamados",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/distribution/{{distributionId}}",
+    "body": "",
+    "keywords": "excluir distribuição de chamados distribuição de chamados delete {{url}}/api/v1/distribution/{{distributionid}}"
+  },
+  {
+    "name": "Buscar estatísticas por período",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general",
+    "body": "",
+    "keywords": "buscar estatísticas por período estatísticas de atendimento get {{url}}/api/v1/dashboard/general"
+  },
+  {
+    "name": "Buscar estatísticas por conexão",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&serviceId={{serviceId}}",
+    "body": "",
+    "keywords": "buscar estatísticas por conexão estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&serviceid={{serviceid}}"
+  },
+  {
+    "name": "Buscar estatísticas por departamento",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general",
+    "body": "",
+    "keywords": "buscar estatísticas por departamento estatísticas de atendimento get {{url}}/api/v1/dashboard/general"
+  },
+  {
+    "name": "Buscar estatísticas por usuário",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&userId={{userId}}",
+    "body": "",
+    "keywords": "buscar estatísticas por usuário estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&userid={{userid}}"
+  },
+  {
+    "name": "Buscar estatísticas por dpt + usuário",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general",
+    "body": "",
+    "keywords": "buscar estatísticas por dpt + usuário estatísticas de atendimento get {{url}}/api/v1/dashboard/general"
+  },
+  {
+    "name": "Buscar estatísticas por data de abertura",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&periodType=open",
+    "body": "",
+    "keywords": "buscar estatísticas por data de abertura estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&periodtype=open"
+  },
+  {
+    "name": "Buscar estatísticas por data de fechamento",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&periodType=close",
+    "body": "",
+    "keywords": "buscar estatísticas por data de fechamento estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&periodtype=close"
+  },
+  {
+    "name": "Buscar estatísticas dos chamados abertos",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&status=open",
+    "body": "",
+    "keywords": "buscar estatísticas dos chamados abertos estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&status=open"
+  },
+  {
+    "name": "Buscar estatísticas dos chamados fechados",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&status=close",
+    "body": "",
+    "keywords": "buscar estatísticas dos chamados fechados estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&status=close"
+  },
+  {
+    "name": "Buscar estatísticas com todos os filtros ativos",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general",
+    "body": "",
+    "keywords": "buscar estatísticas com todos os filtros ativos estatísticas de atendimento get {{url}}/api/v1/dashboard/general"
+  },
+  {
+    "name": "Buscar avaliações sem filtro",
+    "group": "Estatísticas de avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/answers",
+    "body": "",
+    "keywords": "buscar avaliações sem filtro estatísticas de avaliações get {{url}}/api/v1/answers"
+  },
+  {
+    "name": "Buscar avaliações por período",
+    "group": "Estatísticas de avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/answers/overview?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}",
+    "body": "",
+    "keywords": "buscar avaliações por período estatísticas de avaliações get {{url}}/api/v1/answers/overview?startperiod={{2024-01-01t23:59:59.999z}}&endperiod={{2023-01-02t23:59:59.999z}}"
+  },
+  {
+    "name": "Buscar avaliações por conexão",
+    "group": "Estatísticas de avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/answers/overview",
+    "body": "",
+    "keywords": "buscar avaliações por conexão estatísticas de avaliações get {{url}}/api/v1/answers/overview"
+  },
+  {
+    "name": "Buscar avaliações por departamento",
+    "group": "Estatísticas de avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/answers/overview?departmentId={{departmentId}}&from={{2024-07-30T18:01:07.341Z}}&to={{2024-08-06T18:01:07.341Z}}&type={{csat/nps}}",
+    "body": "",
+    "keywords": "buscar avaliações por departamento estatísticas de avaliações get {{url}}/api/v1/answers/overview?departmentid={{departmentid}}&from={{2024-07-30t18:01:07.341z}}&to={{2024-08-06t18:01:07.341z}}&type={{csat/nps}}"
+  },
+  {
+    "name": "Buscar avaliações por usuário",
+    "group": "Estatísticas de avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/answers/overview?userId={{userId}}&from={{2024-07-30T18:01:07.341Z}}&to={{2024-08-06T18:01:07.341Z}}&type={{csat/nps}}",
+    "body": "",
+    "keywords": "buscar avaliações por usuário estatísticas de avaliações get {{url}}/api/v1/answers/overview?userid={{userid}}&from={{2024-07-30t18:01:07.341z}}&to={{2024-08-06t18:01:07.341z}}&type={{csat/nps}}"
+  },
+  {
+    "name": "Buscar avaliações por dpt + usuário",
+    "group": "Estatísticas de avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/answers/overview",
+    "body": "",
+    "keywords": "buscar avaliações por dpt + usuário estatísticas de avaliações get {{url}}/api/v1/answers/overview"
+  },
+  {
+    "name": "Buscar avaliações com todos os filtros ativos",
+    "group": "Estatísticas de avaliações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/answers/overview",
+    "body": "",
+    "keywords": "buscar avaliações com todos os filtros ativos estatísticas de avaliações get {{url}}/api/v1/answers/overview"
+  },
+  {
+    "name": "Listar feriados",
+    "group": "Feriados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/holiday?perPage=40",
+    "body": "",
+    "keywords": "listar feriados feriados get {{url}}/api/v1/holiday?perpage=40"
+  },
+  {
+    "name": "Buscar feriado",
+    "group": "Feriados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/holiday/{{holidayId}}",
+    "body": "",
+    "keywords": "buscar feriado feriados get {{url}}/api/v1/holiday/{{holidayid}}"
+  },
+  {
+    "name": "Editar feriado",
+    "group": "Feriados",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/holiday/{{holidayId}}",
+    "body": "{\r\n    \"name\": \"{{name}}\", //nome feriado\r\n    \"from\": \"{{2024-07-25T03:00:00.000Z}}\", //data e hora inicial\r\n    \"to\": \"{{2024-07-27T02:59:00.000Z}}\", //data e hora final\r\n    \"message\": \"{{massage}}\" //mensagem de texto do feriado\r\n}",
+    "keywords": "editar feriado feriados put {{url}}/api/v1/holiday/{{holidayid}}"
+  },
+  {
+    "name": "Criar feriado",
+    "group": "Feriados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/holiday",
+    "body": "{\r\n    \"name\": \"{{name}}\", //nome feriado\r\n    \"from\": \"{{2024-07-25T03:00:00.000Z}}\", //data e hora inicial\r\n    \"to\": \"{{2024-07-27T02:59:00.000Z}}\", //data e hora final\r\n    \"message\": \"{{massage}}\" //mensagem de texto do feriado\r\n}",
+    "keywords": "criar feriado feriados post {{url}}/api/v1/holiday"
+  },
+  {
+    "name": "Excluir feriado",
+    "group": "Feriados",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/holiday/{{holidayId}}",
+    "body": "",
+    "keywords": "excluir feriado feriados delete {{url}}/api/v1/holiday/{{holidayid}}"
+  },
+  {
+    "name": "Listar funis de vendas",
+    "group": "Funil de vendas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/pipelines?perPage=30",
+    "body": "",
+    "keywords": "listar funis de vendas funil de vendas get {{url}}/api/v1/pipelines?perpage=30"
+  },
+  {
+    "name": "Buscar funil de vendas",
+    "group": "Funil de vendas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/pipelines/{{pipelineId}}",
+    "body": "",
+    "keywords": "buscar funil de vendas funil de vendas get {{url}}/api/v1/pipelines/{{pipelineid}}"
+  },
+  {
+    "name": "Editar funil de vendas",
+    "group": "Funil de vendas",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/pipelines/{{pipelineId}}",
+    "body": "{\n    \"name\": \"{{name}}\", //nome\n    \"type\": \"sales\",\n    \"goBack\": false //false ou true\n    // \"goBack\": false = Apenas avançar\n    //\"goBack\": true = Avançar e recuar\n}",
+    "keywords": "editar funil de vendas funil de vendas put {{url}}/api/v1/pipelines/{{pipelineid}}"
+  },
+  {
+    "name": "Criar funil de vendas",
+    "group": "Funil de vendas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/pipelines",
+    "body": "{\n    \"name\": \"{{name}}\", //nome\n    \"type\": \"sales\",\n    \"goBack\": false //false ou true\n    // \"goBack\": false = Apenas avançar\n    //\"goBack\": true = Avançar e recuar\n}",
+    "keywords": "criar funil de vendas funil de vendas post {{url}}/api/v1/pipelines"
+  },
+  {
+    "name": "Excluir funil de vendas",
+    "group": "Funil de vendas",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/pipelines/{{pipelineId}}",
+    "body": "",
+    "keywords": "excluir funil de vendas funil de vendas delete {{url}}/api/v1/pipelines/{{pipelineid}}"
+  },
+  {
+    "name": "Listar grupos por conexão WhatsApp",
+    "group": "Grupos WhatsApp",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/whatsapp/groups/service/{{serviceId}}",
+    "body": "",
+    "keywords": "listar grupos por conexão whatsapp grupos whatsapp get {{url}}/api/v1/whatsapp/groups/service/{{serviceid}}"
+  },
+  {
+    "name": "Adicionar participante",
+    "group": "Grupos WhatsApp",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/add-members",
+    "body": "[{\n    \"number\": \"{{number}}}}\" // número de quem será adicionado\n}]",
+    "keywords": "adicionar participante grupos whatsapp post {{url}}/api/v1/contacts/{{contactid}}/add-members"
+  },
+  {
+    "name": "Atribuir cargo de administrador",
+    "group": "Grupos WhatsApp",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/promote-members",
+    "body": "[\n    \"{{contactId}}\" // id do contato de quem será promovido a administrador\n]",
+    "keywords": "atribuir cargo de administrador grupos whatsapp post {{url}}/api/v1/contacts/{{contactid}}/promote-members"
+  },
+  {
+    "name": "Criar novo grupo",
+    "group": "Grupos WhatsApp",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts",
+    "body": "{\n  \"serviceId\": \"{{serviceId}}\", // id da conexão\n  \"internalName\": \"{{groupName}}\", // nome do grupo\n  \"isGroup\": true\n}",
+    "keywords": "criar novo grupo grupos whatsapp post {{url}}/api/v1/contacts"
+  },
+  {
+    "name": "Remover permissões de administrador",
+    "group": "Grupos WhatsApp",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}/demote-members",
+    "body": "[\n    \"{{contactId}}\" // id do contato de quem será retirado o cargo de administrador\n]",
+    "keywords": "remover permissões de administrador grupos whatsapp post {{url}}/api/v1/contacts/{{contactid}}/demote-members"
+  },
+  {
+    "name": "Buscar chamados abertos por contactid",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets?query={\"where\":{\"isOpen\":true},\"include\":[{\"model\":\"contact\",\"required\":true,\"where\":{\"visible\":true,\"id\":\"{{contactId}}\"}}]}",
+    "body": "",
+    "keywords": "buscar chamados abertos por contactid histórico de chamados get {{url}}/api/v1/tickets?query={\"where\":{\"isopen\":true},\"include\":[{\"model\":\"contact\",\"required\":true,\"where\":{\"visible\":true,\"id\":\"{{contactid}}\"}}]}"
+  },
+  {
+    "name": "Buscar por um chamado específico",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets/{{ticketId}}",
+    "body": "",
+    "keywords": "buscar por um chamado específico histórico de chamados get {{url}}/api/v1/tickets/{{ticketid}}"
+  },
+  {
+    "name": "Buscar chamados por período",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}",
+    "body": "",
+    "keywords": "buscar chamados por período histórico de chamados get {{url}}/api/v1/tickets?startperiod={{2024-01-01t23:59:59.999z}}&endperiod={{2023-01-02t23:59:59.999z}}"
+  },
+  {
+    "name": "Buscar chamados abertos por conexão",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets",
+    "body": "",
+    "keywords": "buscar chamados abertos por conexão histórico de chamados get {{url}}/api/v1/tickets"
+  },
+  {
+    "name": "Buscar chamados fechados por conexão",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets",
+    "body": "",
+    "keywords": "buscar chamados fechados por conexão histórico de chamados get {{url}}/api/v1/tickets"
+  },
+  {
+    "name": "Buscar chamados abertos + fechados por conexão",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets",
+    "body": "",
+    "keywords": "buscar chamados abertos + fechados por conexão histórico de chamados get {{url}}/api/v1/tickets"
+  },
+  {
+    "name": "Buscar todos os chamados da plataforma",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tickets",
+    "body": "",
+    "keywords": "buscar todos os chamados da plataforma histórico de chamados get {{url}}/api/v1/tickets"
+  },
+  {
+    "name": "Exportar histórico de chamados em PDF",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URL}}/pdf/tickets/{{ticketId}}/pt-BR?pdf=1&lng=pt-BR",
+    "body": "",
+    "keywords": "exportar histórico de chamados em pdf histórico de chamados get {{url}}/pdf/tickets/{{ticketid}}/pt-br?pdf=1&lng=pt-br"
+  },
+  {
+    "name": "Exportar histórico de chamados em TXT",
+    "group": "Histórico de chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/tickets/export",
+    "body": "{\n    \"protocol\": \"{{protocolNumber}}\" //Número do protocolo\n}",
+    "keywords": "exportar histórico de chamados em txt histórico de chamados post {{url}}/api/v1/tickets/export"
+  },
+  {
+    "name": "Exportar histórico de chamados em CSV",
+    "group": "Histórico de chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/tickets/export-history",
+    "body": "",
+    "keywords": "exportar histórico de chamados em csv histórico de chamados post {{url}}/api/v1/tickets/export-history"
+  },
+  {
+    "name": "Exportar histórico de chamados de uma conexão específica em CSV",
+    "group": "Histórico de chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/tickets/export-history",
+    "body": "",
+    "keywords": "exportar histórico de chamados de uma conexão específica em csv histórico de chamados post {{url}}/api/v1/tickets/export-history"
+  },
+  {
+    "name": "Listar integrações",
+    "group": "Integrações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/integrations?perPage=40",
+    "body": "",
+    "keywords": "listar integrações integrações get {{url}}/api/v1/integrations?perpage=40"
+  },
+  {
+    "name": "Buscar integração",
+    "group": "Integrações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/integrations/{{integrationId}}",
+    "body": "",
+    "keywords": "buscar integração integrações get {{url}}/api/v1/integrations/{{integrationid}}"
+  },
+  {
+    "name": "Editar idioma da plataforma",
+    "group": "Idioma da plataforma",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/me",
+    "body": "{\r\n    \"language\": \"pt-BR\" //pt-BR / en-US / es\r\n}",
+    "keywords": "editar idioma da plataforma idioma da plataforma put {{url}}/api/v1/me"
+  },
+  {
+    "name": "Listar mensagens",
+    "group": "Mensagens",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/messages?perPage=40",
+    "body": "",
+    "keywords": "listar mensagens mensagens get {{url}}/api/v1/messages?perpage=40"
+  },
+  {
+    "name": "Buscar total de mensagens do contato",
+    "group": "Mensagens",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/messages?where[contactId]={{contactId}}",
+    "body": "",
+    "keywords": "buscar total de mensagens do contato mensagens get {{url}}/api/v1/messages?where[contactid]={{contactid}}"
+  },
+  {
+    "name": "Buscar mensagem include=file",
+    "group": "Mensagens",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/messages/{{messageId}}?include[0]=file",
+    "body": "",
+    "keywords": "buscar mensagem include=file mensagens get {{url}}/api/v1/messages/{{messageid}}?include[0]=file"
+  },
+  {
+    "name": "Enviar mensagem para contato já cadastrado",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"text\": \"{{text}}\", //texto\r\n    \"type\": \"chat\",\r\n    \"contactId\": \"{{contactId}}\", //ID contato\r\n    \"userId\": \"{{userId}}\", //ID usuário\r\n    \"origin\": \"bot\" // bot or user\r\n}",
+    "keywords": "enviar mensagem para contato já cadastrado mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar mensagem para contato não cadastrado",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"text\": \"{{text}}\", //texto\r\n    \"type\": \"chat\",\r\n    \"serviceId\": \"{{serviceId}}\", // ID conexão\r\n    \"number\": \"{{number}}\", //número do contato\r\n    \"userId\": \"{{userId}}\", //ID usuário\r\n    \"origin\": \"bot\" // bot or user\r\n}",
+    "keywords": "enviar mensagem para contato não cadastrado mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar mensagem SEM abrir o chamado",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"text\": \"{{text}}\",\r\n    \"type\": \"chat\",\r\n    \"contactId\": \"{{contactId}}\",\r\n    \"userId\": \"{{userId}}\",\r\n    \"dontOpenTicket\": \"true\", //este parametro faz com que o chamado não seja aberto no momento do envio da mensagem\r\n    \"origin\": \"bot\" // bot or user\r\n}",
+    "keywords": "enviar mensagem sem abrir o chamado mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar comentário",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"text\": \"{{text}}\", //texto\r\n    \"type\": \"comment\", // chat or comment\r\n    \"contactId\": \"{{contactId}}\", //id contato\r\n    \"userId\": \"{{userId}}\", //id usuário\r\n    \"origin\": \"bot\" // bot or user\r\n}",
+    "keywords": "enviar comentário mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar de mensagem usando bot e sem abrir chamado",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n\"text\": \"{{text}}\",\r\n\"number\": \"{{number}}\", //número do contato\r\n\"serviceId\": \"{{serviceid}}\", //id conexão\r\n\"origin\": \"bot\",\r\n\"dontOpenticket\": true\r\n}",
+    "keywords": "enviar de mensagem usando bot e sem abrir chamado mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar imagem",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"text\": \"{{text}}\", //Texto\r\n    \"number\": \"{{number}}\", //Número do contato\r\n    \"serviceId\": \"{{serviceId}}\", //ID conexão\r\n    \"file\": {\r\n        \"base64\": \"{{base64}}\", //Converter a imagem em base64\r\n        \"mimetype\": \"image/jpeg\",\r\n        \"name\": \"{{name}}\" //Nome imagem\r\n    }\r\n}",
+    "keywords": "enviar imagem mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar PDF",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"text\": \"{{text}}\", //Texto\r\n    \"number\": \"{{number}}\", //Número do contato\r\n    \"serviceId\": \"{{serviceId}}\", //ID conexão\r\n    \"file\": {\r\n        \"base64\": \"{{base64}}\", //Converter o PDF em base64\r\n        \"mimetype\": \"application/pdf\",\r\n        \"name\": \"{{name}}\" //Nome arquivo PDF\r\n    }\r\n}",
+    "keywords": "enviar pdf mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar áudio",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\n    \"number\": \"{{número}}\", //Número do contato\n    \"serviceId\": \"{{serviceid}}\", //ID conexão\n    \"file\": {\n        \"base64\": \"{{base64}}\", //Converter o áudio em base64\n        \"mimetype\": \"audio/mpeg\" \n    }\n}",
+    "keywords": "enviar áudio mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Reagir a uma mensagem",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages/{{messageId}}/send-reaction",
+    "body": "{\n    \"reactionEmojiRendered\": \"🙏\" //Colocar o emoji (reação)\n}",
+    "keywords": "reagir a uma mensagem mensagens post {{url}}/api/v1/messages/{{messageid}}/send-reaction"
+  },
+  {
+    "name": "Editar mensagem",
+    "group": "Mensagens",
+    "method": "PATCH",
+    "url": "{{URL}}/api/v1/messages/messageId",
+    "body": "{\n\"mentionedList\": [],\n\"contactId\": \"{{contactId}}\",\n\"text\": \"{{text}}\"\n}",
+    "keywords": "editar mensagem mensagens patch {{url}}/api/v1/messages/messageid"
+  },
+  {
+    "name": "Listar mensagens interativas",
+    "group": "Mensagens interativas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/interactive-messages?perPage=40",
+    "body": "",
+    "keywords": "listar mensagens interativas mensagens interativas get {{url}}/api/v1/interactive-messages?perpage=40"
+  },
+  {
+    "name": "Buscar mensagem interativa",
+    "group": "Mensagens interativas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/interactive-messages/{{interactiveMessagesId}}",
+    "body": "",
+    "keywords": "buscar mensagem interativa mensagens interativas get {{url}}/api/v1/interactive-messages/{{interactivemessagesid}}"
+  },
+  {
+    "name": "Criar mensagem interativa em lista",
+    "group": "Mensagens interativas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/interactive-messages",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"file\": null,\r\n    \"interactive\": {\r\n        \"type\": \"list\", //lista\r\n        \"action\": {\r\n            \"button\": \"{{name_list}}\",\r\n            \"sections\": [\r\n                {\r\n                    \"title\": \"{{title_list}}\",\r\n                    \"rows\": [\r\n                        {\r\n                            \"title\": \"{{name_row1}}\"\r\n                        },\r\n                        {\r\n                            \"title\": \"{{name_row2}}\"\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        },\r\n        \"body\": //corpo\r\n ",
+    "keywords": "criar mensagem interativa em lista mensagens interativas post {{url}}/api/v1/interactive-messages"
+  },
+  {
+    "name": "Criar mensagem interativa com imagem",
+    "group": "Mensagens interativas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/interactive-messages",
+    "body": "{\n    \"name\": \"{{name}}\", //nome\n    \"interactive\": {\n        \"body\": {\n            \"text\": \"{{text}}\" //texto\n        },\n        \"type\": \"button\", //tipo\n        \"action\": {\n            \"buttons\": [\n                {\n                    \"type\": \"reply\",\n                    \"reply\": {\n                        \"title\": \"{{Button1}}\" //texto botão 1\n                    }\n                },\n                {\n                    \"type\": \"reply\",\n                    \"reply\": {\n                        \"title\": \"{{Button2}}\" //texto botão 2\n                    }\n                }\n            ]\n       ",
+    "keywords": "criar mensagem interativa com imagem mensagens interativas post {{url}}/api/v1/interactive-messages"
+  },
+  {
+    "name": "Enviar mensagem interativa com botão",
+    "group": "Mensagens interativas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"type\": \"chat\",\r\n    \"interactiveMessage\": {\r\n        \"name\": \"{{name}}\",\r\n        \"interactive\": {\r\n            \"type\": \"button\",\r\n            \"action\": {\r\n                \"buttons\": [\r\n                    {\r\n                        \"type\": \"reply\",\r\n                        \"reply\": {\r\n                            \"title\": \"{{button1}}\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"type\": \"reply\",\r\n                        \"reply\": {\r\n                            \"title\": \"{{button2}}\"\r\n                        }\r\n                    }\r",
+    "keywords": "enviar mensagem interativa com botão mensagens interativas post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar mensagem interativa",
+    "group": "Mensagens interativas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "//exemplo de um modelo de body:\r\n\r\n{\r\n  \"contactId\": \"{{contactId}}\", //id contato\r\n  \"interactiveMessage\": {\r\n    \"interactive\": {\r\n      \"body\": { \r\n        \"text\": \"{{Bem vindo, Teste.}}\"  //texto mensagem interativa\r\n    },\r\n      \"type\": \"button\",\r\n      \"action\": {\r\n        \"buttons\": [\r\n          {\r\n            \"type\": \"reply\",\r\n            \"reply\": {\r\n              \"title\": \"{{Sim}}\" //titulo botão\r\n            }\r\n          },\r\n          {\r\n            \"type\": \"reply\",\r\n            \"reply\": {\r\n              \"title\": \"{{Não}}\" //titulo botão\r\n            }\r\n          }\r\n        ]\r\n     ",
+    "keywords": "enviar mensagem interativa mensagens interativas post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Excluir mensagem interativa",
+    "group": "Mensagens interativas",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/interactive-messages/{{interactiveMessagesId}}",
+    "body": "",
+    "keywords": "excluir mensagem interativa mensagens interativas delete {{url}}/api/v1/interactive-messages/{{interactivemessagesid}}"
+  },
+  {
+    "name": "Buscar meus dados",
+    "group": "Meus dados",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/me",
+    "body": "",
+    "keywords": "buscar meus dados meus dados get {{url}}/api/v1/me"
+  },
+  {
+    "name": "Marcar como não lido",
+    "group": "Notificação",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\r\n    \"serviceid\": \"{{serviceid}}\", //ID conexão\r\n    \"data\": {\r\n        \"unread\": true //true or false\r\n    }\r\n}",
+    "keywords": "marcar como não lido notificação put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Notificação mensagens receptivas",
+    "group": "Notificação",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\r\n    \"unread\": \"1\" //quantidade de notificações receptivas\r\n}",
+    "keywords": "notificação mensagens receptivas notificação put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Silenciar contato",
+    "group": "Notificação",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\r\n\"isSilenced\": true // true or false\r\n}",
+    "keywords": "silenciar contato notificação put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Listar organizações",
+    "group": "Organizações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/organizations?perPage=40",
+    "body": "",
+    "keywords": "listar organizações organizações get {{url}}/api/v1/organizations?perpage=40"
+  },
+  {
+    "name": "Buscar organização",
+    "group": "Organizações",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/organizations/{{organizationId}}",
+    "body": "",
+    "keywords": "buscar organização organizações get {{url}}/api/v1/organizations/{{organizationid}}"
+  },
+  {
+    "name": "Editar organização",
+    "group": "Organizações",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/organizations/{{organizationId}}",
+    "body": "{\r\n    \"name\": {{name}}    \r\n}",
+    "keywords": "editar organização organizações put {{url}}/api/v1/organizations/{{organizationid}}"
+  },
+  {
+    "name": "Criar organização",
+    "group": "Organizações",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/organizations",
+    "body": "{\r\n    \"name\":\"{{name}}\"\r\n}",
+    "keywords": "criar organização organizações post {{url}}/api/v1/organizations"
+  },
+  {
+    "name": "Excluir organização",
+    "group": "Organizações",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/organizations/{{organizationId}}",
+    "body": "",
+    "keywords": "excluir organização organizações delete {{url}}/api/v1/organizations/{{organizationid}}"
+  },
+  {
+    "name": "Listar pessoas",
+    "group": "Pessoas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/people?perPage=40",
+    "body": "",
+    "keywords": "listar pessoas pessoas get {{url}}/api/v1/people?perpage=40"
+  },
+  {
+    "name": "Buscar pessoa",
+    "group": "Pessoas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/people/{{peopleId}}",
+    "body": "",
+    "keywords": "buscar pessoa pessoas get {{url}}/api/v1/people/{{peopleid}}"
+  },
+  {
+    "name": "Editar pessoa",
+    "group": "Pessoas",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/people/{{peopleId}}",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"document\": \"{{document}}\", //documento\r\n    \"organizationIds\": [\"{{organizationId}}\", \"{{organizationId}}\"] //id organização\r\n}",
+    "keywords": "editar pessoa pessoas put {{url}}/api/v1/people/{{peopleid}}"
+  },
+  {
+    "name": "Criar pessoa",
+    "group": "Pessoas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/people",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"document\": \"{{document}}\", //documento\r\n    \"organizationIds\": [\"{{organizationId}}\", \"{{organizationId}}\"] //id organização\r\n}",
+    "keywords": "criar pessoa pessoas post {{url}}/api/v1/people"
+  },
+  {
+    "name": "Excluir pessoa",
+    "group": "Pessoas",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/people/{{peopleId}}",
+    "body": "",
+    "keywords": "excluir pessoa pessoas delete {{url}}/api/v1/people/{{peopleid}}"
+  },
+  {
+    "name": "Listar planos",
+    "group": "Planos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/plans",
+    "body": "",
+    "keywords": "listar planos planos get {{url}}/api/v1/plans"
+  },
+  {
+    "name": "Buscar plano",
+    "group": "Planos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/plans/{{planId}}",
+    "body": "",
+    "keywords": "buscar plano planos get {{url}}/api/v1/plans/{{planid}}"
+  },
+  {
+    "name": "Solicitar uma nova senha",
+    "group": "Redefinir senha",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/reset-password/request",
+    "body": "{\r\n    \"email\": \"{{email}}\" //e-mail de acesso do usuário que deseja redefinir a senha\r\n}",
+    "keywords": "solicitar uma nova senha redefinir senha post {{url}}/api/v1/reset-password/request"
+  },
+  {
+    "name": "Listar respostas rápidas",
+    "group": "Respostas rápidas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/quick-replies?perPage=40",
+    "body": "",
+    "keywords": "listar respostas rápidas respostas rápidas get {{url}}/api/v1/quick-replies?perpage=40"
+  },
+  {
+    "name": "Listar textos e departamentos das respostas rápidas",
+    "group": "Respostas rápidas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/quick-replies",
+    "body": "",
+    "keywords": "listar textos e departamentos das respostas rápidas respostas rápidas get {{url}}/api/v1/quick-replies"
+  },
+  {
+    "name": "Listar somente os textos das respostas rápidas",
+    "group": "Respostas rápidas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/quick-replies?query={\"attributes\":[\"text\"],\"perPage\":40}",
+    "body": "",
+    "keywords": "listar somente os textos das respostas rápidas respostas rápidas get {{url}}/api/v1/quick-replies?query={\"attributes\":[\"text\"],\"perpage\":40}"
+  },
+  {
+    "name": "Buscar resposta rápida",
+    "group": "Respostas rápidas",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/quick-replies/{{quickRepliesId}}",
+    "body": "",
+    "keywords": "buscar resposta rápida respostas rápidas get {{url}}/api/v1/quick-replies/{{quickrepliesid}}"
+  },
+  {
+    "name": "Editar resposta rápida ",
+    "group": "Respostas rápidas",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/quick-replies/{{quickRepliesId}}",
+    "body": "{\r\n    \"text\": \"{{text}}\",\r\n    \"departmentIds\":  [\"{{departmentId}}\", \"{{departmentId}}\"] //id departamento\r\n}",
+    "keywords": "editar resposta rápida  respostas rápidas put {{url}}/api/v1/quick-replies/{{quickrepliesid}}"
+  },
+  {
+    "name": "Criar resposta rápida",
+    "group": "Respostas rápidas",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/quick-replies",
+    "body": "{\r\n    \"text\": \"{{test}}\",\r\n    \"departmentIds\":  [\"{{departmentId}}\", \"{{departmentId}}\"] //id departamento\r\n}",
+    "keywords": "criar resposta rápida respostas rápidas post {{url}}/api/v1/quick-replies"
+  },
+  {
+    "name": "Excluir resposta rápida",
+    "group": "Respostas rápidas",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/quick-replies/{{quickRepliesId}}",
+    "body": "",
+    "keywords": "excluir resposta rápida respostas rápidas delete {{url}}/api/v1/quick-replies/{{quickrepliesid}}"
+  },
+  {
+    "name": "Listar bots V1 / V2 / V3",
+    "group": "Robôs",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/bots?perPage=40",
+    "body": "",
+    "keywords": "listar bots v1 / v2 / v3 robôs get {{url}}/api/v1/bots?perpage=40"
+  },
+  {
+    "name": "Listar bots V1 / V2",
+    "group": "Robôs",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/bots?query={\"where\":{\"settings\":{\"botCreatedVersion\":{\"$or\":[null,\"v1\",\"v2\"]}}},\"order\":[[\"name\",\"ASC\"]],\"page\":1,\"perPage\":40}",
+    "body": "",
+    "keywords": "listar bots v1 / v2 robôs get {{url}}/api/v1/bots?query={\"where\":{\"settings\":{\"botcreatedversion\":{\"$or\":[null,\"v1\",\"v2\"]}}},\"order\":[[\"name\",\"asc\"]],\"page\":1,\"perpage\":40}"
+  },
+  {
+    "name": "Listar bots V3",
+    "group": "Robôs",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/bots?query={\"where\":{\"settings\":{\"botCreatedVersion\":\"v3\"}},\"order\":[[\"name\",\"ASC\"]],\"page\":1,\"perPage\":40}",
+    "body": "",
+    "keywords": "listar bots v3 robôs get {{url}}/api/v1/bots?query={\"where\":{\"settings\":{\"botcreatedversion\":\"v3\"}},\"order\":[[\"name\",\"asc\"]],\"page\":1,\"perpage\":40}"
+  },
+  {
+    "name": "Buscar bot",
+    "group": "Robôs",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/bots/{{botId}}",
+    "body": "",
+    "keywords": "buscar bot robôs get {{url}}/api/v1/bots/{{botid}}"
+  },
+  {
+    "name": "Editar bot",
+    "group": "Robôs",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/bots/{{botId}}",
+    "body": "//Copiar o retorno do GET \"Buscar bot\" aqui e altera-lo",
+    "keywords": "editar bot robôs put {{url}}/api/v1/bots/{{botid}}"
+  },
+  {
+    "name": "Excluir bot",
+    "group": "Robôs",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/bots/{{botId}}",
+    "body": "",
+    "keywords": "excluir bot robôs delete {{url}}/api/v1/bots/{{botid}}"
+  },
+  {
+    "name": "Listar tags",
+    "group": "Tags",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tags?perPage=40",
+    "body": "",
+    "keywords": "listar tags tags get {{url}}/api/v1/tags?perpage=40"
+  },
+  {
+    "name": "Buscar tag",
+    "group": "Tags",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/tags/{{tagId}}",
+    "body": "",
+    "keywords": "buscar tag tags get {{url}}/api/v1/tags/{{tagid}}"
+  },
+  {
+    "name": "Editar tag",
+    "group": "Tags",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/tags/{{tagId}}",
+    "body": "{\r\n    \"label\": \"{{name}}\", //nome da tag\r\n    \"backgroundColor\": \"{{#40C3FF}}\", //# da cor da Tag\r\n    \"departments\": [] //ID dos departamentos\r\n}",
+    "keywords": "editar tag tags put {{url}}/api/v1/tags/{{tagid}}"
+  },
+  {
+    "name": "Criar tag",
+    "group": "Tags",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/tags",
+    "body": "{\r\n    \"label\": \"{{name}}\", //nome da tag\r\n    \"backgroundColor\": \"{{#40C3FF}}\", //# da cor da Tag\r\n    \"departments\": [] //ID dos departamentos\r\n}",
+    "keywords": "criar tag tags post {{url}}/api/v1/tags"
+  },
+  {
+    "name": "Adicona uma tag a multiplos contatos",
+    "group": "Tags",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/tags/{{tagId}}/contacts",
+    "body": "{\r\n  \"where\": {\r\n    \"id\": [\r\n      \"{{contactId}}\", //id contato\r\n      \"{{contactId}}\",\r\n      \"{{contactId}}\"\r\n    ]\r\n  }\r\n}",
+    "keywords": "adicona uma tag a multiplos contatos tags post {{url}}/api/v1/tags/{{tagid}}/contacts"
+  },
+  {
+    "name": "Remove uma tag a multiplos contatos",
+    "group": "Tags",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/tags/{{tagId}}/contacts",
+    "body": "{\r\n  \"where\": {\r\n    \"id\": [\r\n      \"{{id do contato}}\",\r\n      \"{{id do contato}}\"\r\n    ]\r\n  }\r\n}",
+    "keywords": "remove uma tag a multiplos contatos tags delete {{url}}/api/v1/tags/{{tagid}}/contacts"
+  },
+  {
+    "name": "Excluir tag",
+    "group": "Tags",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/tags/{{tagId}}",
+    "body": "",
+    "keywords": "excluir tag tags delete {{url}}/api/v1/tags/{{tagid}}"
+  },
+  {
+    "name": "Listar templates",
+    "group": "Templates",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates?perPage=40",
+    "body": "",
+    "keywords": "listar templates templates get {{url}}/api/v1/whatsapp-business-templates?perpage=40"
+  },
+  {
+    "name": "Buscar template",
+    "group": "Templates",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates/{{templateId}}",
+    "body": "",
+    "keywords": "buscar template templates get {{url}}/api/v1/whatsapp-business-templates/{{templateid}}"
+  },
+  {
+    "name": "Total de templates cadastrados",
+    "group": "Templates",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates/count",
+    "body": "",
+    "keywords": "total de templates cadastrados templates get {{url}}/api/v1/whatsapp-business-templates/count"
+  },
+  {
+    "name": "Editar template",
+    "group": "Templates",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates/{{templateId}}",
+    "body": "// //Copiar o retorno do GET \"Buscar template\" aqui e altera-lo",
+    "keywords": "editar template templates put {{url}}/api/v1/whatsapp-business-templates/{{templateid}}"
+  },
+  {
+    "name": "Enviar template para aprovação",
+    "group": "Templates",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates/{{hsmId}}/send-to-review",
+    "body": "",
+    "keywords": "enviar template para aprovação templates post {{url}}/api/v1/whatsapp-business-templates/{{hsmid}}/send-to-review"
+  },
+  {
+    "name": "Sincronizar templates com o provedor",
+    "group": "Templates",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates/refresh-templates",
+    "body": "",
+    "keywords": "sincronizar templates com o provedor templates post {{url}}/api/v1/whatsapp-business-templates/refresh-templates"
+  },
+  {
+    "name": "Enviar template com botão",
+    "group": "Templates",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"type\": \"chat\",\r\n    \"number\": \"{{number}}\", //Número do contato\r\n    \"serviceId\": \"{{serviceId}}\", //ID conexão\r\n    \"hsmId\": \"{{hsmId}}\", //ID HSM\r\n    \"files\": [],\r\n    \"uploadingFiles\": false,\r\n    \"replyTo\": null,\r\n    \"parameters\": [],\r\n    \"file\": {}\r\n}",
+    "keywords": "enviar template com botão templates post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Enviar template com URL no botão",
+    "group": "Templates",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"type\": \"chat\",\r\n    \"contactId\": \"{{contactId}}\", //ID do contato\r\n    \"hsmId\": \"{{hsmId}}\", //ID do template\r\n    \"files\": [],\r\n    \"uploadingFiles\": false,\r\n    \"replyTo\": null,\r\n    \"parameters\": [\r\n        {\r\n            \"type\": \"body\",\r\n            \"parameters\": [\r\n                {\r\n                    \"type\": \"text\",\r\n                    \"text\": \"{{text}}\" //Texto\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"type\": \"button\",\r\n            \"sub_type\": \"url\",\r\n            \"index\": 0,\r\n            \"parameters\": [\r\n                {\r\n                    \"typ",
+    "keywords": "enviar template com url no botão templates post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Envio de template com dois parâmetros",
+    "group": "Templates",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\n  \"type\": \"chat\",\n  \"number\": \"{{number}}\", //número do contato\n  \"serviceId\": \"{{serviceId}}\", //id da conexão\n  \"hsmId\": \"{{hsmId}}\", //id do template\n  \"files\": [],\n  \"uploadingFiles\": false,\n  \"replyTo\": null,\n  \"parameters\": [\n    {\n      \"type\": \"body\",\n      \"parameters\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"{{text1}}\" //texto 1\n        },\n        {\n          \"type\": \"text\",\n          \"text\": \"{{text2}}\" //texto 2\n        }\n      ]\n    }\n  ],\n  \"file\": {}\n}",
+    "keywords": "envio de template com dois parâmetros templates post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "Criar template somente com texto",
+    "group": "Templates",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates",
+    "body": "{\r\n  \"name\": \"{{name}}\", //Nome do template\r\n  \"internalName\": \"{{internalName}}\", //Nome interno que irá aparecer no front da plataforma\r\n  \"components\": [],\r\n  \"serviceId\": \"{{serviceId}}\", //ID da conexão\r\n  \"messageType\": \"text_only\", //Tipo da mensagem\r\n  \"language\": \"pt_BR\", //Idioma\r\n  \"category\": \"{{category}}\", //Categoria do template, por exemplo: MARKETING\r\n  \"namespace\": \"\",\r\n  \"status\": \"\"\r\n}",
+    "keywords": "criar template somente com texto templates post {{url}}/api/v1/whatsapp-business-templates"
+  },
+  {
+    "name": "Excluir template",
+    "group": "Templates",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/whatsapp-business-templates/{{templateId}}",
+    "body": "",
+    "keywords": "excluir template templates delete {{url}}/api/v1/whatsapp-business-templates/{{templateid}}"
+  },
+  {
+    "name": "Listar termos de aceite",
+    "group": "Termos de aceite",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/acceptance-terms?perPage=40",
+    "body": "",
+    "keywords": "listar termos de aceite termos de aceite get {{url}}/api/v1/acceptance-terms?perpage=40"
+  },
+  {
+    "name": "Buscar termo de aceite",
+    "group": "Termos de aceite",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/acceptance-terms/{{termsId}}",
+    "body": "",
+    "keywords": "buscar termo de aceite termos de aceite get {{url}}/api/v1/acceptance-terms/{{termsid}}"
+  },
+  {
+    "name": "Editar termo de aceite",
+    "group": "Termos de aceite",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/acceptance-terms/{{termsId}}",
+    "body": "{\r\n    \"name\": \"{{name}}\",\r\n    \"textField\": \"{{text}}\", //texto\r\n    \"file\": {}\r\n}",
+    "keywords": "editar termo de aceite termos de aceite put {{url}}/api/v1/acceptance-terms/{{termsid}}"
+  },
+  {
+    "name": "Criar termo de aceite",
+    "group": "Termos de aceite",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/acceptance-terms",
+    "body": "{\r\n    \"name\": \"{{nome}}\",\r\n    \"textField\": \"{{texto}}\", //Texto\r\n    \"file\": {}\r\n}",
+    "keywords": "criar termo de aceite termos de aceite post {{url}}/api/v1/acceptance-terms"
+  },
+  {
+    "name": "Excluir termo de aceite",
+    "group": "Termos de aceite",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/acceptance-terms/{{termsId}}",
+    "body": "",
+    "keywords": "excluir termo de aceite termos de aceite delete {{url}}/api/v1/acceptance-terms/{{termsid}}"
+  },
+  {
+    "name": "Listar tokens",
+    "group": "Tokens",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/me/tokens?perPage30",
+    "body": "",
+    "keywords": "listar tokens tokens get {{url}}/api/v1/me/tokens?perpage30"
+  },
+  {
+    "name": "Buscar token",
+    "group": "Tokens",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/me/tokens/{{tokenId}}",
+    "body": "",
+    "keywords": "buscar token tokens get {{url}}/api/v1/me/tokens/{{tokenid}}"
+  },
+  {
+    "name": "Editar token",
+    "group": "Tokens",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/me/tokens/{{tokenId}}",
+    "body": "{\r\n    \"name\": \"{{name}}\"\r\n}",
+    "keywords": "editar token tokens put {{url}}/api/v1/me/tokens/{{tokenid}}"
+  },
+  {
+    "name": "Criar token",
+    "group": "Tokens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/me/tokens",
+    "body": "{\r\n    \"name\": \"{{name}}\"\r\n}",
+    "keywords": "criar token tokens post {{url}}/api/v1/me/tokens"
+  },
+  {
+    "name": "Excluir token",
+    "group": "Tokens",
+    "method": "DELETE",
+    "url": "{{URL}}/api/v1/me/tokens/{{tokenId}}",
+    "body": "",
+    "keywords": "excluir token tokens delete {{url}}/api/v1/me/tokens/{{tokenid}}"
+  },
+  {
+    "name": "Corrigir mensagem",
+    "group": "Texto Mágico",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages/magic-text",
+    "body": "{\n    \"message\": \"{{message}}\",//Mensagem\n    \"tone\": \"correct\"\n}",
+    "keywords": "corrigir mensagem texto mágico post {{url}}/api/v1/messages/magic-text"
+  },
+  {
+    "name": "Listar usuários",
+    "group": "Usuários",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/users?perPage=40",
+    "body": "",
+    "keywords": "listar usuários usuários get {{url}}/api/v1/users?perpage=40"
+  },
+  {
+    "name": "Listar usuários com seus departamentos",
+    "group": "Usuários",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/users?query={\"include\":[{\"model\":\"departments\",\"attributes\":[\"id\",\"name\"]}],\"page\":1,\"perPage\":15}",
+    "body": "",
+    "keywords": "listar usuários com seus departamentos usuários get {{url}}/api/v1/users?query={\"include\":[{\"model\":\"departments\",\"attributes\":[\"id\",\"name\"]}],\"page\":1,\"perpage\":15}"
+  },
+  {
+    "name": "Buscar usuário",
+    "group": "Usuários",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/users/{{userId}}",
+    "body": "",
+    "keywords": "buscar usuário usuários get {{url}}/api/v1/users/{{userid}}"
+  },
+  {
+    "name": "Editar usuário",
+    "group": "Usuários",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/users/{{userId}}",
+    "body": "{\r\n\"accountId\": \"{{accountId}}\",\r\n\"email\": \"{{e-mail}}\",\r\n\"name\": \"{{name}}\",\r\n\"isAdmin\": true //true or false\r\n}",
+    "keywords": "editar usuário usuários put {{url}}/api/v1/users/{{userid}}"
+  },
+  {
+    "name": "Criar usuário",
+    "group": "Usuários",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/users",
+    "body": "{\r\n\"accountId\": \"{{accountId}}\", //id conta\r\n\"email\": {{email}}, \r\n\"password\": \"{{password}}\", //senha\r\n\"name\": \"{{name}}\",\r\n\"rolesId\": \"{{roleId}}\", //id cargo\r\n\"organizationIds\":[],\r\n\"departmentsId\": \"{{departmentsId}}\" //id departamento\r\n}",
+    "keywords": "criar usuário usuários post {{url}}/api/v1/users"
+  },
+  {
+    "name": "Arquiva usuário",
+    "group": "Usuários",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/users/{{userId}}/archive",
+    "body": "{\r\n    \"archive\": true\r\n}",
+    "keywords": "arquiva usuário usuários post {{url}}/api/v1/users/{{userid}}/archive"
+  },
+  {
+    "name": "Versão da plataforma",
+    "group": "Versões",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/versions",
+    "body": "",
+    "keywords": "versão da plataforma versões get {{url}}/api/v1/versions"
+  },
+  {
+    "name": "Listar webhooks",
+    "group": "Webhooks",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/me/webhooks?perPage=40",
+    "body": "",
+    "keywords": "listar webhooks webhooks get {{url}}/api/v1/me/webhooks?perpage=40"
+  },
+  {
+    "name": "Buscar webhook",
+    "group": "Webhooks",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/me/webhooks/{{webhookId}}",
+    "body": "",
+    "keywords": "buscar webhook webhooks get {{url}}/api/v1/me/webhooks/{{webhookid}}"
+  },
+  {
+    "name": "Editar webhook",
+    "group": "Webhooks",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/me/webhooks/{{webhookId}}",
+    "body": "{\r\n    \"active\": {{true or false}},\r\n    \"name\": \"{{name}}}}\",\r\n    \"url\": \"{{url}}\",\r\n    \"events\": [\r\n        \"{{message.created}}\",\r\n        \"{{message.updated}}\"\r\n    ],\r\n    \"type\": \"{{general}}\", //tipo\r\n    \"userId\": \"{{userId}}\",\r\n    \"updatedAt\": \"{{date}}\",\r\n    \"createdAt\": \"{{date}}\",\r\n    \"deletedAt\": null\r\n}",
+    "keywords": "editar webhook webhooks put {{url}}/api/v1/me/webhooks/{{webhookid}}"
+  },
+  {
+    "name": "Criar webhook",
+    "group": "Webhooks",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/me/webhooks",
+    "body": "{\r\n    \"active\": {{true or falsze}},\r\n    \"name\": \"{{name}}\",\r\n    \"url\": \"{{url}}\",\r\n    \"events\": [\r\n        \"{{message.created}}\",\r\n        \"{{message.updated}}\"\r\n    ],\r\n    \"type\": \"{{general}}\",\r\n    \"userId\": \"{{userId}}\",\r\n    \"accountId\": \"{{accountId}}\"\r\n}",
+    "keywords": "criar webhook webhooks post {{url}}/api/v1/me/webhooks"
+  },
+  {
+    "name": "Teste Webhook",
+    "group": "Webhooks",
+    "method": "POST",
+    "url": "{{link_Completo_Webhook}}",
+    "body": "{ \r\n    \"teste\": \"teste\" \r\n}",
+    "keywords": "teste webhook webhooks post {{link_completo_webhook}}"
+  },
+  {
+    "name": "Validação WhatsApp",
+    "group": "WhatsApp",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts/exists?numbers[]={{contactNumber}}&serviceId={{serviceId}}",
+    "body": "",
+    "keywords": "validação whatsapp whatsapp get {{url}}/api/v1/contacts/exists?numbers[]={{contactnumber}}&serviceid={{serviceid}}"
+  },
+  {
+    "name": "Buscar chamados do contato",
+    "group": "Chamados",
+    "method": "GET",
+    "url": "{{URL}}/tickets?where[contactId]={{contactId}}",
+    "body": "",
+    "keywords": "buscar chamados do contato chamados get {{url}}/tickets?where[contactid]={{contactid}}"
+  },
+  {
+    "name": "Transferência de chamado",
+    "group": "Chamados",
+    "method": "POST",
+    "url": "{{URL}}/api/v1//contacts/{{contactId}}/ticket/transfer",
+    "body": "{\r\n    \"departmentId\": \"{{departmentId}}\", //id departamento\r\n    \"userId\": \"{{userId}}\", //id do usuário SE for abrir direto para ele\r\n    \"comments\": \"{{comments}}\" //comentario interno\r\n}",
+    "keywords": "transferência de chamado chamados post {{url}}/api/v1//contacts/{{contactid}}/ticket/transfer"
+  },
+  {
+    "name": "Abertura de chamado",
+    "group": "Chamados",
+    "method": "POST",
+    "url": "{{URL}}/contacts/{{contactId}}/ticket/transfer",
+    "body": "{\r\n    \"departmentId\": \"{{departmentId}}\", //id departamento\r\n    \"userId\": \"{{userId}}\", //id do usuário SE for abrir direto para ele\r\n    \"comments\": \"{{comments}}\" //comentario interno\r\n}",
+    "keywords": "abertura de chamado chamados post {{url}}/contacts/{{contactid}}/ticket/transfer"
+  },
+  {
+    "name": "Buscar contatos que possuem campo personalizado específico",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts?query={\"include\":[{\"model\":\"customFieldValues\",\"include\":[{\"model\":\"customField\",\"where\":{\"name\":\"{{customFieldName}}\"}}]}]}",
+    "body": "",
+    "keywords": "buscar contatos que possuem campo personalizado específico contatos get {{url}}/api/v1/contacts?query={\"include\":[{\"model\":\"customfieldvalues\",\"include\":[{\"model\":\"customfield\",\"where\":{\"name\":\"{{customfieldname}}\"}}]}]}"
+  },
+  {
+    "name": "Buscar campos personalizados de um contato específico",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "",
+    "keywords": "buscar campos personalizados de um contato específico contatos get {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Verifica a existência de um contato",
+    "group": "Contatos",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/contacts/exists?numbers[]={{phoneNumber}}&serviceId={{serviceId}}",
+    "body": "",
+    "keywords": "verifica a existência de um contato contatos get {{url}}/api/v1/contacts/exists?numbers[]={{phonenumber}}&serviceid={{serviceid}}"
+  },
+  {
+    "name": "Incluir tags em um contato existente Copy",
+    "group": "Contatos",
+    "method": "PUT",
+    "url": "{{URL}}/api/v1/contacts/{{contactId}}",
+    "body": "{\n\"tagIds\": [\"{{tagIds}}\", \"{{tagIds}}\"] //id tag\n}",
+    "keywords": "incluir tags em um contato existente copy contatos put {{url}}/api/v1/contacts/{{contactid}}"
+  },
+  {
+    "name": "Buscar estatísticas por período",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}",
+    "body": "",
+    "keywords": "buscar estatísticas por período estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-01-01t23:59:59.999z}}&endperiod={{2023-01-02t23:59:59.999z}}"
+  },
+  {
+    "name": "Buscar estatísticas pela conexão",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&serviceId={{serviceId}}",
+    "body": "",
+    "keywords": "buscar estatísticas pela conexão estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&serviceid={{serviceid}}"
+  },
+  {
+    "name": "Buscar estatísticas por departamento + usuário",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general",
+    "body": "",
+    "keywords": "buscar estatísticas por departamento + usuário estatísticas de atendimento get {{url}}/api/v1/dashboard/general"
+  },
+  {
+    "name": "Buscar estatísticas pelo status dos chamados",
+    "group": "Estatísticas de atendimento",
+    "method": "GET",
+    "url": "{{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&status={{all/open/close}}",
+    "body": "",
+    "keywords": "buscar estatísticas pelo status dos chamados estatísticas de atendimento get {{url}}/api/v1/dashboard/general?startperiod={{2024-07-01t23:59:59.999z}}&endperiod={{2024-07-30t23:59:59.999z}}&status={{all/open/close}}"
+  },
+  {
+    "name": "Exportar histórico de chamados em PDF",
+    "group": "Histórico de chamados",
+    "method": "GET",
+    "url": "{{URLbase}}/pdf/tickets/{{ticketId}}/pt-BR?pdf=1&lng=pt-BR",
+    "body": "",
+    "keywords": "exportar histórico de chamados em pdf histórico de chamados get {{urlbase}}/pdf/tickets/{{ticketid}}/pt-br?pdf=1&lng=pt-br"
+  },
+  {
+    "name": "Enviar mensagem",
+    "group": "Mensagens",
+    "method": "POST",
+    "url": "{{URL}}/api/v1/messages",
+    "body": "{\r\n    \"text\": \"{{text}}\", //Texto\r\n    \"type\": \"chat\",\r\n    \"contactId\": \"{{contactId}}\", //ID contato\r\n    \"userId\": \"{{userId}}\", //ID usuário\r\n    \"origin\": \"bot\" // bot or user\r\n}",
+    "keywords": "enviar mensagem mensagens post {{url}}/api/v1/messages"
+  },
+  {
+    "name": "https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleId}}",
+    "group": "teste",
+    "method": "DELETE",
+    "url": "https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleId}}",
+    "body": "{\n  \"where\": {\n    \"id\": [\n      \"67f1cd72-be0a-4ee3-9a8e-000deb4c1551\",\n      \"2afb0d3f-78c7-459b-ac9c-dd4083d66475\"\n    ]\n  }\n}",
+    "keywords": "https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleid}} teste delete https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleid}}"
+  },
+  {
+    "name": "https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleId}}",
+    "group": "teste",
+    "method": "DELETE",
+    "url": "https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleId}}",
+    "body": "",
+    "keywords": "https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleid}} teste delete https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleid}}"
+  },
+  {
+    "name": "https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleId}}",
+    "group": "",
+    "method": "DELETE",
+    "url": "https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleId}}",
+    "body": "{\n  \"where\": {\n    \"id\": [\n      \"67f1cd72-be0a-4ee3-9a8e-000deb4c1551\",\n      \"2afb0d3f-78c7-459b-ac9c-dd4083d66475\"\n    ]\n  }\n}",
+    "keywords": "https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleid}}  delete https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleid}}"
+  }
+]

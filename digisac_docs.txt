@@ -1,0 +1,2305 @@
+# Documentação API Digisac
+
+### 👋 **Bem-vindo(a)** à **Documentação da API Digisac**!
+
+Este material foi preparado com muito cuidado pela nossa equipe de Suporte Integração. Nosso objetivo é que ele seja útil para você! 🚀
+
+## ⚙️ Gerais
+Descrição: Nesta collection, você vai encontrar uma série de requisições de API para usar no seu ambiente Digisac. Explore à vontade! 😉
+  ## Acionamento flag no robô
+    ### [POST] Acionamento flag no robô
+      Endpoint: {{URL}}/api/v1/bots/{{botId}}/trigger-signal/{{contactId}}?flag=flagAqui
+      Parâmetros de query:
+        - flag: flagAqui
+
+  ## Agendamentos
+  Descrição: Os agendamentos são utilizados para programar a plataforma para fazer alguma ação em uma determinada data e horário. Com esta ferramenta, você poderá agendar uma abertura de chamado automática com algum cliente, uma notificação a um atendente de sua plataforma ou até fazer as duas ações simultaneame
+    ### [GET] Listar agendamentos
+      Endpoint: {{URL}}/api/v1/schedule?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar agendamento
+      Endpoint: {{URL}}/api/v1/schedule/{{scheduleId}}
+
+    ### [PUT] Editar agendamento
+      Endpoint: {{URL}}/api/v1/schedule/{{scheduleId}}
+      Body:
+        {
+          "contactId": "{{contactId}}", //ID do contato
+          "departmentId": "{{departmentId}}", //ID do departamento
+          "files": [],
+          "message": "{{text}}",
+          "notes": "{{notes}}}}",
+          "notificateUser": true, //true or false
+          "openTicket": true, //true or false
+          "scheduledAt": "{{2023-07-15 10:35:18}}",
+          "userId": "{{userId}}"
+        }
+
+    ### [POST] Criar agendamento
+      Endpoint: {{URL}}/api/v1/schedule
+      Body:
+        {
+          "contactId": "{{contactId}}",
+          "departmentId": "{{departmentId}}",
+          "files": [{{arquivos}}],
+          "message": "{{text}}",
+          "notes": "{{note}}}}",
+          "notificateUser": true, //true or false
+          "openTicket": true, //true or false
+          "scheduledAt": "{{2023-07-15 10:35:18}}",
+          "userId": "{{userId}}"
+        }
+
+    ### [DELETE] Excluir agendamento
+      Endpoint: {{URL}}/api/v1/schedule/{{scheduleId}}
+
+  ## Agora
+  Descrição: Nesta função é possível visualizar em tempo real todos os atendimentos que estão acontecendo na plataforma por atendente e departamento.
+    ### [GET] Buscar departamentos (Agora)
+      Endpoint: {{URL}}/api/v1/now/departments-resume
+
+    ### [GET] Buscar atendentes (Agora)
+      Endpoint: {{URL}}/api/v1/now/attendance-resume
+
+    ### [GET] Buscar todos os dados (Agora)
+      Endpoint: {{URL}}/api/v1/now/resume
+
+  ## Assuntos de chamado
+  Descrição: O assunto de chamado é uma ferramenta utilizada para classificar seus atendimentos. Deverá ser inserido sempre que o usuário fechar o chamado com o contato, desta maneira será necessário definir um “titulo” para aquele atendimento.
+    ### [GET] Listar assuntos de fechamento
+      Endpoint: {{URL}}/api/v1/ticket-topics?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar um assunto específico
+      Endpoint: {{URL}}/api/v1/ticket-topics/{{ticketTopicId}}
+
+    ### [PUT] Editar assunto específico
+      Endpoint: {{URL}}/api/v1/ticket-topics/{{ticketTopicId}}
+      Body:
+        {
+          "name": "{{name}}"
+        }
+
+    ### [POST] Criar assunto
+      Endpoint: {{URL}}/api/v1/ticket-topics
+      Body:
+        {
+          "name": "{{name}}"
+        }
+
+    ### [DELETE] Excluir assunto específico
+      Endpoint: {{URL}}/api/v1/ticket-topics/{{ticketTopicId}}
+
+  ## Auditoria de autenticação
+  Descrição: Nesta função é possível filtrar os eventos de criação, alteração e exclusão, por usuários e datas de mudanças no sistema.
+    ### [GET] Listar auditorias de autenticação
+      Endpoint: {{URL}}/api/v1/auth-history?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar auditoria de autenticação
+      Endpoint: {{URL}}/api/v1/auth-history/{{authId}}
+
+  ## Autorização
+  Descrição: Gerar o Token de acesso em sua plataforma.
+    ### [POST] Gerar Token de acesso
+      Endpoint: {{URL}}/api/v1/oauth/token
+      Body:
+        {
+            "grant_type": "password",
+            "client_id": "api",
+            "client_secret": "secret",
+            "username": "{{email}}", //e-mail de login do usuário
+            "password": "{{password}}" //senha de login do usuário
+        }
+
+  ## Avaliações
+  Descrição: Com a ferramenta de avaliação você poderá medir o desempenho dos serviços prestados aos seus clientes, solicitando sempre, ao final de um atendimento**.**
+    ### [GET] Listar avaliações
+      Endpoint: {{URL}}/api/v1/questions?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar avaliação
+      Endpoint: {{URL}}/api/v1/questions/{{questionId}}
+
+    ### [PUT] Editar avaliação
+      Endpoint: {{URL}}/api/v1/questions/{{questionId}}
+      Body:
+        {
+          "name": "{{name}}",
+          "duration": "{{duration}}", //duração
+          "type": "{{type}}", //tipo (NPS ou CSAT)
+          "questionMessage": "{{O que você achou da nossa avaliação?}}",
+          "tries": {{tries}}, //tentativas
+          "successMessage": "{{Obrigado por responder}}",
+          "invalidMessage": "{{Resposta invalida}}"
+        }
+
+    ### [POST] Criar avaliação
+      Endpoint: {{URL}}/api/v1/questions
+      Body:
+        {
+          "name": "{{name}}",
+          "duration": "{{duration}}",
+          "type": "{{type}}",
+          "questionMessage": "{{O que você achou da nossa avaliação?}}",
+          "tries": {{tries}}, //tentativas
+          "successMessage": "{{Obrigado por responder}}",
+          "invalidMessage": "{{Resposta invalida}}"
+        }
+
+    ### [DELETE] Excluir avaliação
+      Endpoint: {{URL}}/api/v1/questions/{{questionId}}
+
+  ## Campanhas
+  Descrição: Disparo de mensagens em massa.
+    ### [GET] Listar campanhas
+      Endpoint: {{URL}}/api/v1/campaigns?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar campanha
+      Endpoint: {{URL}}/api/v1/campaigns/{{campaignsId}}
+
+    ### [GET] Extrair status de uma campanha
+      Endpoint: {{URL}}/api/v1/campaigns/{{campaignId}}/stats
+
+    ### [GET] Visualizar quem criou e enviou uma campanha
+      Endpoint: {{URL}}/api/v1/campaigns?query={"where":{"$and":[{"createdAt":{"$gte":"{{2024-05-07T00:00:00.000Z}}"}},{"createdAt":{"$lte":"{{2024-05-07T23:00:00.000Z}}"}}]},"order":[["createdAt","DESC"]],"include":["service","tags",{"model":"messages","include":"file"},{"model":"createdBy","attributes":["id","name"]},{"model":"sentBy","attributes":["id","name"]}],"page":1,"perPage":15}
+      Parâmetros de query:
+        - query: {"where":{"$and":[{"createdAt":{"$gte":"{{2024-05-07T00:00:00.000Z}}"}},{"createdAt":{"$lte":"{{2024-05-07T23:00:00.000Z}}"}}]},"order":[["createdAt","DESC"]],"include":["service","tags",{"model":"messages","include":"file"},{"model":"createdBy","attributes":["id","name"]},{"model":"sentBy","attributes":["id","name"]}],"page":1,"perPage":15}
+
+    ### [PUT] Editar campanha
+      Endpoint: {{URL}}/api/v1/campaigns/{{campaignsId}}
+      Body:
+        //Copiar o retorno do GET "Buscar campanha" aqui e altera-lo
+
+    ### [POST] Exportar resultados da campanha
+      Endpoint: {{URL}}/api/v1/campaigns/export/csv
+
+      Body:
+        {
+            "where": {
+                "campaignId": "{{campaignId}}" //ID da campanha
+            },
+            "type": "semiColon"
+        }
+
+    ### [DELETE] Excluir campanha
+      Endpoint: {{URL}}/api/v1/campaigns/{{campaignsId}}
+
+  ## Campos personalizados
+  Descrição: A ferramenta de Campos Personalizados é utilizada para adicionar campos de preenchimento nos registros de contatos. Com ela é possível criar um pequeno banco de dados para informações mais simples, mas que podem ajudar no dia a dia, como por exemplo, um e-mail do cliente, CPF ou até um número de mat
+    ### [GET] Listar campos personalizados
+      Endpoint: {{URL}}/api/v1/custom-fields?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar campo personalizado
+      Endpoint: {{URL}}/api/v1/custom-fields/{{customFieldsId}}
+
+    ### [PUT] Editar campo personalizado
+      Endpoint: {{URL}}/api/v1/custom-fields/{{customFieldsId}}
+      Body:
+        {
+            "name": "{{name}}",
+            "type": "text",
+            "allowed": "contacts"
+        }
+
+    ### [POST] Criar campo personalizado
+      Endpoint: {{URL}}/api/v1/custom-fields
+      Body:
+        {
+            "name": "{{name}}",
+            "type": "text",
+            "allowed": "contacts"
+        }
+
+    ### [DELETE] Excluir campo personalizado
+      Endpoint: {{URL}}/api/v1/custom-fields/{{customFieldsId}}
+
+  ## Cargos
+  Descrição: Os cargos funcionam como uma hierarquia de acesso dentro da plataforma. Aqui serão configuradas as permissões que o Administrador oferece aos seus usuários.
+
+A plataforma já vem configurada para que o Administrador tenha acesso total e o Operador tem um acesso mais limitado, basicamente tem permissã
+    ### [GET] Listar cargos
+      Endpoint: {{URL}}/api/v1/roles?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar cargo
+      Endpoint: {{URL}}/api/v1/roles/{{roleId}}
+
+    ### [GET] Buscar permissões do cargo
+      Endpoint: {{URL}}}}/api/v1/roles/{{roleId}}?include=permissions
+      Parâmetros de query:
+        - include: permissions
+
+    ### [GET] Buscar cargos do usuário
+      Endpoint: {{URL}}/api/v1/users/{{roleId}}?include=roles
+      Parâmetros de query:
+        - include: roles
+
+    ### [PUT] Editar cargo
+      Endpoint: {{URL}}/api/v1/roles/{{roleId}}
+      Body:
+        {
+          "displayName": "{{name}}",
+          "isAdmin": {{false}},
+          "permissions": [] 
+        }
+
+    ### [POST] Criar cargo
+      Endpoint: {{URL}}/api/v1/roles
+      Body:
+        {
+          "displayName": "{{name}}",
+          "isAdmin": {{false}},
+          "permissions": [] 
+        }
+
+    ### [DELETE] Excluir cargo
+      Endpoint: {{URL}}/api/v1/roles/{{roleId}}
+
+  ## Central de notificações
+    ### [GET] Listar central de notificações
+      Endpoint: {{URL}}/api/v1/notifications?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Marcar todas as notificações como lidas
+      Endpoint: {{URL}}/api/v1/notifications/read-all
+
+  ## Chamados
+  Descrição: Acontecerá todo o atendimento entre atendente e contato. Abaixo estão as imagens da estrutura do bate papo e todas as ferramentas disponíveis:
+    ### [GET] Buscar chamados do contato
+      Endpoint: {{URL}}/api/v1/tickets?where[contactId]={{contactId}}
+      Parâmetros de query:
+        - where[contactId]: {{contactId}}
+
+    ### [GET] Buscar pelo contactid todos os chamados do cliente trazendo quem encerrou/transferiu
+      Endpoint: {{URL}}/api/v1/tickets?query={"where":{"contactId":"{{contactId}}"},"attributes":["id","isOpen","protocol","origin","startedAt","endedAt"],"include":[{"model":"ticketTransfers","attributes":["action","fromDistribution"],"include":[{"model":"byUser","attributes":["id","name","email","status"]}]}],"perPage":50}
+
+      Parâmetros de query:
+        - query: {"where":{"contactId":"{{contactId}}"},"attributes":["id","isOpen","protocol","origin","startedAt","endedAt"],"include":[{"model":"ticketTransfers","attributes":["action","fromDistribution"],"include":[{"model":"byUser","attributes":["id","name","email","status"]}]}],"perPage":50}
+
+
+    ### [POST] Transferência de chamado
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/ticket/transfer
+      Body:
+        {
+            "departmentId": "{{departmentId}}",
+            "userId": "{{userId}}", //id do usuário SE for abrir direto para ele
+            "comments": "{{comments}}" //comentario interno
+        }
+
+    ### [POST] Transferência de Transferência em massa
+      Endpoint: {{URL}}/api/v1/contacts/ticket/bulk-transfer
+      Body:
+        {
+            "departmentId": "{{departmentId}}", //id do departamento que vai receber os chamados
+            "userId": "{{userId}}", //id do usuário que vai receber os chamados
+            "comments": "{{comments}}", //comentário da transferência
+            "ticketsSelectedId": [
+                "{{idTicket}}", //id dos chamados
+                "{{idTicket}}",
+                "{{idTicket}}",
+                "{{idTicket}}",
+                "{{idTicket}}",
+                "{{idTicket}}",
+                "{{idTicket}}"
+            ]
+        }
+
+    ### [POST] Abertura de chamado
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/ticket/transfer
+      Body:
+        {
+            "departmentId": "{{departmentId}}",
+            "userId": "{{userId}}",
+            "comments": "{{comments}}" //comentario interno
+        }
+
+    ### [POST] Fechar chamado
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/ticket/close
+
+    ### [POST] Fechar um chamado com assunto
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/ticket/close
+      Body:
+        {
+            "ticketTopicIds": "{{ticketTopicIds}}" //ID do chamado
+        }
+
+  ## Conexões
+  Descrição: A Digisac disponibiliza as seguintes conexões:
+    ### [GET] Listar conexões
+      Endpoint: {{URL}}/api/v1/services?perPage=35
+      Parâmetros de query:
+        - perPage: 35
+
+    ### [GET] Buscar conexão
+      Endpoint: {{URL}}/api/v1/services/{{serviceId}}
+
+    ### [GET] Buscar conexões ativas
+      Endpoint: {{URL}}/api/v1/services?query={"where":{"archivedAt":{"$eq":null}},"order":[["name","asc"]],"page":1,"perPage":50}
+      Parâmetros de query:
+        - query: {"where":{"archivedAt":{"$eq":null}},"order":[["name","asc"]],"page":1,"perPage":50}
+
+    ### [PUT] Editar conexão
+      Endpoint: {{URL}}/api/v1/services/{{serviceId}}
+      Body:
+        {
+            "id": "{{serviceId}}", //id da conexão
+            "name": "{{name}}",
+            "archivedAt": null,
+            "type": "{{type}}", //tipo (e-mail, telegram, etc)
+            "deletedAt": null,
+            "accountId": "{{accountId}}", //id da conta
+            "botId": "{{botId}}", //id do robo
+            "defaultDepartmentId": "{{defaultDepartmentId}}" //id departamento padrão
+        }
+
+    ### [POST] Arquivar conexão
+      Endpoint: {{URL}}/api/v1/services/{{serviceId}}/archive
+      Body:
+        {
+            "archive": true,
+            "type": "{{tipo}}" //tipo (e-mail, telegram, etc)
+        }
+
+    ### [POST] Criar conexão
+      Endpoint: {{URL}}/api/v1/services
+      Body:
+        {
+            "name":"{{name}}",
+            "type":"{{type}}", //tipo (e-mail, telegram, etc)
+            "botId": "{{teste}}", //id do robo
+            "defaultDepartmentId": "{{teste}}" //id departamento padrão
+        }
+
+    ### [POST] Desligar conexão
+      Endpoint: {{URL}}api/v1/services/{{serviceId}}/shutdown
+
+    ### [POST] Iniciar conexão
+      Endpoint: {{URL}}/api/v1/services/{{serviceId}}/start
+
+    ### [POST] Reiniciar conexão
+      Endpoint: {{URL}}api/v1/services/{{serviceId}}/restart
+
+    ### [POST] Gerar QR Code
+      Endpoint: {{URL}}/api/v1/services/{{serviceId}}/logout
+
+    ### [DELETE] Excluir conexão
+      Endpoint: {{URL}}/api/v1/services/{{serviceId}}
+
+  ## Contatos
+  Descrição: Contatos são os números dos seus clientes que serão salvos dentro da Digisac.
+    ### [GET] Listar todos os contatos
+      Endpoint: {{URL}}/api/v1/contacts?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Listar contatos da conexão
+      Endpoint: {{URL}}/api/v1/contacts?where[serviceId]={{serviceId}}?perPage=40
+      Parâmetros de query:
+        - where[serviceId]: {{serviceId}}?perPage=40
+
+    ### [GET] Buscar contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+
+    ### [GET] Buscar contato por número de uma conexão específica
+      Endpoint: {{url}}/api/v1/contacts?where[data.number][$iLike]=%{{number}}%&where[serviceId]={{serviceId}}
+      Parâmetros de query:
+        - where[data.number][$iLike]: %{{number}}%
+        - where[serviceId]: {{serviceId}}
+
+    ### [GET] Buscar tags vinculadas a um contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}?include[0]=tags&include[1]
+      Parâmetros de query:
+        - include[0]: tags
+        - include[1]: 
+
+    ### [GET] Buscar contatos vinculados ao Campo Personalizado
+      Endpoint: {{URL}}/api/v1/contacts?query={"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"name":"{{customFieldName}}"}}]}]}
+      Parâmetros de query:
+        - query: {"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"name":"{{customFieldName}}"}}]}]}
+
+    ### [GET] Busca de contatos que possuem X campos personalizados preenchidos
+      Endpoint: {{URL}}/api/v1/contacts?query={"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"$or":[{"name":"{{customFieldName1}}"},{"name":"{{customFieldName2}}"},{"name":"{{customFieldName3}}"},{"name":"{{customFieldName4}}"}]}}]}]}
+      Parâmetros de query:
+        - query: {"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"$or":[{"name":"{{customFieldName1}}"},{"name":"{{customFieldName2}}"},{"name":"{{customFieldName3}}"},{"name":"{{customFieldName4}}"}]}}]}]}
+
+    ### [GET] Buscar contatos vinculados a Organização
+      Endpoint: {{URL}}/api/v1/contacts?query={"include":[{"model":"person","required":"true","where":{"id":"{{organizationId}}"}}],"perPage":"30"}
+      Parâmetros de query:
+        - query: {"include":[{"model":"person","required":"true","where":{"id":"{{organizationId}}"}}],"perPage":"30"}
+
+    ### [GET] Buscar contatos vinculados a Pessoa
+      Endpoint: {{URL}}/api/v1/contacts?query={"include":[{"model":"person","required":"true","where":{"id":"{{personId}}"}}],"perPage":"30"}
+      Parâmetros de query:
+        - query: {"include":[{"model":"person","required":"true","where":{"id":"{{personId}}"}}],"perPage":"30"}
+
+    ### [PUT] Editar contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+        "internalName": "{{name}}",
+        "number": "{{number}}",
+        "serviceId": "{{serviceid}}", //id conexão
+        "defaultDepartmentId": null,
+        "tagIds": ["{{tagIds}}", "{{tagIds}}"]
+        }
+
+    ### [PUT] Editar tag do contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+        "tagIds": ["{{tagIds}}", "{{tagIds}}"] //id tag
+        }
+
+    ### [PUT] Editar campo personalizado de um contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+            "customFields": [
+                {
+                    "id": "{{customFieldsId}}",
+                    "value": "{{texto}}"
+                }
+            ]
+        }
+
+    ### [PUT] Incluir tags em um contato existente
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+        "tagIds": ["{{tagIds}}", "{{tagIds}}"] //id tag
+        }
+
+    ### [POST] Cadastrar contato
+      Endpoint: {{URL}}/api/v1/contacts
+      Body:
+        {
+        "internalName": "{{name}}",
+        "number": "{{number}}", //número contato
+        "serviceId": "{{serviceid}}", //id conexão
+        "defaultDepartmentId": null,
+        "tagIds": ["{{tagIds}}"], //id tag
+        "customFields": [ //campos personalizados
+                {
+                    "id": "{{customFieldId}}", //id campo personalizado
+                    "value": "{{value}}" //texto
+                }
+        ]
+        }
+
+    ### [POST] Cadastrar múltiplos contatos
+      Endpoint: {{URL}}/api/v1/contacts/many
+      Body:
+        [
+            {
+                "internalName": "{{name}}", //Nome do contato
+                "number": "{{number}}", //Número do contato
+                "serviceId": "{{serviceid}}", //ID da conexão
+                "defaultDepartmentId": null,
+                "tagIds": [
+                    "{{tagIds}}" //ID da TAG
+                ]
+            },
+            {
+                "internalName": "{{name}}",
+                "number": "{{number}}",
+                "serviceId": "{{serviceid}}",
+                "defaultDepartmentId": null,
+                "tagIds": [
+                    "{{tagIds}}"
+                ]
+            }
+        ]
+
+    ### [POST] Exportar contatos
+      Endpoint: {{URL}}/api/v1/contacts/export/csv
+      Body:
+        {
+          "where": {
+            "visible": true,
+            "isGroup": {
+              "$eq": false
+            },
+            "isBroadcast": {
+              "$eq": false
+            },
+            "serviceId": "{{serviceId}}" //id conexão
+          },
+          "include": [
+            "avatar",
+            "tags",
+            {
+              "model": "service",
+              "required": true
+            },
+            "person"
+          ],
+
+    ### [POST] Total de contatos com filtros
+      Endpoint: {{URL}}/api/v1/contacts/count
+      Body:
+        {
+          "query": {
+            "isFiltered": false,
+            "departmentIds": [ 
+              {{departmentIds}} //id departamento - Opcional
+            ]
+          }
+        }
+
+    ### [POST] Sincroniza contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/sync
+
+    ### [POST] Bloquear contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/block
+
+    ### [POST] Desbloquear contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/block
+      Body:
+        {
+            "block": false,
+            "description": "{{description}}" //descrição (texto explicando o motivo)
+        }
+
+    ### [DELETE] Excluir contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+
+    ### [DELETE] Exclui multiplos contatos
+      Endpoint: {{URL}}/api/v1/contacts/many
+      Body:
+        {
+          "where": {
+            "id": [
+              "{{contactId}}", //ID dos contatos que deseja excluir
+              "{{contactId}}"
+            ]
+          }
+        }
+
+  ## Controle de ausência
+    ### [GET] Listar ausências
+      Endpoint: {{URL}}/api/v1/absence?filters[createdAt]={{2024-04-09T12:50:49.385}}Z&filters[endedAt]={{2024-04-16T12:50:49.385}}Z&include=user&page=1000&perPage=40
+      Parâmetros de query:
+        - filters[createdAt]: {{2024-04-09T12:50:49.385}}Z
+        - filters[endedAt]: {{2024-04-16T12:50:49.385}}Z
+        - include: user
+        - page: 1000
+        - perPage: 40
+
+  ## Créditos SMS
+  Descrição: Os créditos são utilizados para fazer o envio de mensagens via SMS pela plataforma. Esta área é o local para consultar a quantidade de créditos disponíveis para o envio de campanhas.
+    ### [GET] Listagem de créditos
+      Endpoint: {{URL}}/api/v1/credit-movements?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Balanço
+      Endpoint: {{URL}}/api/v1/credit-movements/balances
+
+    ### [GET] Buscar uma movimentação expecífica 
+      Endpoint: {{URL}}/api/v1/credit-movements/{{movementId}}
+
+  ## Departamentos
+  Descrição: Os departamentos se referem às áreas da empresa que realizarão os atendimentos (ex.: Suporte, Comercial, Atendimento).
+
+Obs.: em cada departamento, é possível vincular mais de um usuário cadastrado.
+    ### [GET] Listar departamentos
+      Endpoint: {{URL}}/api/v1/departments?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar departamento
+      Endpoint: {{URL}}/api/v1/departments/{{departmentId}}
+
+    ### [PUT] Editar departamento
+      Endpoint: {{URL}}/api/v1/departments/{{departmentId}}
+      Body:
+        {
+            "name": "{{name}}" //nome
+        }
+
+    ### [POST] Criar departamento
+      Endpoint: {{URL}}/api/v1/departments
+      Body:
+        {
+            "name": "{{name}}" //nome
+        }
+
+    ### [POST] Arquivar departamento
+      Endpoint: {{URL}}/api/v1/departments/{{departmentId}}/archive
+      Body:
+        {
+            "archive": true
+        }
+
+    ### [DELETE] Excluir departamento
+      Endpoint: {{URL}}/api/v1/departments/{{departmentId}}
+
+  ## Distribuição de chamados
+  Descrição: A distribuição de chamados tem a intenção de realizar a ramificação de atendimentos de maneira igualitária e automática para usuários de determinados departamentos.
+    ### [GET] Listas distribuições de chamados
+      Endpoint: {{URL}}/api/v1/distribution?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar distribuição de chamados
+      Endpoint: {{URL}}/api/v1/distribution/{{distributionId}}
+
+    ### [PUT] Editar distribuição de chamados
+      Endpoint: {{URL}}/api/v1/distribution/{{distributionId}}
+      Body:
+        {
+            "name": "{{name}}",
+            "maxNum": 1, //máximo de chamados por Atendente e Departamento
+            "timeToRedistribute": 5,//tempo máximo em minutos que os chamados permanecerão na fila do usuário offline.
+            "departments": [
+                {
+                    "id": "[{{departmentId}}], [{{departmentId}}]" //id departamento
+                }
+            ],
+            "roles": [
+                {
+                    "id": "[{{roleId}}], [{{roleId}}]" //id cargo
+                }
+            ],
+            "redistributeAll": false, //redistribuir todos os chamados
+            "redistributeAssignedTickets": false, //redistribuir somente chamados não respondidos
+            "distributeQueue": true //true = distribuir em Fila ou false = Distribuição Padrão
+        }
+
+    ### [POST] Criar distribuição de chamados - Fila
+      Endpoint: {{URL}}/api/v1/distribution
+      Body:
+        {
+            "name": "{{name}}",
+            "maxNum": 1, //máximo de chamados por Atendente e Departamento
+            "timeToRedistribute": 5, //tempo máximo em minutos que os chamados permanecerão na fila do usuário offline.
+            "departments": [
+                {
+                    "id": "[{{departmentId}}], [{{departmentId}}]" //id departamento
+                }
+            ],
+            "roles": [
+                {
+                    "id": "[{{roleId}}], [{{roleId}}]" //id cargo
+                }
+            ],
+            "redistributeAll": false, //redistribuir todos os chamados
+            "redistributeAssignedTickets": false, //redistribuir somente chamados não respondidos
+            "distributeQueue": true //true = Distribuir em fila
+        }
+
+    ### [POST] Criar distribuição de chamados - Padrão
+      Endpoint: {{URL}}/api/v1/distribution
+      Body:
+        {
+            "name": "{{name}}",
+            "maxNum": 1, //máximo de chamados por Atendente e Departamento
+            "timeToRedistribute": 5, //tempo máximo em minutos que os chamados permanecerão na fila do usuário offline.
+            "departments": [
+                {
+                    "id": "[{{departmentId}}], [{{departmentId}}]" //id departamento
+                }
+            ],
+            "roles": [
+                {
+                    "id": "[{{roleId}}], [{{roleId}}]" //id cargo
+                }
+            ],
+            "redistributeAll": false, //redistribuir todos os chamados
+            "redistributeAssignedTickets": false, //redistribuir somente chamados não respondidos
+            "distributeQueue": false //false = Distribuição padrão
+        }
+
+    ### [DELETE] Excluir distribuição de chamados
+      Endpoint: {{URL}}/api/v1/distribution/{{distributionId}}
+
+  ## Estatísticas de atendimento
+  Descrição: Essa ferramenta permite que seja visualizado uma média de como estão os atendimentos com os clientes de uma maneira geral ou individualizada de acordo com os filtros gerados.
+    ### [GET] Buscar estatísticas por período
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}&grouping=&departmentId=all&userId=all&periodType=openDate&departmentParticipation=last&userParticipation=last&status=all
+      Parâmetros de query:
+        - startPeriod: {{2024-01-01T23:59:59.999Z}}
+        - endPeriod: {{2023-01-02T23:59:59.999Z}}
+        - grouping: 
+        - departmentId: all
+        - userId: all
+        - periodType: openDate
+        - departmentParticipation: last
+        - userParticipation: last
+        - status: all
+
+    ### [GET] Buscar estatísticas por conexão
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&serviceId={{serviceId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - serviceId: {{serviceId}}
+
+    ### [GET] Buscar estatísticas por departamento
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&grouping=&departmentId={{departmentId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - grouping: 
+        - departmentId: {{departmentId}}
+
+    ### [GET] Buscar estatísticas por usuário
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&userId={{userId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - userId: {{userId}}
+
+    ### [GET] Buscar estatísticas por dpt + usuário
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&grouping=&departmentId={{departmentId}}&userId={{userId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - grouping: 
+        - departmentId: {{departmentId}}
+        - userId: {{userId}}
+
+    ### [GET] Buscar estatísticas por data de abertura
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&periodType=open
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - periodType: open
+
+    ### [GET] Buscar estatísticas por data de fechamento
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&periodType=close
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - periodType: close
+
+    ### [GET] Buscar estatísticas dos chamados abertos
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&status=open
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - status: open
+
+    ### [GET] Buscar estatísticas dos chamados fechados
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&status=close
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - status: close
+
+    ### [GET] Buscar estatísticas com todos os filtros ativos
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&grouping=&departmentId={{departmentId}}&userId={{userId}}&periodType={{open/close}}Date&departmentParticipation={{last/middle}}&userParticipation={{last/middle}}&status={{all/open/close}}&serviceId={{serviceId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - grouping: 
+        - departmentId: {{departmentId}}
+        - userId: {{userId}}
+        - periodType: {{open/close}}Date
+        - departmentParticipation: {{last/middle}}
+        - userParticipation: {{last/middle}}
+        - status: {{all/open/close}}
+        - serviceId: {{serviceId}}
+
+  ## Estatísticas de avaliações
+    ### [GET] Buscar avaliações sem filtro
+      Endpoint: {{URL}}/api/v1/answers
+
+    ### [GET] Buscar avaliações por período
+      Endpoint: {{URL}}/api/v1/answers/overview?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}
+      Parâmetros de query:
+        - startPeriod: {{2024-01-01T23:59:59.999Z}}
+        - endPeriod: {{2023-01-02T23:59:59.999Z}}
+
+    ### [GET] Buscar avaliações por conexão
+      Endpoint: {{URL}}/api/v1/answers/overview?serviceId={{serviceId}}&periodType={{all/close/open}}&from={{2024-07-30T18:01:07.341Z}}&to={{2024-08-06T18:01:07.341Z}}&type={{csat/nps}}
+      Parâmetros de query:
+        - serviceId: {{serviceId}}
+        - periodType: {{all/close/open}}
+        - from: {{2024-07-30T18:01:07.341Z}}
+        - to: {{2024-08-06T18:01:07.341Z}}
+        - type: {{csat/nps}}
+
+    ### [GET] Buscar avaliações por departamento
+      Endpoint: {{URL}}/api/v1/answers/overview?departmentId={{departmentId}}&from={{2024-07-30T18:01:07.341Z}}&to={{2024-08-06T18:01:07.341Z}}&type={{csat/nps}}
+      Parâmetros de query:
+        - departmentId: {{departmentId}}
+        - from: {{2024-07-30T18:01:07.341Z}}
+        - to: {{2024-08-06T18:01:07.341Z}}
+        - type: {{csat/nps}}
+
+    ### [GET] Buscar avaliações por usuário
+      Endpoint: {{URL}}/api/v1/answers/overview?userId={{userId}}&from={{2024-07-30T18:01:07.341Z}}&to={{2024-08-06T18:01:07.341Z}}&type={{csat/nps}}
+      Parâmetros de query:
+        - userId: {{userId}}
+        - from: {{2024-07-30T18:01:07.341Z}}
+        - to: {{2024-08-06T18:01:07.341Z}}
+        - type: {{csat/nps}}
+
+    ### [GET] Buscar avaliações por dpt + usuário
+      Endpoint: {{URL}}/api/v1/answers/overview?userId={{userId}}&departmentId={{departmentId}}&from={{2024-07-30T18:01:07.341Z}}&to={{2024-08-06T18:01:07.341Z}}&type={{csat/nps}}
+      Parâmetros de query:
+        - userId: {{userId}}
+        - departmentId: {{departmentId}}
+        - from: {{2024-07-30T18:01:07.341Z}}
+        - to: {{2024-08-06T18:01:07.341Z}}
+        - type: {{csat/nps}}
+
+    ### [GET] Buscar avaliações com todos os filtros ativos
+      Endpoint: {{URL}}/api/v1/answers/overview?userId={{userId}}&departmentId={{departmentId}}&serviceId={{serviceId}}&periodType={{all/close/open}}&from={{2024-07-30T18:01:07.341Z}}&to={{2024-08-06T18:01:07.341Z}}&type={{csat/nps}}
+      Parâmetros de query:
+        - userId: {{userId}}
+        - departmentId: {{departmentId}}
+        - serviceId: {{serviceId}}
+        - periodType: {{all/close/open}}
+        - from: {{2024-07-30T18:01:07.341Z}}
+        - to: {{2024-08-06T18:01:07.341Z}}
+        - type: {{csat/nps}}
+
+  ## Feriados
+  Descrição: Com ícone feriados é possível determinar, como o próprio nome diz, dias de feriados, nos quais o robô realizará interação com essas datas e identificará ser um dia de “não trabalho”, enviando assim, uma mensagem de ausência para todos os clientes que entrarem em contato naquele dia especifico.
+    ### [GET] Listar feriados
+      Endpoint: {{URL}}/api/v1/holiday?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar feriado
+      Endpoint: {{URL}}/api/v1/holiday/{{holidayId}}
+
+    ### [PUT] Editar feriado
+      Endpoint: {{URL}}/api/v1/holiday/{{holidayId}}
+      Body:
+        {
+            "name": "{{name}}", //nome feriado
+            "from": "{{2024-07-25T03:00:00.000Z}}", //data e hora inicial
+            "to": "{{2024-07-27T02:59:00.000Z}}", //data e hora final
+            "message": "{{massage}}" //mensagem de texto do feriado
+        }
+
+    ### [POST] Criar feriado
+      Endpoint: {{URL}}/api/v1/holiday
+      Body:
+        {
+            "name": "{{name}}", //nome feriado
+            "from": "{{2024-07-25T03:00:00.000Z}}", //data e hora inicial
+            "to": "{{2024-07-27T02:59:00.000Z}}", //data e hora final
+            "message": "{{massage}}" //mensagem de texto do feriado
+        }
+
+    ### [DELETE] Excluir feriado
+      Endpoint: {{URL}}/api/v1/holiday/{{holidayId}}
+
+  ## Funil de vendas
+    ### [GET] Listar funis de vendas
+      Endpoint: {{URL}}/api/v1/pipelines?perPage=30
+      Parâmetros de query:
+        - perPage: 30
+
+    ### [GET] Buscar funil de vendas
+      Endpoint: {{URL}}/api/v1/pipelines/{{pipelineId}}
+
+    ### [PUT] Editar funil de vendas
+      Endpoint: {{URL}}/api/v1/pipelines/{{pipelineId}}
+      Body:
+        {
+            "name": "{{name}}", //nome
+            "type": "sales",
+            "goBack": false //false ou true
+            // "goBack": false = Apenas avançar
+            //"goBack": true = Avançar e recuar
+        }
+
+    ### [POST] Criar funil de vendas
+      Endpoint: {{URL}}/api/v1/pipelines
+      Body:
+        {
+            "name": "{{name}}", //nome
+            "type": "sales",
+            "goBack": false //false ou true
+            // "goBack": false = Apenas avançar
+            //"goBack": true = Avançar e recuar
+        }
+
+    ### [DELETE] Excluir funil de vendas
+      Endpoint: {{URL}}/api/v1/pipelines/{{pipelineId}}
+
+  ## Grupos WhatsApp
+    ### [GET] Listar grupos por conexão WhatsApp
+      Endpoint: {{URL}}/api/v1/whatsapp/groups/service/{{serviceId}}
+
+    ### [POST] Adicionar participante
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/add-members
+      Body:
+        [{
+            "number": "{{number}}}}" // número de quem será adicionado
+        }]
+
+    ### [POST] Atribuir cargo de administrador
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/promote-members
+      Body:
+        [
+            "{{contactId}}" // id do contato de quem será promovido a administrador
+        ]
+
+    ### [POST] Criar novo grupo
+      Endpoint: {{URL}}/api/v1/contacts
+      Body:
+        {
+          "serviceId": "{{serviceId}}", // id da conexão
+          "internalName": "{{groupName}}", // nome do grupo
+          "isGroup": true
+        }
+
+    ### [POST] Remover permissões de administrador
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/demote-members
+      Body:
+        [
+            "{{contactId}}" // id do contato de quem será retirado o cargo de administrador
+        ]
+
+  ## Histórico de chamados
+  Descrição: O Histórico de Chamados é um dos relatórios de análise de atendimentos mais completos da plataforma, principalmente pelos seus filtros.
+    ### [GET] Buscar chamados abertos por contactid
+      Endpoint: {{URL}}/api/v1/tickets?query={"where":{"isOpen":true},"include":[{"model":"contact","required":true,"where":{"visible":true,"id":"{{contactId}}"}}]}
+      Parâmetros de query:
+        - query: {"where":{"isOpen":true},"include":[{"model":"contact","required":true,"where":{"visible":true,"id":"{{contactId}}"}}]}
+
+    ### [GET] Buscar por um chamado específico
+      Endpoint: {{URL}}/api/v1/tickets/{{ticketId}}?include[0][model]=contact&include[0][include][0]=avatar&include[0][include][1]=thumbAvatar&include[1]=department&include[2]=user&include[3]=ticketTopics
+      Parâmetros de query:
+        - include[0][model]: contact
+        - include[0][include][0]: avatar
+        - include[0][include][1]: thumbAvatar
+        - include[1]: department
+        - include[2]: user
+        - include[3]: ticketTopics
+
+    ### [GET] Buscar chamados por período
+      Endpoint: {{URL}}/api/v1/tickets?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}
+      Parâmetros de query:
+        - startPeriod: {{2024-01-01T23:59:59.999Z}}
+        - endPeriod: {{2023-01-02T23:59:59.999Z}}
+
+    ### [GET] Buscar chamados abertos por conexão
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":true},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":true},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+
+    ### [GET] Buscar chamados fechados por conexão
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":false},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":false},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+
+    ### [GET] Buscar chamados abertos + fechados por conexão
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":{"$in":[true,false]}},"include":[{"model":"contact","attributes":["name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":{"$in":[true,false]}},"include":[{"model":"contact","attributes":["name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+
+    ### [GET] Buscar todos os chamados da plataforma
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"account"},{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]},{"model":"thumbAvatar"}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}&perPage=30
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"account"},{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]},{"model":"thumbAvatar"}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+        - perPage: 30
+
+    ### [GET] Exportar histórico de chamados em PDF
+      Endpoint: {{URL}}/pdf/tickets/{{ticketId}}/pt-BR?pdf=1&lng=pt-BR
+      Parâmetros de query:
+        - pdf: 1
+        - lng: pt-BR
+
+    ### [POST] Exportar histórico de chamados em TXT
+      Endpoint: {{URL}}/api/v1/tickets/export
+      Body:
+        {
+            "protocol": "{{protocolNumber}}" //Número do protocolo
+        }
+
+    ### [POST] Exportar histórico de chamados em CSV
+      Endpoint: {{URL}}/api/v1/tickets/export-history?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+
+    ### [POST] Exportar histórico de chamados de uma conexão específica em CSV
+      Endpoint: {{URL}}/api/v1/tickets/export-history?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{servieId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{servieId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+
+  ## Integrações
+  Descrição: A função de integrações tem como objetivo incorporar algum site dentro da plataforma Digisac. Com esta função, o usuário conseguirá acessar o site integrado sem precisar sair da própria plataforma.
+    ### [GET] Listar integrações
+      Endpoint: {{URL}}/api/v1/integrations?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar integração
+      Endpoint: {{URL}}/api/v1/integrations/{{integrationId}}
+
+  ## Idioma da plataforma
+  Descrição: No painel de navegação, é possível escolher a língua descrita na Digisac, as opções são: Português (Brasil), Inglês e Espanhol.
+    ### [PUT] Editar idioma da plataforma
+      Endpoint: {{URL}}/api/v1/me
+      Body:
+        {
+            "language": "pt-BR" //pt-BR / en-US / es
+        }
+
+  ## Mensagens
+    ### [GET] Listar mensagens
+      Endpoint: {{URL}}/api/v1/messages?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar total de mensagens do contato
+      Endpoint: {{URL}}/api/v1/messages?where[contactId]={{contactId}}
+      Parâmetros de query:
+        - where[contactId]: {{contactId}}
+
+    ### [GET] Buscar mensagem include=file
+      Endpoint: {{URL}}/api/v1/messages/{{messageId}}?include[0]=file
+      Parâmetros de query:
+        - include[0]: file
+
+    ### [POST] Enviar mensagem para contato já cadastrado
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //texto
+            "type": "chat",
+            "contactId": "{{contactId}}", //ID contato
+            "userId": "{{userId}}", //ID usuário
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar mensagem para contato não cadastrado
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //texto
+            "type": "chat",
+            "serviceId": "{{serviceId}}", // ID conexão
+            "number": "{{number}}", //número do contato
+            "userId": "{{userId}}", //ID usuário
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar mensagem SEM abrir o chamado
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}",
+            "type": "chat",
+            "contactId": "{{contactId}}",
+            "userId": "{{userId}}",
+            "dontOpenTicket": "true", //este parametro faz com que o chamado não seja aberto no momento do envio da mensagem
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar comentário
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //texto
+            "type": "comment", // chat or comment
+            "contactId": "{{contactId}}", //id contato
+            "userId": "{{userId}}", //id usuário
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar de mensagem usando bot e sem abrir chamado
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+        "text": "{{text}}",
+        "number": "{{number}}", //número do contato
+        "serviceId": "{{serviceid}}", //id conexão
+        "origin": "bot",
+        "dontOpenticket": true
+        }
+
+    ### [POST] Enviar imagem
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //Texto
+            "number": "{{number}}", //Número do contato
+            "serviceId": "{{serviceId}}", //ID conexão
+            "file": {
+                "base64": "{{base64}}", //Converter a imagem em base64
+                "mimetype": "image/jpeg",
+                "name": "{{name}}" //Nome imagem
+            }
+        }
+
+    ### [POST] Enviar PDF
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //Texto
+            "number": "{{number}}", //Número do contato
+            "serviceId": "{{serviceId}}", //ID conexão
+            "file": {
+                "base64": "{{base64}}", //Converter o PDF em base64
+                "mimetype": "application/pdf",
+                "name": "{{name}}" //Nome arquivo PDF
+            }
+        }
+
+    ### [POST] Enviar áudio
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "number": "{{número}}", //Número do contato
+            "serviceId": "{{serviceid}}", //ID conexão
+            "file": {
+                "base64": "{{base64}}", //Converter o áudio em base64
+                "mimetype": "audio/mpeg" 
+            }
+        }
+
+    ### [POST] Reagir a uma mensagem
+      Endpoint: {{URL}}/api/v1/messages/{{messageId}}/send-reaction
+      Body:
+        {
+            "reactionEmojiRendered": "🙏" //Colocar o emoji (reação)
+        }
+
+    ### [PATCH] Editar mensagem
+      Endpoint: {{URL}}/api/v1/messages/messageId
+      Body:
+        {
+        "mentionedList": [],
+        "contactId": "{{contactId}}",
+        "text": "{{text}}"
+        }
+
+  ## Mensagens interativas
+  Descrição: As mensagens interativas são mensagens pré-definidas pelo administrador da plataforma com o intuito de engajar os clientes com botões, links e chamadas para ação. São como os templates, porém é possível personaliza-las de acordo com a necessidade durante o túnel de atendimento aberto sem gerar custo
+    ### [GET] Listar mensagens interativas
+      Endpoint: {{URL}}/api/v1/interactive-messages?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar mensagem interativa
+      Endpoint: {{URL}}/api/v1/interactive-messages/{{interactiveMessagesId}}
+
+    ### [POST] Criar mensagem interativa em lista
+      Endpoint: {{URL}}/api/v1/interactive-messages
+      Body:
+        {
+            "name": "{{name}}",
+            "file": null,
+            "interactive": {
+                "type": "list", //lista
+                "action": {
+                    "button": "{{name_list}}",
+                    "sections": [
+                        {
+                            "title": "{{title_list}}",
+                            "rows": [
+                                {
+                                    "title": "{{name_row1}}"
+                                },
+                                {
+                                    "title": "{{name_row2}}"
+                                }
+                            ]
+                        }
+                    ]
+
+    ### [POST] Criar mensagem interativa com imagem
+      Endpoint: {{URL}}/api/v1/interactive-messages
+      Body:
+        {
+            "name": "{{name}}", //nome
+            "interactive": {
+                "body": {
+                    "text": "{{text}}" //texto
+                },
+                "type": "button", //tipo
+                "action": {
+                    "buttons": [
+                        {
+                            "type": "reply",
+                            "reply": {
+                                "title": "{{Button1}}" //texto botão 1
+                            }
+                        },
+                        {
+                            "type": "reply",
+                            "reply": {
+                                "title": "{{Button2}}" //texto botão 2
+                            }
+
+    ### [POST] Enviar mensagem interativa com botão
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "type": "chat",
+            "interactiveMessage": {
+                "name": "{{name}}",
+                "interactive": {
+                    "type": "button",
+                    "action": {
+                        "buttons": [
+                            {
+                                "type": "reply",
+                                "reply": {
+                                    "title": "{{button1}}"
+                                }
+                            },
+                            {
+                                "type": "reply",
+                                "reply": {
+                                    "title": "{{button2}}"
+                                }
+                            }
+
+    ### [POST] Enviar mensagem interativa
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        //exemplo de um modelo de body:
+        
+        {
+          "contactId": "{{contactId}}", //id contato
+          "interactiveMessage": {
+            "interactive": {
+              "body": { 
+                "text": "{{Bem vindo, Teste.}}"  //texto mensagem interativa
+            },
+              "type": "button",
+              "action": {
+                "buttons": [
+                  {
+                    "type": "reply",
+                    "reply": {
+                      "title": "{{Sim}}" //titulo botão
+                    }
+                  },
+                  {
+                    "type": "reply",
+
+    ### [DELETE] Excluir mensagem interativa
+      Endpoint: {{URL}}/api/v1/interactive-messages/{{interactiveMessagesId}}
+
+  ## Meus dados
+    ### [GET] Buscar meus dados
+      Endpoint: {{URL}}/api/v1/me
+
+  ## Notificação
+    ### [PUT] Marcar como não lido
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+            "serviceid": "{{serviceid}}", //ID conexão
+            "data": {
+                "unread": true //true or false
+            }
+        }
+
+    ### [PUT] Notificação mensagens receptivas
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+            "unread": "1" //quantidade de notificações receptivas
+        }
+
+    ### [PUT] Silenciar contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+        "isSilenced": true // true or false
+        }
+
+  ## Organizações
+  Descrição: Organizações é uma forma de liberar o acesso da plataforma a um terceiro, vinculando a um agrupamento de Pessoas, permitindo o acesso a esse terceiro (usuário) de somente visualizar as conversas de um agrupamento de Pessoas em especifico.
+    ### [GET] Listar organizações
+      Endpoint: {{URL}}/api/v1/organizations?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar organização
+      Endpoint: {{URL}}/api/v1/organizations/{{organizationId}}
+
+    ### [PUT] Editar organização
+      Endpoint: {{URL}}/api/v1/organizations/{{organizationId}}
+      Body:
+        {
+            "name": {{name}}    
+        }
+
+    ### [POST] Criar organização
+      Endpoint: {{URL}}/api/v1/organizations
+      Body:
+        {
+            "name":"{{name}}"
+        }
+
+    ### [DELETE] Excluir organização
+      Endpoint: {{URL}}/api/v1/organizations/{{organizationId}}
+
+  ## Pessoas
+  Descrição: Pessoas são como um agrupamento de contatos, ou seja, é um facilitador para encontrar contatos vinculados em um mesmo grupo diretamente nas conversas internas do Chat.
+    ### [GET] Listar pessoas
+      Endpoint: {{URL}}/api/v1/people?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar pessoa
+      Endpoint: {{URL}}/api/v1/people/{{peopleId}}
+
+    ### [PUT] Editar pessoa
+      Endpoint: {{URL}}/api/v1/people/{{peopleId}}
+      Body:
+        {
+            "name": "{{name}}",
+            "document": "{{document}}", //documento
+            "organizationIds": ["{{organizationId}}", "{{organizationId}}"] //id organização
+        }
+
+    ### [POST] Criar pessoa
+      Endpoint: {{URL}}/api/v1/people
+      Body:
+        {
+            "name": "{{name}}",
+            "document": "{{document}}", //documento
+            "organizationIds": ["{{organizationId}}", "{{organizationId}}"] //id organização
+        }
+
+    ### [DELETE] Excluir pessoa
+      Endpoint: {{URL}}/api/v1/people/{{peopleId}}
+
+  ## Planos
+  Descrição: Para um maior controle de sua fatura e para que tenha mais autonomia, com a ferramenta do meu plano você pode ter acesso a sua situação financeira, descrição dos itens disponíveis em seu plano, emissão de 2ª via, histórico de fatura. Além disso, você pode realizar tanto aumento quanto redução a quan
+    ### [GET] Listar planos
+      Endpoint: {{URL}}/api/v1/plans
+
+    ### [GET] Buscar plano
+      Endpoint: {{URL}}/api/v1/plans/{{planId}}
+
+  ## Redefinir senha
+    ### [POST] Solicitar uma nova senha
+      Endpoint: {{URL}}/api/v1/reset-password/request
+      Body:
+        {
+            "email": "{{email}}" //e-mail de acesso do usuário que deseja redefinir a senha
+        }
+
+  ## Respostas rápidas
+  Descrição: A ferramenta de Respostas Rápidas pode ser utilizada para agilizar o atendimento com o cliente, com ela pode-se criar vários textos que normalmente são enviados com frequência aos clientes, como por exemplo: um endereço, uma conta de banco, um formulário ou até alguma mensagem de apresentação dos at
+    ### [GET] Listar respostas rápidas
+      Endpoint: {{URL}}/api/v1/quick-replies?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Listar textos e departamentos das respostas rápidas
+      Endpoint: {{URL}}/api/v1/quick-replies?query={"attributes":["id","text"],"include":[{"model":"departments","attributes":["name","id"],"through":{"attributes":[]}}],"perPage":40}
+      Parâmetros de query:
+        - query: {"attributes":["id","text"],"include":[{"model":"departments","attributes":["name","id"],"through":{"attributes":[]}}],"perPage":40}
+
+    ### [GET] Listar somente os textos das respostas rápidas
+      Endpoint: {{URL}}/api/v1/quick-replies?query={"attributes":["text"],"perPage":40}
+      Parâmetros de query:
+        - query: {"attributes":["text"],"perPage":40}
+
+    ### [GET] Buscar resposta rápida
+      Endpoint: {{URL}}/api/v1/quick-replies/{{quickRepliesId}}
+
+    ### [PUT] Editar resposta rápida 
+      Endpoint: {{URL}}/api/v1/quick-replies/{{quickRepliesId}}
+      Body:
+        {
+            "text": "{{text}}",
+            "departmentIds":  ["{{departmentId}}", "{{departmentId}}"] //id departamento
+        }
+
+    ### [POST] Criar resposta rápida
+      Endpoint: {{URL}}/api/v1/quick-replies
+      Body:
+        {
+            "text": "{{test}}",
+            "departmentIds":  ["{{departmentId}}", "{{departmentId}}"] //id departamento
+        }
+
+    ### [DELETE] Excluir resposta rápida
+      Endpoint: {{URL}}/api/v1/quick-replies/{{quickRepliesId}}
+
+  ## Robôs
+  Descrição: Os robôs de atendimento, ou mais conhecidos como Chatbot ou somente Bot, realizam o atendimento inicial com os seus clientes. Ele é receptivo, por isso, é necessário que ele receba uma mensagem do contato para ser acionado.
+    ### [GET] Listar bots V1 / V2 / V3
+      Endpoint: {{URL}}/api/v1/bots?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Listar bots V1 / V2
+      Endpoint: {{URL}}/api/v1/bots?query={"where":{"settings":{"botCreatedVersion":{"$or":[null,"v1","v2"]}}},"order":[["name","ASC"]],"page":1,"perPage":40}
+      Parâmetros de query:
+        - query: {"where":{"settings":{"botCreatedVersion":{"$or":[null,"v1","v2"]}}},"order":[["name","ASC"]],"page":1,"perPage":40}
+
+    ### [GET] Listar bots V3
+      Endpoint: {{URL}}/api/v1/bots?query={"where":{"settings":{"botCreatedVersion":"v3"}},"order":[["name","ASC"]],"page":1,"perPage":40}
+      Parâmetros de query:
+        - query: {"where":{"settings":{"botCreatedVersion":"v3"}},"order":[["name","ASC"]],"page":1,"perPage":40}
+
+    ### [GET] Buscar bot
+      Endpoint: {{URL}}/api/v1/bots/{{botId}}
+
+    ### [PUT] Editar bot
+      Endpoint: {{URL}}/api/v1/bots/{{botId}}
+      Body:
+        //Copiar o retorno do GET "Buscar bot" aqui e altera-lo
+
+    ### [DELETE] Excluir bot
+      Endpoint: {{URL}}/api/v1/bots/{{botId}}
+
+  ## Tags
+  Descrição: As Tags são como etiquetas que têm como finalidade classificar os seus contatos através de palavras-chave.
+    ### [GET] Listar tags
+      Endpoint: {{URL}}/api/v1/tags?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar tag
+      Endpoint: {{URL}}/api/v1/tags/{{tagId}}
+
+    ### [GET] Buscar tags vinculadas a um contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}?include[0]=tags&include[1]
+      Parâmetros de query:
+        - include[0]: tags
+        - include[1]: 
+
+    ### [PUT] Editar tag
+      Endpoint: {{URL}}/api/v1/tags/{{tagId}}
+      Body:
+        {
+            "label": "{{name}}", //nome da tag
+            "backgroundColor": "{{#40C3FF}}", //# da cor da Tag
+            "departments": [] //ID dos departamentos
+        }
+
+    ### [POST] Criar tag
+      Endpoint: {{URL}}/api/v1/tags
+      Body:
+        {
+            "label": "{{name}}", //nome da tag
+            "backgroundColor": "{{#40C3FF}}", //# da cor da Tag
+            "departments": [] //ID dos departamentos
+        }
+
+    ### [POST] Adicona uma tag a multiplos contatos
+      Endpoint: {{URL}}/api/v1/tags/{{tagId}}/contacts
+      Body:
+        {
+          "where": {
+            "id": [
+              "{{contactId}}", //id contato
+              "{{contactId}}",
+              "{{contactId}}"
+            ]
+          }
+        }
+
+    ### [DELETE] Remove uma tag a multiplos contatos
+      Endpoint: {{URL}}/api/v1/tags/{{tagId}}/contacts
+      Body:
+        {
+          "where": {
+            "id": [
+              "{{id do contato}}",
+              "{{id do contato}}"
+            ]
+          }
+        }
+
+    ### [DELETE] Excluir tag
+      Endpoint: {{URL}}/api/v1/tags/{{tagId}}
+
+  ## Templates
+  Descrição: Os TEMPLATES são textos padrões aprovados pelo Whatsapp utilizados para iniciar um atendimento ativo através da conexão oficial do Whatsapp – WABA (mencionada no tópico de conexões).
+    ### [GET] Listar templates
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar template
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates/{{templateId}}
+
+    ### [GET] Total de templates cadastrados
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates/count
+
+    ### [PUT] Editar template
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates/{{templateId}}
+      Body:
+        // //Copiar o retorno do GET "Buscar template" aqui e altera-lo
+
+    ### [POST] Enviar template para aprovação
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates/{{hsmId}}/send-to-review
+
+    ### [POST] Sincronizar templates com o provedor
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates/refresh-templates
+
+    ### [POST] Enviar template com botão
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "type": "chat",
+            "number": "{{number}}", //Número do contato
+            "serviceId": "{{serviceId}}", //ID conexão
+            "hsmId": "{{hsmId}}", //ID HSM
+            "files": [],
+            "uploadingFiles": false,
+            "replyTo": null,
+            "parameters": [],
+            "file": {}
+        }
+
+    ### [POST] Enviar template com URL no botão
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "type": "chat",
+            "contactId": "{{contactId}}", //ID do contato
+            "hsmId": "{{hsmId}}", //ID do template
+            "files": [],
+            "uploadingFiles": false,
+            "replyTo": null,
+            "parameters": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "text",
+                            "text": "{{text}}" //Texto
+                        }
+                    ]
+                },
+                {
+                    "type": "button",
+                    "sub_type": "url",
+
+    ### [POST] Envio de template com dois parâmetros
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+          "type": "chat",
+          "number": "{{number}}", //número do contato
+          "serviceId": "{{serviceId}}", //id da conexão
+          "hsmId": "{{hsmId}}", //id do template
+          "files": [],
+          "uploadingFiles": false,
+          "replyTo": null,
+          "parameters": [
+            {
+              "type": "body",
+              "parameters": [
+                {
+                  "type": "text",
+                  "text": "{{text1}}" //texto 1
+                },
+                {
+                  "type": "text",
+                  "text": "{{text2}}" //texto 2
+                }
+
+    ### [POST] Criar template somente com texto
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates
+      Body:
+        {
+          "name": "{{name}}", //Nome do template
+          "internalName": "{{internalName}}", //Nome interno que irá aparecer no front da plataforma
+          "components": [],
+          "serviceId": "{{serviceId}}", //ID da conexão
+          "messageType": "text_only", //Tipo da mensagem
+          "language": "pt_BR", //Idioma
+          "category": "{{category}}", //Categoria do template, por exemplo: MARKETING
+          "namespace": "",
+          "status": ""
+        }
+
+    ### [DELETE] Excluir template
+      Endpoint: {{URL}}/api/v1/whatsapp-business-templates/{{templateId}}
+
+  ## Termos de aceite
+  Descrição: Esta funcionalidade tem o objetivo de solicitar ao cliente que aceite ou não continuar um atendimento, de acordo com as normas e regras de sua empresa.
+    ### [GET] Listar termos de aceite
+      Endpoint: {{URL}}/api/v1/acceptance-terms?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar termo de aceite
+      Endpoint: {{URL}}/api/v1/acceptance-terms/{{termsId}}
+
+    ### [PUT] Editar termo de aceite
+      Endpoint: {{URL}}/api/v1/acceptance-terms/{{termsId}}
+      Body:
+        {
+            "name": "{{name}}",
+            "textField": "{{text}}", //texto
+            "file": {}
+        }
+
+    ### [POST] Criar termo de aceite
+      Endpoint: {{URL}}/api/v1/acceptance-terms
+      Body:
+        {
+            "name": "{{nome}}",
+            "textField": "{{texto}}", //Texto
+            "file": {}
+        }
+
+    ### [DELETE] Excluir termo de aceite
+      Endpoint: {{URL}}/api/v1/acceptance-terms/{{termsId}}
+
+  ## Tokens
+  Descrição: Tokens de acesso pessoal.
+    ### [GET] Listar tokens
+      Endpoint: {{URL}}/api/v1/me/tokens?perPage30
+      Parâmetros de query:
+        - perPage30: 
+
+    ### [GET] Buscar token
+      Endpoint: {{URL}}/api/v1/me/tokens/{{tokenId}}
+
+    ### [PUT] Editar token
+      Endpoint: {{URL}}/api/v1/me/tokens/{{tokenId}}
+      Body:
+        {
+            "name": "{{name}}"
+        }
+
+    ### [POST] Criar token
+      Endpoint: {{URL}}/api/v1/me/tokens
+      Body:
+        {
+            "name": "{{name}}"
+        }
+
+    ### [DELETE] Excluir token
+      Endpoint: {{URL}}/api/v1/me/tokens/{{tokenId}}
+
+  ## Texto Mágico
+    ### [POST] Corrigir mensagem
+      Endpoint: {{URL}}/api/v1/messages/magic-text
+      Body:
+        {
+            "message": "{{message}}",//Mensagem
+            "tone": "correct"
+        }
+
+  ## Usuários
+  Descrição: Os usuários são os responsáveis por realizar o atendimento ao cliente. É necessário que cada um tenha o seu login e senha individual para que consigam acessar a Digisac, e a função de criar esses usuários é do administrador.
+    ### [GET] Listar usuários
+      Endpoint: {{URL}}/api/v1/users?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Listar usuários com seus departamentos
+      Endpoint: {{URL}}/api/v1/users?query={"include":[{"model":"departments","attributes":["id","name"]}],"page":1,"perPage":15}
+      Parâmetros de query:
+        - query: {"include":[{"model":"departments","attributes":["id","name"]}],"page":1,"perPage":15}
+
+    ### [GET] Buscar usuário
+      Endpoint: {{URL}}/api/v1/users/{{userId}}
+
+    ### [PUT] Editar usuário
+      Endpoint: {{URL}}/api/v1/users/{{userId}}
+      Body:
+        {
+        "accountId": "{{accountId}}",
+        "email": "{{e-mail}}",
+        "name": "{{name}}",
+        "isAdmin": true //true or false
+        }
+
+    ### [POST] Criar usuário
+      Endpoint: {{URL}}/api/v1/users
+      Body:
+        {
+        "accountId": "{{accountId}}", //id conta
+        "email": {{email}}, 
+        "password": "{{password}}", //senha
+        "name": "{{name}}",
+        "rolesId": "{{roleId}}", //id cargo
+        "organizationIds":[],
+        "departmentsId": "{{departmentsId}}" //id departamento
+        }
+
+    ### [POST] Arquiva usuário
+      Endpoint: {{URL}}/api/v1/users/{{userId}}/archive
+      Body:
+        {
+            "archive": true
+        }
+
+  ## Versões
+    ### [GET] Versão da plataforma
+      Endpoint: {{URL}}/api/v1/versions
+
+  ## Webhooks
+    ### [GET] Listar webhooks
+      Endpoint: {{URL}}/api/v1/me/webhooks?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Buscar webhook
+      Endpoint: {{URL}}/api/v1/me/webhooks/{{webhookId}}
+
+    ### [PUT] Editar webhook
+      Endpoint: {{URL}}/api/v1/me/webhooks/{{webhookId}}
+      Body:
+        {
+            "active": {{true or false}},
+            "name": "{{name}}}}",
+            "url": "{{url}}",
+            "events": [
+                "{{message.created}}",
+                "{{message.updated}}"
+            ],
+            "type": "{{general}}", //tipo
+            "userId": "{{userId}}",
+            "updatedAt": "{{date}}",
+            "createdAt": "{{date}}",
+            "deletedAt": null
+        }
+
+    ### [POST] Criar webhook
+      Endpoint: {{URL}}/api/v1/me/webhooks
+      Body:
+        {
+            "active": {{true or falsze}},
+            "name": "{{name}}",
+            "url": "{{url}}",
+            "events": [
+                "{{message.created}}",
+                "{{message.updated}}"
+            ],
+            "type": "{{general}}",
+            "userId": "{{userId}}",
+            "accountId": "{{accountId}}"
+        }
+
+    ### [POST] Teste Webhook
+      Endpoint: {{link_Completo_Webhook}}
+      Body:
+        { 
+            "teste": "teste" 
+        }
+
+  ## WhatsApp
+    ### [GET] Validação WhatsApp
+      Endpoint: {{URL}}/api/v1/contacts/exists?numbers[]={{contactNumber}}&serviceId={{serviceId}}
+      Parâmetros de query:
+        - numbers[]: {{contactNumber}}
+        - serviceId: {{serviceId}}
+
+## 🛠️ Populares
+Descrição: Nesta collection, você encontrará as requisições de API mais populares e amplamente utilizadas no ambiente Digisac. Elas são as mais pedidas pelos nossos usuários e podem facilitar muito o seu trabalho! 🎯
+  ## Agora
+  Descrição: Nesta função é possível visualizar em tempo real todos os atendimentos que estão acontecendo na plataforma por atendente e departamento.
+    ### [GET] Buscar departamentos (Agora)
+      Endpoint: {{URL}}/api/v1/now/departments-resume
+
+    ### [GET] Buscar atendentes (Agora)
+      Endpoint: {{URL}}/api/v1/now/attendance-resume
+
+    ### [GET] Buscar todos os dados (Agora)
+      Endpoint: {{URL}}/api/v1/now/resume
+
+  ## Autorização
+  Descrição: Gerar o Token de acesso em sua plataforma.
+    ### [POST] Gerar Token de acesso
+      Endpoint: {{URL}}/api/v1/oauth/token
+      Body:
+        {
+            "grant_type": "password",
+            "client_id": "api",
+            "client_secret": "secret",
+            "username": "{{e-mail}}", //e-mail de login do usuário
+            "password": "{{password}}" //senha de login do usuário
+        }
+
+  ## Chamados
+  Descrição: Acontecerá todo o atendimento entre atendente e contato. Abaixo estão as imagens da estrutura do bate papo e todas as ferramentas disponíveis:
+    ### [GET] Buscar chamados do contato
+      Endpoint: {{URL}}/tickets?where[contactId]={{contactId}}
+      Parâmetros de query:
+        - where[contactId]: {{contactId}}
+
+    ### [GET] Buscar pelo contactid todos os chamados do cliente trazendo quem encerrou/transferiu
+      Endpoint: {{URL}}/api/v1/tickets?query={"where":{"contactId":"{{contactId}}"},"attributes":["id","isOpen","protocol","origin","startedAt","endedAt"],"include":[{"model":"ticketTransfers","attributes":["action","fromDistribution"],"include":[{"model":"byUser","attributes":["id","name","email","status"]}]}],"perPage":50}
+
+      Parâmetros de query:
+        - query: {"where":{"contactId":"{{contactId}}"},"attributes":["id","isOpen","protocol","origin","startedAt","endedAt"],"include":[{"model":"ticketTransfers","attributes":["action","fromDistribution"],"include":[{"model":"byUser","attributes":["id","name","email","status"]}]}],"perPage":50}
+
+
+    ### [POST] Transferência de chamado
+      Endpoint: {{URL}}/api/v1//contacts/{{contactId}}/ticket/transfer
+      Body:
+        {
+            "departmentId": "{{departmentId}}", //id departamento
+            "userId": "{{userId}}", //id do usuário SE for abrir direto para ele
+            "comments": "{{comments}}" //comentario interno
+        }
+
+    ### [POST] Abertura de chamado
+      Endpoint: {{URL}}/contacts/{{contactId}}/ticket/transfer
+      Body:
+        {
+            "departmentId": "{{departmentId}}", //id departamento
+            "userId": "{{userId}}", //id do usuário SE for abrir direto para ele
+            "comments": "{{comments}}" //comentario interno
+        }
+
+    ### [POST] Fechar chamado
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/ticket/close
+
+    ### [POST] Fechar um chamado com assunto
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/ticket/close
+      Body:
+        {
+            "ticketTopicIds": "{{ticketTopicIds}}" //ID do chamado
+        }
+
+  ## Contatos
+  Descrição: Contatos são os números dos seus clientes que serão salvos dentro da Digisac.
+    ### [GET] Listar todos os contatos
+      Endpoint: {{URL}}/api/v1/contacts?perPage=40
+      Parâmetros de query:
+        - perPage: 40
+
+    ### [GET] Listar contatos da conexão
+      Endpoint: {{URL}}/api/v1/contacts?where[serviceId]={{serviceId}}?perPage=40
+      Parâmetros de query:
+        - where[serviceId]: {{serviceId}}?perPage=40
+
+    ### [GET] Buscar contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+
+    ### [GET] Buscar contato por número de uma conexão específica
+      Endpoint: {{url}}/api/v1/contacts?where[data.number][$iLike]=%{{number}}%&where[serviceId]={{serviceId}}
+      Parâmetros de query:
+        - where[data.number][$iLike]: %{{number}}%
+        - where[serviceId]: {{serviceId}}
+
+    ### [GET] Buscar tags vinculadas a um contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}?include[0]=tags&include[1]
+      Parâmetros de query:
+        - include[0]: tags
+        - include[1]: 
+
+    ### [GET] Buscar contatos que possuem campo personalizado específico
+      Endpoint: {{URL}}/api/v1/contacts?query={"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"name":"{{customFieldName}}"}}]}]}
+      Parâmetros de query:
+        - query: {"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"name":"{{customFieldName}}"}}]}]}
+
+    ### [GET] Buscar campos personalizados de um contato específico
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}?query={"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"name":"{{customFieldName}}"}}]}]}
+      Parâmetros de query:
+        - query: {"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"name":"{{customFieldName}}"}}]}]}
+
+    ### [GET] Busca de contatos que possuem X campos personalizados preenchidos
+      Endpoint: {{URL}}/api/v1/contacts?query={"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"$or":[{"name":"{{customFieldName1}}"},{"name":"{{customFieldName2}}"},{"name":"{{customFieldName3}}"},{"name":"{{customFieldName4}}"}]}}]}]}
+      Parâmetros de query:
+        - query: {"include":[{"model":"customFieldValues","include":[{"model":"customField","where":{"$or":[{"name":"{{customFieldName1}}"},{"name":"{{customFieldName2}}"},{"name":"{{customFieldName3}}"},{"name":"{{customFieldName4}}"}]}}]}]}
+
+    ### [GET] Verifica a existência de um contato
+      Endpoint: {{URL}}/api/v1/contacts/exists?numbers[]={{phoneNumber}}&serviceId={{serviceId}}
+      Parâmetros de query:
+        - numbers[]: {{phoneNumber}}
+        - serviceId: {{serviceId}}
+
+    ### [PUT] Editar contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+        "internalName": "{{name}}",
+        "number": "{{number}}",
+        "serviceId": "{{serviceid}}", //id conexão
+        "defaultDepartmentId": null,
+        "tagIds": ["{{tagIds}}", "{{tagIds}}"]
+        }
+
+    ### [PUT] Editar tag do contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+        "tagIds": ["{{tagIds}}", "{{tagIds}}"] //id tag
+        }
+
+    ### [PUT] Editar campo personalizado de um contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+            "customFields": [
+                {
+                    "id": "{{customFieldsId}}",
+                    "value": "{{texto}}"
+                }
+            ]
+        }
+
+    ### [PUT] Incluir tags em um contato existente Copy
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+      Body:
+        {
+        "tagIds": ["{{tagIds}}", "{{tagIds}}"] //id tag
+        }
+
+    ### [POST] Cadastrar contato
+      Endpoint: {{URL}}/api/v1/contacts
+      Body:
+        {
+        "internalName": "{{name}}",
+        "number": "{{number}}", //número contato
+        "serviceId": "{{serviceid}}", //id conexão
+        "defaultDepartmentId": null,
+        "tagIds": ["{{tagIds}}"], //id tag
+        "customFields": [ //campos personalizados
+                {
+                    "customFieldId": "{{customFieldId}}", //id campo personalizado
+                    "value": "{{value}}" //texto
+                }
+        ]
+        }
+
+    ### [POST] Cadastrar múltiplos contatos
+      Endpoint: {{URL}}/api/v1/contacts/many
+      Body:
+        [
+            {
+                "internalName": "{{name}}", //Nome do contato
+                "number": "{{number}}", //Número do contato
+                "serviceId": "{{serviceid}}", //ID da conexão
+                "defaultDepartmentId": null,
+                "tagIds": [
+                    "{{tagIds}}" //ID da TAG
+                ]
+            },
+            {
+                "internalName": "{{name}}",
+                "number": "{{number}}",
+                "serviceId": "{{serviceid}}",
+                "defaultDepartmentId": null,
+                "tagIds": [
+                    "{{tagIds}}"
+                ]
+            }
+        ]
+
+    ### [POST] Exportar contatos
+      Endpoint: {{URL}}/api/v1/contacts/export/csv
+      Body:
+        {
+          "where": {
+            "visible": true,
+            "isGroup": {
+              "$eq": false
+            },
+            "isBroadcast": {
+              "$eq": false
+            },
+            "serviceId": "{{serviceId}}" //id conexão
+          },
+          "include": [
+            "avatar",
+            "tags",
+            {
+              "model": "service",
+              "required": true
+            },
+            "person"
+          ],
+
+    ### [POST] Total de contatos com filtros
+      Endpoint: {{URL}}/api/v1/contacts/count
+      Body:
+        {
+          "query": {
+            "isFiltered": false,
+            "departmentIds": [ 
+              {{departmentIds}} //id departamento - Opcional
+            ]
+          }
+        }
+
+    ### [POST] Sincroniza contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/sync
+
+    ### [POST] Bloquear contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/block
+
+    ### [POST] Desbloquear contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}/block
+      Body:
+        {
+            "block": false,
+            "description": "{{description}}" //descrição (texto explicando o motivo)
+        }
+
+    ### [DELETE] Excluir contato
+      Endpoint: {{URL}}/api/v1/contacts/{{contactId}}
+
+    ### [DELETE] Exclui multiplos contatos
+      Endpoint: {{URL}}/api/v1/contacts/many
+      Body:
+        {
+          "where": {
+            "id": [
+              "{{contactId}}", //ID dos contatos que deseja excluir
+              "{{contactId}}"
+            ]
+          }
+        }
+
+  ## Estatísticas de atendimento
+  Descrição: Essa ferramenta permite que seja visualizado uma média de como estão os atendimentos com os clientes de uma maneira geral ou individualizada de acordo com os filtros gerados.
+    ### [GET] Buscar estatísticas por período
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}
+      Parâmetros de query:
+        - startPeriod: {{2024-01-01T23:59:59.999Z}}
+        - endPeriod: {{2023-01-02T23:59:59.999Z}}
+
+    ### [GET] Buscar estatísticas pela conexão
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&serviceId={{serviceId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - serviceId: {{serviceId}}
+
+    ### [GET] Buscar estatísticas por departamento
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&grouping=&departmentId={{departmentId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - grouping: 
+        - departmentId: {{departmentId}}
+
+    ### [GET] Buscar estatísticas por usuário
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&userId={{userId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - userId: {{userId}}
+
+    ### [GET] Buscar estatísticas por departamento + usuário
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&grouping=&departmentId={{departmentId}}&userId={{userId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - grouping: 
+        - departmentId: {{departmentId}}
+        - userId: {{userId}}
+
+    ### [GET] Buscar estatísticas pelo status dos chamados
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&status={{all/open/close}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - status: {{all/open/close}}
+
+    ### [GET] Buscar estatísticas com todos os filtros ativos
+      Endpoint: {{URL}}/api/v1/dashboard/general?startPeriod={{2024-07-01T23:59:59.999Z}}&endPeriod={{2024-07-30T23:59:59.999Z}}&grouping=&departmentId={{departmentId}}&userId={{userId}}&periodType={{open/close}}Date&departmentParticipation={{last/middle}}&userParticipation={{last/middle}}&status={{all/open/close}}&serviceId={{serviceId}}
+      Parâmetros de query:
+        - startPeriod: {{2024-07-01T23:59:59.999Z}}
+        - endPeriod: {{2024-07-30T23:59:59.999Z}}
+        - grouping: 
+        - departmentId: {{departmentId}}
+        - userId: {{userId}}
+        - periodType: {{open/close}}Date
+        - departmentParticipation: {{last/middle}}
+        - userParticipation: {{last/middle}}
+        - status: {{all/open/close}}
+        - serviceId: {{serviceId}}
+
+  ## Histórico de chamados
+  Descrição: O Histórico de Chamados é um dos relatórios de análise de atendimentos mais completos da plataforma, principalmente pelos seus filtros.
+    ### [GET] Buscar por um chamado específico
+      Endpoint: {{URL}}/api/v1/tickets/{{ticketId}}?include[0][model]=contact&include[0][include][0]=avatar&include[0][include][1]=thumbAvatar&include[1]=department&include[2]=user&include[3]=ticketTopics
+      Parâmetros de query:
+        - include[0][model]: contact
+        - include[0][include][0]: avatar
+        - include[0][include][1]: thumbAvatar
+        - include[1]: department
+        - include[2]: user
+        - include[3]: ticketTopics
+
+    ### [GET] Buscar chamados por período
+      Endpoint: {{URL}}/api/v1/tickets?startPeriod={{2024-01-01T23:59:59.999Z}}&endPeriod={{2023-01-02T23:59:59.999Z}}
+      Parâmetros de query:
+        - startPeriod: {{2024-01-01T23:59:59.999Z}}
+        - endPeriod: {{2023-01-02T23:59:59.999Z}}
+
+    ### [GET] Buscar chamados abertos por conexão
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":true},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":true},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+
+    ### [GET] Buscar chamados fechados por conexão
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":false},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":false},"include":[{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+
+    ### [GET] Buscar chamados abertos + fechados por conexão
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":{"$in":[true,false]}},"include":[{"model":"contact","attributes":["name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{"isOpen":{"$in":[true,false]}},"include":[{"model":"contact","attributes":["name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true,"serviceId":"{{serviceId}}"},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true}]}],"page":1,"perPage":20}
+
+    ### [GET] Buscar todos os chamados da plataforma
+      Endpoint: {{URL}}/api/v1/tickets?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"account"},{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]},{"model":"thumbAvatar"}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}&perPage=30
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"account"},{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]},{"model":"thumbAvatar"}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+        - perPage: 30
+
+    ### [GET] Exportar histórico de chamados em PDF
+      Endpoint: {{URLbase}}/pdf/tickets/{{ticketId}}/pt-BR?pdf=1&lng=pt-BR
+      Parâmetros de query:
+        - pdf: 1
+        - lng: pt-BR
+
+    ### [POST] Exportar histórico de chamados em TXT
+      Endpoint: {{URL}}/api/v1/tickets/export
+      Body:
+        {
+            "protocol": "{{protocolNumber}}" //Número do protocolo
+        }
+
+    ### [POST] Exportar histórico de chamados em CSV
+      Endpoint: {{URL}}/api/v1/tickets/export-history?query={"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+      Parâmetros de query:
+        - query: {"distinct":true,"order":[["updatedAt","DESC"]],"where":{},"include":[{"model":"firstMessage","attributes":["id","type","text","timestamp","isFromMe","sent","data","accountId","serviceId","contactId","fromId","toId","userId","ticketId","isFromBot","isFromSync","visible","ticketUserId","ticketDepartmentId","origin","botId","campaignId"]},{"model":"contact","attributes":["id","accountId","name","alternativeName","internalName","serviceId","data","note","personId","status"],"required":true,"where":{"visible":true},"include":[{"model":"service","attributes":["id","name","type","accountId","botId","archivedAt"],"required":true},{"model":"tags","attributes":["id","label","accountId"]},{"model":"person","attributes":["id","name","document","accountId"]}]},{"model":"user","attributes":["id","name","email","isSuperAdmin","active","accountId","isFirstLogin","status","timetableId","archivedAt","phoneNumber","data","language","isActiveInternalChat"]},{"model":"department","attributes":["id","name","accountId","archivedAt","distributionId"]},{"model":"ticketTopics","attributes":["id","name","archivedAt"]}]}
+
+  ## Mensagens
+    ### [POST] Enviar mensagem
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //Texto
+            "type": "chat",
+            "contactId": "{{contactId}}", //ID contato
+            "userId": "{{userId}}", //ID usuário
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar mensagem SEM abrir o chamado
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}",
+            "type": "chat",
+            "contactId": "{{contactId}}",
+            "userId": "{{userId}}",
+            "dontOpenTicket": "true", //este parametro faz com que o chamado não seja aberto no momento do envio da mensagem
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar comentário
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //texto
+            "type": "comment", // chat or comment
+            "contactId": "{{contactId}}", //id contato
+            "userId": "{{userId}}", //id usuário
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar de mensagem usando bot e sem abrir chamado
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+        "text": "{{text}}",
+        "number": "{{number}}",
+        "serviceId": "{{serviceid}}",
+        "origin": "bot",
+        "dontOpenticket": true
+        }
+
+    ### [POST] Enviar imagem
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //Texto
+            "number": "{{number}}", //Número do contato
+            "serviceId": "{{serviceId}}", //ID conexão
+            "file": {
+                "base64": "{{base64}}", //Converter a imagem em base64
+                "mimetype": "image/jpeg",
+                "name": "{{name}}" //Nome imagem
+            }
+        }
+
+    ### [POST] Enviar PDF
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "{{text}}", //Texto
+            "number": "{{number}}", //Número do contato
+            "serviceId": "{{serviceId}}", //ID conexão
+            "file": {
+                "base64": "{{base64}}", //Converter o PDF em base64
+                "mimetype": "application/pdf",
+                "name": "{{name}}" //Nome arquivo PDF
+            }
+        }
+
+    ### [POST] Enviar comentário
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "text": "Olá",
+            "type": "comment", // chat or comment
+            "contactId": "{{contactId}}", //id contato
+            "userId": "{{userId}}", //id usuário
+            "origin": "bot" // bot or user
+        }
+
+    ### [POST] Enviar áudio
+      Endpoint: {{URL}}/api/v1/messages
+      Body:
+        {
+            "number": "{{número}}", //Número do contato
+            "serviceId": "{{serviceid}}", //ID conexão
+            "file": {
+                "base64": "{{base64}}", //Converter o áudio em base64
+                "mimetype": "audio/mpeg" 
+            }
+        }
+
+  ## teste
+    ### [DELETE] https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleId}}
+      Endpoint: https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleId}}
+      Body:
+        {
+          "where": {
+            "id": [
+              "67f1cd72-be0a-4ee3-9a8e-000deb4c1551",
+              "2afb0d3f-78c7-459b-ac9c-dd4083d66475"
+            ]
+          }
+        }
+
+    ### [DELETE] https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleId}}
+      Endpoint: https://dinheirofacil.digisac.me/api/v1/schedule/{{scheduleId}}
+
+### [DELETE] https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleId}}
+  Endpoint: https://qa-suporte.digisac.chat/api/v1/schedule/{{scheduleId}}
+  Body:
+    {
+      "where": {
+        "id": [
+          "67f1cd72-be0a-4ee3-9a8e-000deb4c1551",
+          "2afb0d3f-78c7-459b-ac9c-dd4083d66475"
+        ]
+      }
+    }

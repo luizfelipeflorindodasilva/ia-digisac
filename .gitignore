@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.sessions_cache
+uvicorn.log
+*.postman_collection.json
