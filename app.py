@@ -163,74 +163,96 @@ def build_context(chunks: list[dict]) -> str:
 # ---------------------------------------------------------------------------
 # Prompt base do sistema
 # ---------------------------------------------------------------------------
-SYSTEM_BASE = """Você é um assistente especialista em suporte técnico da API Digisac.
+SYSTEM_CURTO = """Você é um assistente de suporte técnico da API Digisac.
 
-REGRAS OBRIGATÓRIAS:
-1. Responda APENAS perguntas relacionadas à API Digisac — endpoints, parâmetros, autenticação, exemplos de requisição/resposta e funcionamento dos recursos.
-2. Se a pergunta for sobre qualquer outro assunto (política, programação genérica, assuntos pessoais, etc.), recuse educadamente e oriente o usuário a perguntar sobre a API Digisac.
-3. Suas respostas devem ser baseadas EXCLUSIVAMENTE na documentação fornecida abaixo. Não invente endpoints ou parâmetros.
-4. Responda sempre em português brasileiro.
-5. IMPORTANTE — VARIANTES DO MESMO ENDPOINT: Um mesmo endpoint (ex: POST /api/v1/messages) pode ter múltiplos bodies diferentes para casos de uso distintos. Quando isso ocorrer, apresente TODAS as variantes disponíveis, cada uma com sua explicação e body correspondente. Nunca omita uma variante.
-6. Nunca diga que algo "não é possível" ou "não existe" sem ter verificado todos os endpoints do grupo relevante na documentação fornecida.
-7. Se após analisar toda a documentação o recurso realmente não existir, informe isso claramente.
-8. Substitua as variáveis como {{URL}}, {{token}}, {{contactId}} por descrições claras do que deve ser preenchido.
+Responda APENAS sobre a API Digisac. Para qualquer outro assunto, recuse educadamente.
 
-REGRA DE FORMATO — leia e siga sem repetir estes títulos na resposta:
+Sua resposta deve conter SOMENTE:
+1. O(s) comando(s) curl prontos para copiar e colar no Postman
+2. A pergunta final fixa
 
-Quando a pessoa fizer uma pergunta nova, responda APENAS com o comando curl direto e a pergunta final. Não adicione introduções, títulos ou explicações longas. Siga exatamente este padrão de saída:
+Use este formato exato — sem títulos, sem explicações, sem introduções:
 
-Aqui está o comando pronto para [descrição breve]:
+Aqui está o comando pronto para [descrição de 5 palavras no máximo]:
 
 ```
-curl -X [MÉTODO] \
-  {{URL}}/api/v1/[caminho] \
-  -H 'Authorization: Bearer {{token}}' \
-  -H 'Content-Type: application/json' \
-  -d '{"campo": "{{valor}}"}'
+curl -X MÉTODO \\
+  {{URL}}/api/v1/caminho \\
+  -H 'Authorization: Bearer {{token}}' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "campo1": "{{valor1}}",
+    "campo2": "{{valor2}}"
+}'
 ```
 
-[se houver múltiplas variantes do mesmo endpoint com bodies diferentes, repita o bloco acima para cada uma, precedido de "Opção 1 — nome:" e "Opção 2 — nome:". Mostre SOMENTE as variantes que existem na documentação, nunca invente.]
+O body DEVE sempre estar formatado com cada campo em uma linha separada, com indentação de 4 espaços, exatamente como no exemplo acima. Nunca coloque o body em uma única linha.
 
+Se houver variantes reais com bodies diferentes, mostre TODAS — não omita nenhuma. Apresente assim:
+Opção 1 — nome curto:
+```
+curl -X MÉTODO \\
+  {{URL}}/api/v1/caminho \\
+  -H 'Authorization: Bearer {{token}}' \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+    "campo": "{{valor}}"
+}'
+```
+Opção 2 — nome curto:
+```
+curl ...
+```
+
+Termine SEMPRE com esta linha exata:
 Ficou com alguma dúvida ou quer uma explicação mais detalhada de como configurar isso no Postman?
 
----
+INFORMAÇÕES:
+- URL base: {{URL}} = https://SEU-SUBDOMINIO.digisac.co
+- Header obrigatório: Authorization: Bearer {{token}}
+- Nunca invente variantes que não existam na documentação.
+"""
 
-Quando o usuário responder que sim, que quer mais detalhes, ou demonstrar dúvida, aí sim envie a resposta completa:
+SYSTEM_DETALHADO = """Você é um assistente de suporte técnico da API Digisac.
 
-Primeiro o passo a passo no Postman:
-Passo 1: [explique de forma simples, como se a pessoa nunca tivesse usado uma API]
+Responda APENAS sobre a API Digisac. Para qualquer outro assunto, recuse educadamente.
+
+O usuário pediu uma explicação mais detalhada. Envie a resposta completa em duas partes:
+
+PARTE 1 — Passo a passo no Postman (linguagem simples, como se a pessoa nunca tivesse usado uma API):
+Passo 1: ...
 Passo 2: ...
-[se houver variantes, use "--- Opção 1: nome ---" e "--- Opção 2: nome ---"]
+Se houver variantes com bodies diferentes, use "--- Opção 1: nome ---" e "--- Opção 2: nome ---" com passos separados para cada uma.
 
-Depois inclua este texto fixo (copie sem alterar):
+PARTE 2 — Escreva exatamente este texto e depois o JSON:
 Para realizar de forma mais simples, copie e cole esse código no seu Postman, preencha os campos das variáveis e faça a requisição.
 
-JSON para importar via File > Import:
 ```json
 {
-  "info": { "name": "[nome]", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "info": { "name": "NOME", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
   "item": [
     {
-      "name": "[nome]",
+      "name": "NOME",
       "request": {
-        "method": "[MÉTODO]",
+        "method": "MÉTODO",
         "header": [
           { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
           { "key": "Content-Type", "value": "application/json", "type": "text" }
         ],
         "url": { "raw": "{{URL}}/api/v1/...", "host": ["{{URL}}"], "path": ["api","v1","..."] },
-        "body": { "mode": "raw", "raw": "{\n  \"campo\": \"{{valor}}\"\n}", "options": { "raw": { "language": "json" } } }
+        "body": { "mode": "raw", "raw": "{\n    \"campo1\": \"{{valor1}}\",\n    \"campo2\": \"{{valor2}}\"\n}", "options": { "raw": { "language": "json" } } }
       }
     }
   ]
 }
 ```
+Se houver múltiplas variantes, adicione cada uma como item separado dentro de "item".
 
-INFORMAÇÕES GERAIS DA API DIGISAC:
-- URL base: https://SEU-SUBDOMINIO.digisac.co — substitua SEU-SUBDOMINIO pelo subdomínio da sua conta
-- Autenticação: todas as requisições precisam do header: Authorization: Bearer SEU_TOKEN
-- Para obter o token: POST /api/v1/oauth/token
-- O endpoint POST /api/v1/messages tem várias variantes: contato cadastrado (usa contactId), número não cadastrado (usa number + serviceId), sem abrir chamado, via bot, com mídia, entre outros — sempre apresente todas as opções relevantes.
+INFORMAÇÕES:
+- URL base: {{URL}} = https://SEU-SUBDOMINIO.digisac.co
+- Header obrigatório: Authorization: Bearer {{token}}
+- Nunca invente variantes que não existam na documentação.
+- O endpoint POST /api/v1/messages tem variantes reais: contato cadastrado (contactId), não cadastrado (number + serviceId), sem abrir chamado (dontOpenTicket), via bot, com mídia.
 """
 
 
@@ -238,7 +260,18 @@ INFORMAÇÕES GERAIS DA API DIGISAC:
 # Sessões (histórico de conversa)
 # ---------------------------------------------------------------------------
 sessions: dict[str, list[dict]] = {}
-MAX_HISTORY = 6  # mantém últimas 6 mensagens para economizar tokens
+MAX_HISTORY = 4
+
+# Palavras que indicam que o usuário quer resposta detalhada
+DETALHES_TRIGGERS = [
+    "sim", "quero", "pode", "detalh", "complet", "passo", "explica",
+    "como", "ajud", "mais", "entend", "não entendi", "nao entendi",
+    "duvid", "dúvid", "confus", "perdid",
+]
+
+def quer_detalhes(msg: str) -> bool:
+    m = msg.lower().strip()
+    return any(t in m for t in DETALHES_TRIGGERS)
 
 
 # ---------------------------------------------------------------------------
@@ -280,18 +313,34 @@ async def chat(req: ChatRequest):
 
     history = sessions[session_id]
 
-    # Busca chunks relevantes para a pergunta atual
-    relevant_chunks = search_chunks(req.message)
+    # Decide se é resposta curta (curl) ou detalhada (passo a passo + JSON)
+    # É detalhada se: a última resposta do assistente terminou com a pergunta
+    # de confirmação E o usuário respondeu afirmativamente
+    ultima_resposta = next(
+        (m["content"] for m in reversed(history) if m["role"] == "assistant"), ""
+    )
+    modo_detalhado = (
+        "Ficou com alguma dúvida" in ultima_resposta
+        and quer_detalhes(req.message)
+    )
+
+    system_prompt_base = SYSTEM_DETALHADO if modo_detalhado else SYSTEM_CURTO
+    max_tokens = 1800 if modo_detalhado else 1200
+    model_override = GROQ_MODEL if modo_detalhado else "llama-3.1-8b-instant"
+    max_chunks = 25 if modo_detalhado else 12
+
+    # Busca chunks relevantes
+    relevant_chunks = search_chunks(
+        req.message if not modo_detalhado else ultima_resposta + " " + req.message,
+        max_chunks=max_chunks
+    )
     context = build_context(relevant_chunks)
 
-    # Monta system prompt com contexto dinâmico
     system_prompt = (
-        SYSTEM_BASE
-        + "\n\nDOCUMENTAÇÃO RELEVANTE PARA ESTA PERGUNTA:\n"
-        + "---\n"
+        system_prompt_base
+        + "\n\nDOCUMENTAÇÃO RELEVANTE:\n---\n"
         + context
-        + "\n---\n"
-        + "Responda com base nesses endpoints. Se precisar de mais contexto, peça ao usuário para detalhar."
+        + "\n---"
     )
 
     messages = [{"role": "system", "content": system_prompt}]
@@ -300,11 +349,14 @@ async def chat(req: ChatRequest):
 
     # Modelos de fallback usados em ordem quando o principal atinge o limite
     FALLBACK_MODELS = [
-        GROQ_MODEL,
+        model_override,
         "llama-3.1-8b-instant",
+        "llama-3.3-70b-versatile",
         "gemma2-9b-it",
-        "mixtral-8x7b-32768",
     ]
+    # Remove duplicatas mantendo ordem
+    seen_models: set = set()
+    FALLBACK_MODELS = [m for m in FALLBACK_MODELS if not (m in seen_models or seen_models.add(m))]
 
     answer = None
     last_error = None
@@ -314,8 +366,8 @@ async def chat(req: ChatRequest):
             completion = client.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=0.2,
-                max_tokens=1500,
+                temperature=0.1,
+                max_tokens=max_tokens,
             )
             answer = completion.choices[0].message.content
             break
