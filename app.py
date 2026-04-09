@@ -302,16 +302,51 @@ async def chat(req: ChatRequest):
     messages.extend(history[-MAX_HISTORY:])
     messages.append({"role": "user", "content": req.message})
 
-    try:
-        completion = client.chat.completions.create(
-            model=GROQ_MODEL,
-            messages=messages,
-            temperature=0.2,
-            max_tokens=1500,
+    # Modelos de fallback usados em ordem quando o principal atinge o limite
+    FALLBACK_MODELS = [
+        GROQ_MODEL,
+        "llama-3.1-8b-instant",
+        "gemma2-9b-it",
+        "mixtral-8x7b-32768",
+    ]
+
+    answer = None
+    last_error = None
+
+    for model in FALLBACK_MODELS:
+        try:
+            completion = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.2,
+                max_tokens=1500,
+            )
+            answer = completion.choices[0].message.content
+            break
+        except Exception as e:
+            err_str = str(e)
+            last_error = err_str
+            # Se for rate limit (429), tenta o próximo modelo
+            if "429" in err_str or "rate_limit" in err_str:
+                continue
+            # Qualquer outro erro para imediatamente
+            raise HTTPException(status_code=500, detail=f"Erro ao chamar a API Groq: {err_str}")
+
+    if answer is None:
+        # Extrai o tempo de espera da mensagem de erro, se disponível
+        wait = ""
+        import re as _re
+        match = _re.search(r'try again in ([\w\d.]+)', last_error or "")
+        if match:
+            wait = f" Tente novamente em aproximadamente {match.group(1)}."
+        raise HTTPException(
+            status_code=429,
+            detail=(
+                f"O limite diário de requisições foi atingido em todos os modelos disponíveis.{wait} "
+                "Isso ocorre no plano gratuito da Groq (100 mil tokens/dia). "
+                "O limite é renovado automaticamente todo dia."
+            )
         )
-        answer = completion.choices[0].message.content
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro ao chamar a API Groq: {str(e)}")
 
     # Salva no histórico (sem o system, só user/assistant)
     history.append({"role": "user", "content": req.message})

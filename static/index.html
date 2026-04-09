@@ -468,7 +468,10 @@
 
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.detail || 'Erro desconhecido');
+        const detail = err.detail || 'Erro desconhecido';
+        const error = new Error(detail);
+        error.status = res.status;
+        throw error;
       }
 
       const data = await res.json();
@@ -477,7 +480,11 @@
       appendMessage('assistant', data.response);
     } catch (err) {
       removeTyping();
-      appendMessage('assistant', `❌ Erro: ${err.message}`);
+      if (err.status === 429 || (err.message || '').toLowerCase().includes('limite diário')) {
+        appendMessage('assistant', '⚠️ O limite diário de uso gratuito da IA foi atingido. O limite é renovado automaticamente todo dia. Tente novamente mais tarde.');
+      } else {
+        appendMessage('assistant', `❌ Erro: ${err.message || 'desconhecido'}`);
+      }
     } finally {
       isLoading = false;
       sendBtn.disabled = false;
