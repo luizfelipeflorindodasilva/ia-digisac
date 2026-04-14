@@ -1,15 +1,19 @@
+import hashlib
 import json
 import os
 import re
 import uuid
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 from fastapi.responses import HTMLResponse, FileResponse
 from groq import Groq
 from pydantic import BaseModel
+
+import db
 
 load_dotenv()
 
@@ -18,6 +22,9 @@ load_dotenv()
 # ---------------------------------------------------------------------------
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "")
+ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH", "")
 
 if not GROQ_API_KEY:
     raise RuntimeError("GROQ_API_KEY não definida. Crie o arquivo .env com sua chave.")
@@ -167,7 +174,10 @@ SYSTEM_CURTO = """Você é um assistente de suporte técnico da API Digisac.
 
 Responda APENAS sobre a API Digisac. Para qualquer outro assunto, recuse educadamente.
 
-Sua resposta deve conter SOMENTE:
+REGRA CRÍTICA: Se a funcionalidade solicitada não estiver presente na DOCUMENTAÇÃO RELEVANTE fornecida abaixo, responda EXATAMENTE com esta frase e nada mais:
+Não encontrei documentação para isso na API Digisac. Essa funcionalidade pode não existir na plataforma ou a requisição ainda não foi desenvolvida.
+
+Se a funcionalidade ESTIVER documentada, sua resposta deve conter SOMENTE:
 1. O(s) comando(s) curl prontos para copiar e colar no Postman
 2. A pergunta final fixa
 
@@ -217,7 +227,10 @@ SYSTEM_DETALHADO = """Você é um assistente de suporte técnico da API Digisac.
 
 Responda APENAS sobre a API Digisac. Para qualquer outro assunto, recuse educadamente.
 
-O usuário pediu uma explicação mais detalhada. Envie a resposta completa em duas partes:
+REGRA CRÍTICA: Se a funcionalidade solicitada não estiver presente na DOCUMENTAÇÃO RELEVANTE fornecida abaixo, responda EXATAMENTE com esta frase e nada mais:
+Não encontrei documentação para isso na API Digisac. Essa funcionalidade pode não existir na plataforma ou a requisição ainda não foi desenvolvida.
+
+Se a funcionalidade ESTIVER documentada, o usuário pediu uma explicação mais detalhada. Envie a resposta completa em duas partes:
 
 PARTE 1 — Passo a passo no Postman (linguagem simples, como se a pessoa nunca tivesse usado uma API):
 Passo 1: ...
@@ -275,6 +288,33 @@ def quer_detalhes(msg: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Admin tokens (em memória, expiram em 8h)
+# ---------------------------------------------------------------------------
+admin_tokens: dict[str, datetime] = {}
+ADMIN_TOKEN_TTL = timedelta(hours=8)
+
+
+def _hash_password(password: str) -> str:
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
+def _generate_admin_token() -> str:
+    token = str(uuid.uuid4())
+    admin_tokens[token] = datetime.now(timezone.utc)
+    return token
+
+
+def _validate_admin_token(token: str) -> bool:
+    if token not in admin_tokens:
+        return False
+    created_at = admin_tokens[token]
+    if datetime.now(timezone.utc) - created_at > ADMIN_TOKEN_TTL:
+        del admin_tokens[token]
+        return False
+    return True
+
+
+# ---------------------------------------------------------------------------
 # Modelos Pydantic
 # ---------------------------------------------------------------------------
 class ChatRequest(BaseModel):
@@ -287,6 +327,11 @@ class ChatResponse(BaseModel):
     session_id: str
 
 
+class AdminLoginRequest(BaseModel):
+    email: str
+    password: str
+
+
 # ---------------------------------------------------------------------------
 # App FastAPI
 # ---------------------------------------------------------------------------
@@ -296,6 +341,10 @@ app = FastAPI(
     version="1.0.0",
 )
 
+@app.on_event("startup")
+def startup_event():
+    db.init_db()
+
 
 @app.get("/", response_class=HTMLResponse)
 async def index():
@@ -303,6 +352,14 @@ async def index():
     if html_path.exists():
         return FileResponse(html_path)
     return HTMLResponse("<h1>IA Suporte Digisac</h1>")
+
+
+@app.get("/admin", response_class=HTMLResponse)
+async def admin_page():
+    html_path = Path(__file__).parent / "static" / "admin.html"
+    if html_path.exists():
+        return FileResponse(html_path)
+    return HTMLResponse("<h1>Painel Admin</h1>", status_code=404)
 
 
 @app.post("/chat", response_model=ChatResponse)
@@ -314,8 +371,6 @@ async def chat(req: ChatRequest):
     history = sessions[session_id]
 
     # Decide se é resposta curta (curl) ou detalhada (passo a passo + JSON)
-    # É detalhada se: a última resposta do assistente terminou com a pergunta
-    # de confirmação E o usuário respondeu afirmativamente
     ultima_resposta = next(
         (m["content"] for m in reversed(history) if m["role"] == "assistant"), ""
     )
@@ -374,14 +429,16 @@ async def chat(req: ChatRequest):
         except Exception as e:
             err_str = str(e)
             last_error = err_str
-            # Se for rate limit (429), tenta o próximo modelo
             if "429" in err_str or "rate_limit" in err_str:
                 continue
-            # Qualquer outro erro para imediatamente
             raise HTTPException(status_code=500, detail=f"Erro ao chamar a API Groq: {err_str}")
 
+    # Se a resposta for a mensagem de "não encontrei", trunca qualquer texto extra
+    NOT_FOUND_MSG = "Não encontrei documentação para isso na API Digisac. Essa funcionalidade pode não existir na plataforma ou a requisição ainda não foi desenvolvida."
+    if answer and answer.strip().startswith("Não encontrei documentação"):
+        answer = NOT_FOUND_MSG
+
     if answer is None:
-        # Extrai o tempo de espera da mensagem de erro, se disponível
         wait = ""
         import re as _re
         match = _re.search(r'try again in ([\w\d.]+)', last_error or "")
@@ -400,6 +457,10 @@ async def chat(req: ChatRequest):
     history.append({"role": "user", "content": req.message})
     history.append({"role": "assistant", "content": answer})
 
+    # Persiste no banco
+    db.save_message(session_id, "user", req.message)
+    db.save_message(session_id, "assistant", answer)
+
     return ChatResponse(response=answer, session_id=session_id)
 
 
@@ -412,6 +473,39 @@ async def clear_session(session_id: str):
 @app.get("/health")
 async def health():
     return {"status": "ok", "model": GROQ_MODEL, "chunks": len(API_CHUNKS)}
+
+
+# ---------------------------------------------------------------------------
+# Admin endpoints
+# ---------------------------------------------------------------------------
+@app.post("/admin/login")
+async def admin_login(req: AdminLoginRequest):
+    if not ADMIN_EMAIL or not ADMIN_PASSWORD_HASH:
+        raise HTTPException(status_code=503, detail="Admin não configurado.")
+    if req.email != ADMIN_EMAIL:
+        raise HTTPException(status_code=401, detail="Credenciais inválidas.")
+    if _hash_password(req.password) != ADMIN_PASSWORD_HASH:
+        raise HTTPException(status_code=401, detail="Credenciais inválidas.")
+    token = _generate_admin_token()
+    return {"token": token}
+
+
+@app.get("/admin/logs")
+async def admin_logs(authorization: str = Header(default="")):
+    token = authorization.replace("Bearer ", "").strip()
+    if not _validate_admin_token(token):
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado.")
+    conversations = db.get_all_conversations()
+    return {"conversations": conversations}
+
+
+@app.get("/admin/logs/{session_id}")
+async def admin_session_messages(session_id: str, authorization: str = Header(default="")):
+    token = authorization.replace("Bearer ", "").strip()
+    if not _validate_admin_token(token):
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado.")
+    messages = db.get_conversation_messages(session_id)
+    return {"session_id": session_id, "messages": messages}
 
 
 # ---------------------------------------------------------------------------

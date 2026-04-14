@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin — IA Digisac</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Login screen ---- */
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .login-box {
+      background: #1e2433;
+      border: 1px solid #2d3748;
+      border-radius: 16px;
+      padding: 40px 48px;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .login-box h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 4px;
+    }
+
+    .login-box p {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .login-box input {
+      background: #0f1117;
+      border: 1px solid #2d3748;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #e2e8f0;
+      font-size: 14px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .login-box input:focus { border-color: #6366f1; }
+
+    .login-box button {
+      background: #6366f1;
+      border: none;
+      color: white;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-box button:hover { background: #4f46e5; }
+
+    #login-error {
+      font-size: 13px;
+      color: #f87171;
+      display: none;
+      text-align: center;
+    }
+
+    /* ---- Admin panel ---- */
+    #admin-panel {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      padding: 16px 24px;
+      border-bottom: 1px solid #1e2433;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header h1 { font-size: 16px; font-weight: 600; color: #f1f5f9; }
+    header span { font-size: 12px; color: #64748b; margin-left: 4px; }
+
+    #logout-btn {
+      margin-left: auto;
+      background: transparent;
+      border: 1px solid #2d3748;
+      color: #64748b;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #logout-btn:hover { border-color: #f87171; color: #f87171; }
+
+    .panel-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ---- Sessions list ---- */
+    #sessions-list {
+      width: 300px;
+      min-width: 260px;
+      border-right: 1px solid #1e2433;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sessions-header {
+      padding: 14px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      border-bottom: 1px solid #1e2433;
+      font-weight: 600;
+    }
+
+    .session-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1a2030;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .session-item:hover { background: #1e2433; }
+    .session-item.active { background: #252d40; border-left: 3px solid #6366f1; }
+
+    .session-item .sid {
+      font-size: 12px;
+      color: #94a3b8;
+      font-family: monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .session-item .meta {
+      font-size: 11px;
+      color: #475569;
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .session-item .count {
+      background: #2d3748;
+      color: #94a3b8;
+      border-radius: 10px;
+      padding: 1px 7px;
+      font-size: 10px;
+    }
+
+    #sessions-empty {
+      padding: 32px 16px;
+      text-align: center;
+      font-size: 13px;
+      color: #475569;
+    }
+
+    /* ---- Messages panel ---- */
+    #messages-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .messages-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid #1e2433;
+      font-size: 12px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .messages-header .sid-label {
+      font-family: monospace;
+      color: #94a3b8;
+    }
+
+    #messages-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #messages-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .msg-row {
+      display: flex;
+      gap: 10px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg-row.user { flex-direction: row-reverse; }
+
+    .msg-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .msg-row.user .msg-avatar { background: #6366f1; }
+    .msg-row.assistant .msg-avatar { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+
+    .msg-bubble {
+      max-width: 70%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .msg-row.user .msg-bubble {
+      background: #6366f1;
+      color: #fff;
+      border-bottom-right-radius: 3px;
+    }
+
+    .msg-row.assistant .msg-bubble {
+      background: #1e2433;
+      border: 1px solid #2d3748;
+      color: #e2e8f0;
+      border-bottom-left-radius: 3px;
+    }
+
+    .msg-bubble pre {
+      background: #0f1117;
+      border: 1px solid #2d3748;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 8px;
+      overflow-x: auto;
+      font-size: 11.5px;
+    }
+
+    .msg-bubble code {
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 11.5px;
+    }
+
+    .msg-time {
+      font-size: 10px;
+      color: #334155;
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .msg-row.user .msg-time { text-align: right; margin-right: 38px; }
+    .msg-row.assistant .msg-time { text-align: left; margin-left: 38px; }
+
+    /* Scrollbars */
+    #sessions-list::-webkit-scrollbar,
+    #messages-container::-webkit-scrollbar { width: 4px; }
+    #sessions-list::-webkit-scrollbar-track,
+    #messages-container::-webkit-scrollbar-track { background: transparent; }
+    #sessions-list::-webkit-scrollbar-thumb,
+    #messages-container::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="login-screen">
+  <div class="login-box">
+    <h2>Painel Administrativo</h2>
+    <p>Acesso restrito. Insira suas credenciais.</p>
+    <input type="email" id="email-input" placeholder="E-mail" autocomplete="email" />
+    <input type="password" id="password-input" placeholder="Senha" autocomplete="current-password"
+           onkeydown="if(event.key==='Enter') doLogin()" />
+    <button onclick="doLogin()">Entrar</button>
+    <div id="login-error">E-mail ou senha incorretos.</div>
+  </div>
+</div>
+
+<!-- Admin Panel -->
+<div id="admin-panel">
+  <header>
+    <div>
+      <h1>Painel Admin <span>— IA Suporte Digisac</span></h1>
+    </div>
+    <button id="logout-btn" onclick="doLogout()">Sair</button>
+  </header>
+
+  <div class="panel-body">
+    <!-- Sessions list -->
+    <div id="sessions-list">
+      <div class="sessions-header">Conversas</div>
+      <div id="sessions-empty">Nenhuma conversa ainda.</div>
+    </div>
+
+    <!-- Messages panel -->
+    <div id="messages-panel">
+      <div class="messages-header">
+        <span id="selected-session-label">Selecione uma conversa</span>
+      </div>
+      <div id="messages-container">
+        <div id="messages-placeholder">← Selecione uma conversa para ver as mensagens</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let adminToken = sessionStorage.getItem('admin_token') || null;
+
+  // Auto-login se já tiver token
+  if (adminToken) {
+    showPanel();
+    loadSessions();
+  }
+
+  async function doLogin() {
+    const email = document.getElementById('email-input').value.trim();
+    const password = document.getElementById('password-input').value;
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+
+    try {
+      const res = await fetch('/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        errEl.style.display = 'block';
+        return;
+      }
+
+      const data = await res.json();
+      adminToken = data.token;
+      sessionStorage.setItem('admin_token', adminToken);
+      showPanel();
+      loadSessions();
+    } catch {
+      errEl.style.display = 'block';
+    }
+  }
+
+  function doLogout() {
+    adminToken = null;
+    sessionStorage.removeItem('admin_token');
+    document.getElementById('admin-panel').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('email-input').value = '';
+    document.getElementById('password-input').value = '';
+  }
+
+  function showPanel() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'flex';
+  }
+
+  async function loadSessions() {
+    try {
+      const res = await fetch('/admin/logs', {
+        headers: { 'Authorization': `Bearer ${adminToken}` },
+      });
+
+      if (res.status === 401) { doLogout(); return; }
+
+      const data = await res.json();
+      renderSessions(data.conversations);
+    } catch {
+      // silently fail
+    }
+  }
+
+  function renderSessions(conversations) {
+    const container = document.getElementById('sessions-list');
+    const empty = document.getElementById('sessions-empty');
+
+    // Remove previous items (keep header and empty)
+    container.querySelectorAll('.session-item').forEach(el => el.remove());
+
+    if (!conversations || conversations.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+
+    empty.style.display = 'none';
+
+    conversations.forEach(conv => {
+      const item = document.createElement('div');
+      item.className = 'session-item';
+      item.dataset.sessionId = conv.session_id;
+
+      const shortId = conv.session_id.split('-')[0];
+      const updatedAt = conv.updated_at
+        ? new Date(conv.updated_at).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' })
+        : '—';
+
+      item.innerHTML = `
+        <div class="sid">${conv.session_id}</div>
+        <div class="meta">
+          <span>${updatedAt}</span>
+          <span class="count">${conv.msg_count} msgs</span>
+        </div>
+      `;
+
+      item.onclick = () => {
+        document.querySelectorAll('.session-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        loadMessages(conv.session_id);
+      };
+
+      container.appendChild(item);
+    });
+  }
+
+  async function loadMessages(sessionId) {
+    const label = document.getElementById('selected-session-label');
+    label.innerHTML = `Sessão: <span class="sid-label">${sessionId}</span>`;
+
+    const container = document.getElementById('messages-container');
+    container.innerHTML = '<div style="color:#475569;font-size:13px;text-align:center;margin-top:32px;">Carregando...</div>';
+
+    try {
+      const res = await fetch(`/admin/logs/${sessionId}`, {
+        headers: { 'Authorization': `Bearer ${adminToken}` },
+      });
+
+      if (res.status === 401) { doLogout(); return; }
+
+      const data = await res.json();
+      renderMessages(data.messages);
+    } catch {
+      container.innerHTML = '<div style="color:#f87171;font-size:13px;text-align:center;margin-top:32px;">Erro ao carregar mensagens.</div>';
+    }
+  }
+
+  function renderMessages(messages) {
+    const container = document.getElementById('messages-container');
+    container.innerHTML = '';
+
+    if (!messages || messages.length === 0) {
+      container.innerHTML = '<div style="color:#475569;font-size:13px;text-align:center;margin-top:32px;">Nenhuma mensagem nesta sessão.</div>';
+      return;
+    }
+
+    messages.forEach(msg => {
+      const row = document.createElement('div');
+      row.className = `msg-row ${msg.role}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'msg-avatar';
+      avatar.textContent = msg.role === 'user' ? '👤' : '🤖';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.innerHTML = formatText(msg.content);
+
+      const timeEl = document.createElement('div');
+      timeEl.className = 'msg-time';
+      timeEl.textContent = msg.created_at
+        ? new Date(msg.created_at).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' })
+        : '';
+
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.flexDirection = 'column';
+      wrapper.appendChild(row);
+      wrapper.appendChild(timeEl);
+
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+
+      container.appendChild(wrapper);
+    });
+
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function formatText(text) {
+    text = text.replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) =>
+      `<pre><code>${escapeHtml(code.trim())}</code></pre>`
+    );
+    text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/\n/g, '<br>');
+    return text;
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+</script>
+</body>
+</html>
